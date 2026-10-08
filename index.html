@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,8 @@
       margin: auto;
     }
 
-    /* NAVBAR */
+    /* ================= NAVBAR ================= */
+
     header {
       position: sticky;
       top: 0;
@@ -46,6 +48,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
     }
 
     .logo {
@@ -72,7 +75,19 @@
       color: #38bdf8;
     }
 
-    /* HERO */
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid #334155;
+      color: white;
+      font-size: 22px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
     .hero {
       min-height: 90vh;
       display: flex;
@@ -117,6 +132,7 @@
     }
 
     .btn {
+      display: inline-block;
       padding: 12px 22px;
       border-radius: 30px;
       border: 1px solid #38bdf8;
@@ -137,7 +153,8 @@
       transform: translateY(-3px);
     }
 
-    /* SECTIONS */
+    /* ================= SECTIONS ================= */
+
     section {
       padding: 90px 0;
     }
@@ -164,7 +181,8 @@
       margin-top: 10px;
     }
 
-    /* CARDS */
+    /* ================= CARDS ================= */
+
     .card {
       background: #111827;
       border: 1px solid #243047;
@@ -178,7 +196,8 @@
       border-color: #38bdf8;
     }
 
-    /* ABOUT */
+    /* ================= ABOUT ================= */
+
     .about-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
@@ -210,7 +229,8 @@
       color: #cbd5e1;
     }
 
-    /* SKILLS */
+    /* ================= SKILLS ================= */
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -230,7 +250,8 @@
       font-weight: bold;
     }
 
-    /* EDUCATION */
+    /* ================= EDUCATION ================= */
+
     .education-list {
       display: grid;
       gap: 20px;
@@ -260,7 +281,8 @@
       color: #94a3b8;
     }
 
-    /* PROJECTS */
+    /* ================= PROJECTS ================= */
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -268,7 +290,7 @@
     }
 
     .project-card {
-      min-height: 260px;
+      min-height: 300px;
       display: flex;
       flex-direction: column;
     }
@@ -293,7 +315,19 @@
       color: #cbd5e1;
     }
 
-    /* CONTACT */
+    .project-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .project-buttons .btn {
+      padding: 8px 15px;
+    }
+
+    /* ================= CONTACT ================= */
+
     .contact-box {
       text-align: center;
     }
@@ -325,7 +359,8 @@
       border-color: #38bdf8;
     }
 
-    /* FOOTER */
+    /* ================= FOOTER ================= */
+
     footer {
       text-align: center;
       padding: 25px;
@@ -333,62 +368,64 @@
       color: #94a3b8;
     }
 
-    /* MOBILE MENU */
+    /* ================= MOBILE ================= */
 
-.menu-btn {
-  display: none;
-  background: transparent;
-  border: 1px solid #334155;
-  color: white;
-  font-size: 22px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    @media (max-width: 800px) {
 
-@media (max-width: 800px) {
+      .menu-btn {
+        display: block;
+      }
 
-  .menu-btn {
-    display: block;
-  }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #0b1120;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid #243047;
+      }
 
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: #0b1120;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-    gap: 15px;
-    border-bottom: 1px solid #243047;
-  }
+      .nav-links.active {
+        display: flex;
+      }
 
-  .nav-links.active {
-    display: flex;
-  }
+      .about-grid,
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .about-grid,
-  .skills-grid,
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+      .timeline {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
 
-  .timeline {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
+      .section-title h2 {
+        font-size: 32px;
+      }
 
-  .section-title h2 {
-    font-size: 32px;
-  }
+      section {
+        padding: 70px 0;
+      }
 
-  section {
-    padding: 70px 0;
-  }
-}
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
   <!-- ================= NAVBAR ================= -->
 
   <header>
@@ -398,16 +435,21 @@
         <a href="#home" class="logo">
           Battina <span>Durga Pradeep</span>
         </a>
-        <button class="menu-btn" onclick="toggleMenu()">
-  ☰
-</button>
 
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <button
+          class="menu-btn"
+          onclick="toggleMenu()"
+          aria-label="Open navigation menu"
+        >
+          ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" onclick="closeMenu()">About</a></li>
+          <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+          <li><a href="#education" onclick="closeMenu()">Education</a></li>
+          <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
 
       </nav>
@@ -469,7 +511,6 @@
 
       </div>
 
-
       <div class="about-grid">
 
         <div class="card">
@@ -482,7 +523,6 @@
           </p>
 
         </div>
-
 
         <div class="facts">
 
@@ -524,7 +564,6 @@
 
       </div>
 
-
       <div class="skills-grid">
 
         <div class="card skill-card">
@@ -535,7 +574,6 @@
           </p>
         </div>
 
-
         <div class="card skill-card">
           <span class="number">02</span>
           <h3>CSS3</h3>
@@ -543,7 +581,6 @@
             Creating attractive layouts, animations and responsive designs.
           </p>
         </div>
-
 
         <div class="card skill-card">
           <span class="number">03</span>
@@ -553,7 +590,6 @@
           </p>
         </div>
 
-
         <div class="card skill-card">
           <span class="number">04</span>
           <h3>Responsive Design</h3>
@@ -562,15 +598,13 @@
           </p>
         </div>
 
-
         <div class="card skill-card">
           <span class="number">05</span>
-          <h3>Git & GitHub</h3>
+          <h3>Git &amp; GitHub</h3>
           <p>
             Managing projects and source code using version control.
           </p>
         </div>
-
 
         <div class="card skill-card">
           <span class="number">06</span>
@@ -595,15 +629,13 @@
 
       <div class="section-title">
 
-        <small>Education & Internship</small>
+        <small>Education &amp; Internship</small>
 
         <h2>My learning journey.</h2>
 
       </div>
 
-
       <div class="education-list">
-
 
         <!-- COLLEGE -->
 
@@ -617,14 +649,10 @@
 
             <h3>Bachelor's Degree</h3>
 
-            <h4>
-              Computer Science & Engineering
-            </h4>
+            <h4>Computer Science &amp; Engineering</h4>
 
             <p>
-              <strong>
-                SIR C R Reddy College of Engineering
-              </strong>
+              <strong>SIR C R Reddy College of Engineering</strong>
             </p>
 
             <p>
@@ -649,9 +677,7 @@
 
             <h3>Front-End Development Internship</h3>
 
-            <h4>
-              Cognifyz Technologies
-            </h4>
+            <h4>Cognifyz Technologies</h4>
 
             <p>
               Developing front-end skills through practical internship
@@ -661,7 +687,6 @@
           </div>
 
         </div>
-
 
       </div>
 
@@ -689,108 +714,129 @@
 
       </div>
 
-
       <div class="projects-grid">
-
 
         <!-- PROJECT 1 -->
 
-<div class="card project-card">
+        <div class="card project-card">
 
-  <span class="number">
-    01
-  </span>
+          <span class="number">01</span>
 
-  <h3>
-    Personal Portfolio Website
-  </h3>
+          <h3>Personal Portfolio Website</h3>
 
-  <p>
-    A responsive personal portfolio website showcasing my skills,
-    education, internship experience, projects and contact information.
-  </p>
+          <p>
+            A responsive personal portfolio website showcasing my skills,
+            education, internship experience, projects and contact information.
+          </p>
 
-  <div class="tags">
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
 
-    <span class="tag">HTML</span>
-    <span class="tag">CSS</span>
-    <span class="tag">JavaScript</span>
+          <div class="project-buttons">
 
-  </div>
+            <a
+              href="https://battinapradeep3-cmd.github.io/Cognifyz-IT-Solutions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              Live Demo
+            </a>
 
-  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a
+              href="https://github.com/battinapradeep3-cmd/Cognifyz-IT-Solutions"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+            >
+              GitHub
+            </a>
 
-    <a
-      href="https://battinapradeep3-cmd.github.io/Cognifyz-IT-Solutions/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn-primary"
-      style="padding:8px 15px;"
-    >
-      Live Demo
-    </a>
+          </div>
 
-    <a
-      href="https://github.com/battinapradeep3-cmd/Cognifyz-IT-Solutions"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn-secondary"
-      style="padding:8px 15px;"
-    >
-      GitHub
-    </a>
-
-  </div>
-
-</div>
+        </div>
 
 
-      <!-- PROJECT 2 -->
+        <!-- PROJECT 2 -->
 
-<div class="card project-card">
+        <div class="card project-card">
 
-  <span class="number">
-    02
-  </span>
+          <span class="number">02</span>
 
-  <h3>
-    AURELIA Event Booking Website
-  </h3>
+          <h3>AURELIA Event Booking Website</h3>
 
-  <p>
-    A responsive event booking website where users can explore
-    events, view event details, choose tickets and manage bookings.
-  </p>
+          <p>
+            A responsive event booking website where users can explore
+            events, view event details, choose tickets and manage bookings.
+          </p>
 
-  <div class="tags">
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
 
-    <span class="tag">HTML</span>
-    <span class="tag">CSS</span>
-    <span class="tag">JavaScript</span>
+          <div class="project-buttons">
 
-  </div>
+            <a
+              href="https://battinapradeep3-cmd.github.io/Sysslanintership/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              Live Demo
+            </a>
 
-  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a
+              href="https://github.com/battinapradeep3-cmd/Sysslanintership"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+            >
+              GitHub
+            </a>
 
-    <a
-      href="https://battinapradeep3-cmd.github.io/Sysslanintership/"
-      target="_blank"
-      class="btn btn-primary"
-      style="padding:8px 15px;"
-    >
-      Live Demo
-    </a>
+          </div>
 
-    <a
-      href="https://github.com/battinapradeep3-cmd/Sysslanintership"
-      target="_blank"
-      class="btn btn-secondary"
-      style="padding:8px 15px;"
-    >
-      GitHub
-    </a>
+        </div>
 
-    </div>
+
+        <!-- PROJECT 3 -->
+
+        <div class="card project-card">
+
+          <span class="number">03</span>
+
+          <h3>Weather Dashboard</h3>
+
+          <p>
+            A weather application designed to display current weather
+            information using JavaScript, API integration and a responsive UI.
+          </p>
+
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">API</span>
+          </div>
+
+          <div class="project-buttons">
+
+            <a
+              href="#"
+              class="btn btn-secondary"
+              onclick="return false;"
+            >
+              Coming Soon
+            </a>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -820,11 +866,7 @@
 
         </div>
 
-</div>
-
-</section>
         <div class="contact-details">
-
 
           <!-- EMAIL -->
 
@@ -835,7 +877,6 @@
             📧 battinapradeep3@gmail.com
           </a>
 
-
           <!-- PHONE -->
 
           <a
@@ -845,47 +886,60 @@
             📱 9346070654
           </a>
 
-
           <!-- GITHUB -->
 
           <a
             class="contact-item"
             href="https://github.com/battinapradeep3-cmd"
             target="_blank"
+            rel="noopener noreferrer"
           >
             GitHub
           </a>
 
-<!-- LINKEDIN -->
+          <!-- LINKEDIN -->
 
-<a
-  class="contact-item"
-  href="https://www.linkedin.com/in/battina-durga-pradeep-1a5ab4367/"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  LinkedIn
-</a>
-</div>
+          <a
+            class="contact-item"
+            href="https://www.linkedin.com/in/battina-durga-pradeep-1a5ab4367/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
-</div>
-</section>
-    <!-- ================= FOOTER ================= -->
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
 
   <footer>
-
-    © 2026 Battina Durga Pradeep.
-    All rights reserved.
-
+    © 2026 Battina Durga Pradeep. All rights reserved.
   </footer>
 
 
+  <!-- ================= JAVASCRIPT ================= -->
+
   <script>
     function toggleMenu() {
-      document.querySelector(".nav-links").classList.toggle("active");
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("active");
+    }
+
+    function closeMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.remove("active");
     }
   </script>
 
-
 </body>
 </html>
+```
+
+            
