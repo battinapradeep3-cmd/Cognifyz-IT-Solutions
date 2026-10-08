@@ -333,37 +333,62 @@
       color: #94a3b8;
     }
 
-    /* MOBILE */
-    @media (max-width: 800px) {
+    /* MOBILE MENU */
 
-      .nav-links {
-        display: none;
-      }
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid #334155;
+  color: white;
+  font-size: 22px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-      .about-grid,
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 800px) {
 
-      .timeline {
-        grid-template-columns: 1fr;
-        gap: 5px;
-      }
+  .menu-btn {
+    display: block;
+  }
 
-      .section-title h2 {
-        font-size: 32px;
-      }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #0b1120;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    gap: 15px;
+    border-bottom: 1px solid #243047;
+  }
 
-      section {
-        padding: 70px 0;
-      }
-    }
-  </style>
-</head>
+  .nav-links.active {
+    display: flex;
+  }
 
-<body>
+  .about-grid,
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .section-title h2 {
+    font-size: 32px;
+  }
+
+  section {
+    padding: 70px 0;
+  }
+}
   <!-- ================= NAVBAR ================= -->
 
   <header>
