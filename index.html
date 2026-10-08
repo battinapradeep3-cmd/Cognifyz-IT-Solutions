@@ -1,436 +1,846 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="Personal profile website created for Front-End Development Internship"
-    >
+  <title>Battina Durga Pradeep | Front-End Developer</title>
 
-    <title>Alex Morgan | Personal Profile</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-    <link rel="stylesheet" href="style.css">
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1120;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 17, 32, 0.95);
+      border-bottom: 1px solid #243047;
+    }
+
+    nav {
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #38bdf8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-content {
+      width: 100%;
+    }
+
+    .hero small {
+      color: #38bdf8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 75px);
+      margin: 20px 0;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: #38bdf8;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: #94a3b8;
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: 1px solid #38bdf8;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: #38bdf8;
+      color: #07111f;
+    }
+
+    .btn-secondary {
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title small {
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin-top: 8px;
+    }
+
+    .section-title p {
+      color: #94a3b8;
+      max-width: 700px;
+      margin-top: 10px;
+    }
+
+    /* CARDS */
+    .card {
+      background: #111827;
+      border: 1px solid #243047;
+      border-radius: 18px;
+      padding: 28px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 25px;
+    }
+
+    .about-grid p {
+      color: #94a3b8;
+    }
+
+    .facts {
+      display: grid;
+      gap: 15px;
+    }
+
+    .fact {
+      background: #111827;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #243047;
+    }
+
+    .fact strong {
+      display: block;
+      color: #38bdf8;
+    }
+
+    .fact span {
+      color: #cbd5e1;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card h3 {
+      margin: 10px 0;
+    }
+
+    .skill-card p {
+      color: #94a3b8;
+    }
+
+    .number {
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    /* EDUCATION */
+    .education-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 25px;
+      background: #111827;
+      border: 1px solid #243047;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .year {
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    .timeline h4 {
+      color: #8b5cf6;
+      margin-bottom: 8px;
+    }
+
+    .timeline p {
+      color: #94a3b8;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card p {
+      color: #94a3b8;
+    }
+
+    .tags {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      border: 1px solid #334155;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      text-align: center;
+    }
+
+    .contact-box p {
+      color: #94a3b8;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .contact-details {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      padding: 12px 16px;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: #cbd5e1;
+      transition: 0.3s;
+    }
+
+    .contact-item:hover {
+      color: #38bdf8;
+      border-color: #38bdf8;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid #243047;
+      color: #94a3b8;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-grid,
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-    <header class="header">
-        <nav class="navbar">
+  <!-- ================= NAVBAR ================= -->
 
-            <a href="#home" class="logo">
-                <span>.</span>
-            </a>
+  <header>
+    <div class="container">
+      <nav>
 
-            <button class="menu-btn" id="menuBtn">
-                ☰
-            </button>
+        <a href="#home" class="logo">
+          Battina <span>Durga Pradeep</span>
+        </a>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-        </nav>
-    </header>
+      </nav>
+    </div>
+  </header>
 
 
-    <!-- ================= HERO ================= -->
-    <main>
+  <!-- ================= HERO ================= -->
 
-        <section class="hero" id="home">
+  <section class="hero" id="home">
 
-            <div class="hero-content">
+    <div class="container hero-content">
 
-                <p class="intro">HELLO, I'M</p>
+      <small>Front-End Development</small>
 
-                <h1>
-                    Battina <span>Pradeep</span>
-                </h1>
+      <h1>
+        Hello, I'm
+        <span>Battina Durga Pradeep</span>
+      </h1>
 
-                <h2>Front-End Development Enthusiast</h2>
+      <p>
+        I am passionate about creating clean, user-friendly and responsive
+        websites while continuously improving my front-end development skills.
+      </p>
 
-                <p class="hero-text">
-                    I am passionate about creating clean, user-friendly
-                    and responsive web experiences while continuously
-                    improving my development skills.
-                </p>
+      <div class="buttons">
 
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn primary-btn">
-                        View My Work
-                    </a>
+        <a href="#projects" class="btn btn-primary">
+          View My Work
+        </a>
 
-                    <a href="#contact" class="btn secondary-btn">
-                        Contact Me
-                    </a>
-                </div>
+        <a href="#contact" class="btn btn-secondary">
+          Contact Me
+        </a>
 
-            </div>
+      </div>
 
+    </div>
 
-            <div class="hero-card">
+  </section>
 
-                <div class="profile-image">
-                    AM
-                </div>
 
-                <h3>Front-End Learner</h3>
+  <!-- ================= ABOUT ================= -->
 
-                <p>
-                    HTML • CSS • JavaScript
-                </p>
+  <section id="about">
 
-                <div class="availability">
-                    <span></span>
-                    Available for opportunities
-                </div>
+    <div class="container">
 
-            </div>
+      <div class="section-title">
 
-        </section>
+        <small>About Me</small>
 
-
-        <!-- ================= ABOUT ================= -->
-        <section class="section" id="about">
-
-            <div class="section-heading">
-                <p>ABOUT ME</p>
-                <h2>Turning ideas into web experiences</h2>
-            </div>
-
-            <div class="about-grid">
-
-                <div class="about-text">
-
-                    <p>
-                        I am a motivated learner with a strong interest
-                        in front-end web development and modern
-                        user-interface design.
-                    </p>
-
-                    <p>
-                        My goal is to build websites that are visually
-                        appealing, responsive and easy for users to
-                        navigate.
-                    </p>
-
-                    <p>
-                        Through practical projects and continuous
-                        learning, I am developing my knowledge of
-                        HTML, CSS, JavaScript and modern web technologies.
-                    </p>
-
-                </div>
-
-                <div class="about-stats">
-
-                    <div class="stat">
-                        <strong>10+</strong>
-                        <span>Projects</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong>5+</strong>
-                        <span>Technologies</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong>100%</strong>
-                        <span>Learning Mindset</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SKILLS ================= -->
-        <section class="section skills-section" id="skills">
-
-            <div class="section-heading">
-                <p>MY SKILLS</p>
-                <h2>Technologies I am learning</h2>
-            </div>
-
-            <div class="skills-grid">
-
-                <article class="skill-card">
-                    <div class="skill-icon">01</div>
-                    <h3>HTML5</h3>
-                    <p>
-                        Building structured and semantic web pages
-                        using modern HTML elements.
-                    </p>
-                </article>
-
-                <article class="skill-card">
-                    <div class="skill-icon">02</div>
-                    <h3>CSS3</h3>
-                    <p>
-                        Creating attractive layouts, typography,
-                        animations and responsive designs.
-                    </p>
-                </article>
-
-                <article class="skill-card">
-                    <div class="skill-icon">03</div>
-                    <h3>JavaScript</h3>
-                    <p>
-                        Adding interactivity and dynamic behaviour
-                        to web applications.
-                    </p>
-                </article>
-
-                <article class="skill-card">
-                    <div class="skill-icon">04</div>
-                    <h3>Responsive Design</h3>
-                    <p>
-                        Designing websites that work smoothly
-                        across different screen sizes.
-                    </p>
-                </article>
-
-                <article class="skill-card">
-                    <div class="skill-icon">05</div>
-                    <h3>Git & GitHub</h3>
-                    <p>
-                        Managing projects and maintaining source
-                        code using version control.
-                    </p>
-                </article>
-
-                <article class="skill-card">
-                    <div class="skill-icon">06</div>
-                    <h3>Problem Solving</h3>
-                    <p>
-                        Understanding problems and developing
-                        practical technical solutions.
-                    </p>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= EDUCATION ================= -->
-        <section class="section" id="education">
-
-            <div class="section-heading">
-                <p>EDUCATION</p>
-                <h2>My learning journey</h2>
-            </div>
-
-            <div class="timeline">
-
-                <article class="timeline-item">
-
-                    <div class="timeline-dot"></div>
-
-                    <div class="timeline-content">
-
-                        <span>2023 — Present</span>
-
-                        <h3>Bachelor's Degree</h3>
-
-                        <h4>Computer Science / Related Field</h4>
-
-                        <p>
-                            Developing a strong foundation in programming,
-                            computer science concepts and software
-                            development.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-               
-
-                <article class="timeline-item">
-
-                    <div class="timeline-dot"></div>
-                     
-                    <div class="timeline-content">
-
-                        <span>2026</span>
-
-                        <h3>Front-End Development Internship</h3>
-
-                        <h4>SsyslanIT Solutions </h4>
-
-                        <p>
-                            Practising HTML, CSS, JavaScript,
-                            responsive design and web development
-                            through hands-on projects.
-                        </p>
-
-                    </div>
-                    <div class="timeline-content">
-
-                        <span>2026</span>
-
-                        <h3>Front-End Development Internship</h3>
-
-                        <h4>Cognifyz Technologies</h4>
-
-                        <p>
-                            Applying front-end development concepts
-                            through practical internship tasks.
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= PROJECTS ================= -->
-        <section class="section projects-section" id="projects">
-
-            <div class="section-heading">
-                <p>PROJECTS</p>
-                <h2>Things I have worked on</h2>
-            </div>
-
-            <div class="project-grid">
-
-                <article class="project-card">
-
-                    <div class="project-number">01</div>
-
-                    <h3>Personal Portfolio</h3>
-
-                    <p>
-                        A responsive personal website showcasing
-                        profile information, skills and projects.
-                    </p>
-
-                    <div class="project-tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                    </div>
-
-                </article>
-
-
-                <article class="project-card">
-
-                    <div class="project-number">02</div>
-
-                    <h3>Student Learning Platform</h3>
-
-                    <p>
-                        A learning platform concept designed to
-                        present educational resources in a simple
-                        and accessible way.
-                    </p>
-
-                    <div class="project-tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
-
-                </article>
-
-
-                <article class="project-card">
-
-                    <div class="project-number">03</div>
-
-                    <h3>Weather Dashboard</h3>
-
-                    <p>
-                        A web application concept for displaying
-                        weather information using an external API.
-                    </p>
-
-                    <div class="project-tags">
-                        <span>JavaScript</span>
-                        <span>API</span>
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CONTACT ================= -->
-        <section class="contact-section" id="contact">
-
-            <div class="contact-container">
-
-                <div class="contact-text">
-
-                    <p class="section-label">GET IN TOUCH</p>
-
-                    <h2>
-                        Let's build something
-                        <span>great.</span>
-                    </h2>
-
-                    <p>
-                        I am always interested in learning,
-                        collaborating and exploring new opportunities
-                        in web development.
-                    </p>
-
-                </div>
-
-                <div class="contact-details">
-
-                    <a href="mailto:alex@example.com">
-                        <span>Email</span>
-                    battinapradeep3@gmail.com
-                    </a>
-
-                    <a href="https://github.com/" target="_blank">
-                        <span>GitHub</span>
-                    
-                    </a>
-
-                    <a href="https://linkedin.com/" target="_blank">
-                        <span>LinkedIn</span>
-                    
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer">
-
+        <h2>Turning ideas into web experiences.</h2>
 
         <p>
-            Front-End Development Internship Project
+          I am a motivated learner with a strong interest in front-end
+          web development and modern user-interface design.
         </p>
 
-    </footer>
+      </div>
 
 
-    <script src="script.js"></script>
+      <div class="about-grid">
+
+        <div class="card">
+
+          <p>
+            My goal is to build websites that are visually appealing,
+            responsive and easy for users to navigate. Through practical
+            projects and continuous learning, I am developing my knowledge
+            of HTML, CSS, JavaScript and modern web technologies.
+          </p>
+
+        </div>
+
+
+        <div class="facts">
+
+          <div class="fact">
+            <strong>Current Year</strong>
+            <span>2026</span>
+          </div>
+
+          <div class="fact">
+            <strong>Focus</strong>
+            <span>Front-End Development</span>
+          </div>
+
+          <div class="fact">
+            <strong>Learning</strong>
+            <span>HTML • CSS • JavaScript</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SKILLS ================= -->
+
+  <section id="skills">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <small>My Skills</small>
+
+        <h2>Technologies I am learning.</h2>
+
+      </div>
+
+
+      <div class="skills-grid">
+
+        <div class="card skill-card">
+          <span class="number">01</span>
+          <h3>HTML5</h3>
+          <p>
+            Building structured and semantic web pages using modern HTML.
+          </p>
+        </div>
+
+
+        <div class="card skill-card">
+          <span class="number">02</span>
+          <h3>CSS3</h3>
+          <p>
+            Creating attractive layouts, animations and responsive designs.
+          </p>
+        </div>
+
+
+        <div class="card skill-card">
+          <span class="number">03</span>
+          <h3>JavaScript</h3>
+          <p>
+            Adding interactivity and dynamic behaviour to web applications.
+          </p>
+        </div>
+
+
+        <div class="card skill-card">
+          <span class="number">04</span>
+          <h3>Responsive Design</h3>
+          <p>
+            Designing websites that work across different screen sizes.
+          </p>
+        </div>
+
+
+        <div class="card skill-card">
+          <span class="number">05</span>
+          <h3>Git & GitHub</h3>
+          <p>
+            Managing projects and source code using version control.
+          </p>
+        </div>
+
+
+        <div class="card skill-card">
+          <span class="number">06</span>
+          <h3>Problem Solving</h3>
+          <p>
+            Understanding problems and developing practical technical solutions.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= EDUCATION ================= -->
+
+  <section id="education">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <small>Education & Internship</small>
+
+        <h2>My learning journey.</h2>
+
+      </div>
+
+
+      <div class="education-list">
+
+
+        <!-- COLLEGE -->
+
+        <div class="timeline">
+
+          <div class="year">
+            2026
+          </div>
+
+          <div>
+
+            <h3>Bachelor's Degree</h3>
+
+            <h4>
+              Computer Science & Engineering
+            </h4>
+
+            <p>
+              <strong>
+                SIR C R Reddy College of Engineering
+              </strong>
+            </p>
+
+            <p>
+              Building a strong foundation in programming,
+              computer science concepts and software development.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- COGNIFYZ INTERNSHIP -->
+
+        <div class="timeline">
+
+          <div class="year">
+            2026
+          </div>
+
+          <div>
+
+            <h3>Front-End Development Internship</h3>
+
+            <h4>
+              Cognifyz Technologies
+            </h4>
+
+            <p>
+              Developing front-end skills through practical internship
+              tasks and hands-on web development projects.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PROJECTS ================= -->
+
+  <section id="projects">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <small>Projects</small>
+
+        <h2>Things I have worked on.</h2>
+
+        <p>
+          Selected front-end projects demonstrating my learning
+          and practical development skills.
+        </p>
+
+      </div>
+
+
+      <div class="projects-grid">
+
+
+        <!-- PROJECT 1 -->
+
+        <div class="card project-card">
+
+          <span class="number">
+            01
+          </span>
+
+          <h3>
+            Personal Portfolio
+          </h3>
+
+          <p>
+            A responsive personal website showcasing profile information,
+            skills, education, internship experience and projects.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROJECT 2 -->
+
+        <div class="card project-card">
+
+          <span class="number">
+            02
+          </span>
+
+          <h3>
+            Event Booking Website
+          </h3>
+
+          <p>
+            A front-end event booking website designed with event listings,
+            event details, ticket options and a user-friendly interface.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROJECT 3 -->
+
+        <div class="card project-card">
+
+          <span class="number">
+            03
+          </span>
+
+          <h3>
+            Weather Dashboard
+          </h3>
+
+          <p>
+            A web application for displaying weather information
+            using JavaScript and an external API.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">JavaScript</span>
+            <span class="tag">API</span>
+            <span class="tag">CSS</span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CONTACT ================= -->
+
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="card contact-box">
+
+        <div class="section-title">
+
+          <small>Get In Touch</small>
+
+          <h2>Let's build something great.</h2>
+
+          <p>
+            I am interested in learning, collaborating and exploring
+            new opportunities in web development.
+          </p>
+
+        </div>
+
+
+        <div class="contact-details">
+
+
+          <!-- EMAIL -->
+
+          <a
+            class="contact-item"
+            href="mailto:battinapradeep3@gmail.com"
+          >
+            📧 battinapradeep3@gmail.com
+          </a>
+
+
+          <!-- PHONE -->
+
+          <a
+            class="contact-item"
+            href="tel:9346070654"
+          >
+            📱 9346070654
+          </a>
+
+
+          <!-- GITHUB -->
+
+          <a
+            class="contact-item"
+            href="https://github.com/battinapradeep3-cmd"
+            target="_blank"
+          >
+            GitHub
+          </a>
+
+
+          <!-- LINKEDIN -->
+
+          <a
+            class="contact-item"
+            href="https://www.linkedin.com/"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    © 2026 Battina Durga Pradeep.
+    All rights reserved.
+
+  </footer>
+
 
 </body>
 </html>
