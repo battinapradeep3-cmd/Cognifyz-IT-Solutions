@@ -1,208 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Order Details | Sweet Crumbs Bakery</title>
-
-    <meta name="description" content="View your selected bakery product and contact Sweet Crumbs Bakery to enquire about an order.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Order freshly baked treats from Sweet Crumbs Bakery.">
+<title>Place Your Order | Sweet Crumbs Bakery</title>
 </head>
 
-<body style="margin:0; font-family:Arial,Helvetica,sans-serif; background:#fff8ef; color:#432719;">
+<body style="margin:0;font-family:Arial,sans-serif;background:#fffaf3;color:#432719;">
 
-    <!-- HEADER -->
-    <header style="background:#432719; color:#f5d6a3; padding:24px 15px; text-align:center;">
-        <a href="index.html" style="color:#f5d6a3; text-decoration:none;">
-            <h1 style="font-family:Georgia,serif; margin:0; font-size:30px;">
-                Sweet Crumbs
-            </h1>
-        </a>
-        <p style="font-size:11px; letter-spacing:4px; color:#fff8ef; margin-bottom:0;">
-            BAKERY & DESSERTS
+<header style="background:#2B1712;padding:22px 15px;text-align:center;color:#F5EBDD;">
+    <h1 style="font-family:Georgia,serif;margin:0;">Sweet Crumbs Bakery</h1>
+    <p style="color:#D5B98C;letter-spacing:3px;font-size:11px;">FRESHLY BAKED WITH LOVE</p>
+</header>
+
+<main style="max-width:750px;margin:30px auto;padding:0 15px 35px;">
+
+    <a href="index.html#menu" style="color:#7b4228;text-decoration:none;">← Back to Menu</a>
+
+    <div style="background:white;border:1px solid #eadaca;border-radius:10px;padding:24px;margin-top:20px;box-shadow:0 4px 15px rgba(67,39,25,0.07);">
+
+        <h2 style="font:normal 32px Georgia,serif;text-align:center;margin-top:0;">Place Your Order</h2>
+
+        <p style="text-align:center;color:#806b59;line-height:1.7;">
+            Choose your quantity and enter your delivery details below.
         </p>
-    </header>
 
-    <!-- MAIN ORDER SECTION -->
-    <main style="max-width:600px; margin:40px auto; padding:0 16px 40px;">
+        <div id="productBox" style="background:#f5e3ce;border-radius:8px;padding:18px;margin:22px 0;">
+            <p style="font-size:11px;letter-spacing:3px;color:#9a5b35;">YOUR SELECTED PRODUCT</p>
+            <h3 id="productName" style="font:normal 25px Georgia,serif;margin:8px 0;">Loading product...</h3>
+            <p id="productDescription" style="color:#725848;font-size:14px;"></p>
+            <p style="font-size:18px;font-weight:bold;color:#7b4228;">
+                Unit Price: <span id="unitPrice">₹0</span>
+            </p>
+        </div>
 
-        <div style="background:#ffffff; padding:30px 22px; border-radius:10px; border:1px solid #eadaca; box-shadow:0 5px 20px rgba(67,39,25,0.08);">
+        <form id="orderForm">
 
-            <div style="text-align:center;">
-                <p style="font-size:11px; letter-spacing:3px; color:#a8753e;">
-                    THANK YOU FOR CHOOSING US
-                </p>
+            <label for="productSelect" style="display:block;font-weight:bold;margin:18px 0 8px;">Select Product</label>
+            <select id="productSelect" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;background:white;font-size:15px;">
+                <option value="cake">Chocolate Cake - ₹499</option>
+                <option value="croissant">Butter Croissant - ₹89</option>
+                <option value="cupcakes">Gourmet Cupcakes - ₹79</option>
+                <option value="cookies">Chocolate Cookies - ₹99</option>
+                <option value="brownies">Fudge Brownies - ₹89</option>
+                <option value="bread">Artisan Bread - ₹69</option>
+            </select>
 
-                <h2 style="font-family:Georgia,serif; font-size:34px; font-weight:normal; margin:12px 0;">
-                    Your Order Details
-                </h2>
+            <label for="quantity" style="display:block;font-weight:bold;margin:18px 0 8px;">Quantity</label>
+            <input type="number" id="quantity" min="1" max="100" value="1" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
 
-                <p style="font-size:14px; line-height:1.8; color:#806b59;">
-                    Your selected bakery product details are shown below.
-                </p>
+            <div style="background:#fffaf3;border:1px solid #eadaca;padding:16px;border-radius:6px;margin:20px 0;">
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Price per item</span>
+                    <strong id="summaryPrice">₹499</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Quantity</span>
+                    <strong id="summaryQuantity">1</strong>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Delivery charge</span>
+                    <strong id="deliveryCharge">₹0</strong>
+                </div>
+
+                <hr style="border:0;border-top:1px solid #eadaca;">
+
+                <div style="display:flex;justify-content:space-between;gap:10px;font-size:21px;color:#7b4228;">
+                    <strong>Total Cost</strong>
+                    <strong id="totalCost" aria-live="polite">₹499</strong>
+                </div>
+
+                <p style="font-size:11px;color:#806b59;">Delivery is shown as ₹0 in this demo. Confirm actual delivery fees before accepting orders.</p>
             </div>
 
-            <!-- PRODUCT DETAILS -->
-            <section style="background:#f5e3ce; padding:24px; border-radius:8px; margin-top:25px;">
+            <h3 style="font:normal 24px Georgia,serif;">Customer Details</h3>
 
-                <p style="font-size:11px; letter-spacing:2px; color:#806b59;">
-                    SELECTED PRODUCT
-                </p>
+            <label for="customerName" style="display:block;font-weight:bold;margin:15px 0 8px;">Full Name *</label>
+            <input type="text" id="customerName" name="customerName" autocomplete="name" maxlength="100" required placeholder="Enter your full name"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
 
-                <h3 id="productName" style="font-family:Georgia,serif; font-size:27px; margin:10px 0; overflow-wrap:anywhere;">
-                    Loading product...
-                </h3>
+            <label for="phone" style="display:block;font-weight:bold;margin:15px 0 8px;">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" pattern="[0-9+() -]{10,20}" maxlength="20" required placeholder="Enter your phone number"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
 
-                <div style="border-top:1px solid #d8bfa5; margin-top:20px; padding-top:15px;">
-                    <p style="font-size:11px; letter-spacing:2px; color:#806b59;">
-                        STARTING PRICE
-                    </p>
+            <label for="email" style="display:block;font-weight:bold;margin:15px 0 8px;">Email (Optional)</label>
+            <input type="email" id="email" name="email" autocomplete="email" maxlength="150" placeholder="Enter your email"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
 
-                    <p id="productPrice" style="font-size:30px; font-weight:bold; color:#7b4228; margin:8px 0;">
-                        Loading price...
-                    </p>
+            <label for="address" style="display:block;font-weight:bold;margin:15px 0 8px;">Delivery Address *</label>
+            <textarea id="address" name="address" autocomplete="street-address" maxlength="500" required rows="3" placeholder="House number, street, area, city, PIN code"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-family:Arial,sans-serif;font-size:15px;resize:vertical;"></textarea>
 
-                    <p style="font-size:12px; line-height:1.7; color:#806b59;">
-                        Final price and availability should be confirmed with the bakery.
-                    </p>
-                </div>
+            <label for="notes" style="display:block;font-weight:bold;margin:15px 0 8px;">Order Notes (Optional)</label>
+            <textarea id="notes" name="notes" maxlength="500" rows="2" placeholder="Cake message or special instructions"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-family:Arial,sans-serif;font-size:15px;resize:vertical;"></textarea>
 
-                <p id="orderError" style="display:none; color:#9b2525; font-size:13px; line-height:1.7;">
-                    Product details were not found. Please return to the menu and select a product.
-                </p>
+            <label for="payment" style="display:block;font-weight:bold;margin:15px 0 8px;">Payment Method</label>
+            <select id="payment" name="payment" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;background:white;font-size:15px;">
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="UPI on Delivery">UPI on Delivery</option>
+            </select>
 
-            </section>
+            <button type="submit"
+                style="width:100%;margin-top:24px;padding:16px;background:#7b4228;color:white;border:0;border-radius:5px;font-size:16px;font-weight:bold;cursor:pointer;">
+                CONFIRM ORDER
+            </button>
 
-            <!-- CONTACT DETAILS -->
-            <section style="margin-top:30px;">
+        </form>
 
-                <h3 style="font-family:Georgia,serif; font-size:24px; font-weight:normal;">
-                    Contact Our Bakery
-                </h3>
-
-                <!-- EMAIL -->
-                <div style="padding:15px 0; border-bottom:1px solid #eadaca;">
-                    <p style="font-size:11px; letter-spacing:2px; color:#a8753e; margin-bottom:8px;">
-                        EMAIL ADDRESS
-                    </p>
-
-                    <a href="mailto:battinapradeep3@gmail.com"
-                       style="color:#7b4228; font-size:15px; overflow-wrap:anywhere;">
-                        battinapradeep3@gmail.com
-                    </a>
-                </div>
-
-                <!-- MOBILE -->
-                <div style="padding:15px 0; border-bottom:1px solid #eadaca;">
-                    <p style="font-size:11px; letter-spacing:2px; color:#a8753e; margin-bottom:8px;">
-                        MOBILE NUMBER
-                    </p>
-
-                    <a href="tel:9346070654"
-                       style="color:#7b4228; font-size:18px;">
-                        9346070654
-                    </a>
-                </div>
-
-            </section>
-
-            <!-- EMAIL ORDER BUTTON -->
-            <a id="emailOrder"
-               href="mailto:battinapradeep3@gmail.com"
-               style="display:block; margin-top:25px; padding:15px 10px; background:#7b4228; color:#ffffff; text-decoration:none; text-align:center; border-radius:4px; font-size:13px; font-weight:bold;">
-                SEND ORDER ENQUIRY BY EMAIL
-            </a>
-
-            <!-- WHATSAPP BUTTON -->
-            <a id="whatsappOrder"
-               href="https://wa.me/919346070654"
-               target="_blank"
-               rel="noopener noreferrer"
-               style="display:block; margin-top:12px; padding:15px 10px; background:#426b45; color:#ffffff; text-decoration:none; text-align:center; border-radius:4px; font-size:13px; font-weight:bold;">
-                CONTACT ON WHATSAPP
-            </a>
-
-            <!-- BACK BUTTON -->
-            <a href="index.html#menu"
-               style="display:block; margin-top:25px; text-align:center; color:#7b4228; text-decoration:none; font-size:14px;">
-                ← Back to Our Menu
-            </a>
-
+        <div id="confirmation" role="status" aria-live="polite"
+            style="display:none;margin-top:25px;padding:20px;background:#edf7ed;border:1px solid #b8d9b8;border-radius:7px;overflow-wrap:anywhere;">
+            <h2 style="color:#286638;">Order Summary Created!</h2>
+            <p id="confirmationText" style="line-height:1.8;"></p>
+            <button type="button" onclick="window.print()"
+                style="padding:12px 18px;background:#286638;color:white;border:0;border-radius:5px;cursor:pointer;">
+                Print Order Summary
+            </button>
+            <p style="font-size:12px;color:#536b53;">
+                This is a demo confirmation. Your order has not been sent to the bakery.
+            </p>
         </div>
-    </main>
 
-    <!-- FOOTER -->
-    <footer style="background:#432719; color:#fff8ef; text-align:center; padding:22px 12px;">
-        <h3 style="font-family:Georgia,serif; color:#f5d6a3; font-weight:normal;">
-            Sweet Crumbs Bakery
-        </h3>
+    </div>
+</main>
 
-        <p style="font-size:12px; line-height:1.8; color:#dfc6b4;">
-            Freshly Baked With Love<br>
-            Front-End Development Project
-        </p>
+<footer style="background:#2B1712;color:#F5EBDD;text-align:center;padding:25px 15px;">
+    <h3 style="font-family:Georgia,serif;color:#D5B98C;">Sweet Crumbs Bakery</h3>
+    <p style="font-size:13px;">Freshly Baked With Love</p>
+    <a href="index.html" style="color:#F5EBDD;">Return to Home</a>
+</footer>
 
-        <p style="font-size:11px; color:#dfc6b4;">
-            © 2026 Sweet Crumbs Bakery
-        </p>
-    </footer>
+<script>
+(function () {
+    "use strict";
 
-    <!-- PRODUCT DETAILS SCRIPT -->
-    <script>
-        (function () {
-            var params = new URLSearchParams(window.location.search);
+    const products = {
+        cake: {
+            name: "Chocolate Cake",
+            price: 499,
+            description: "Rich chocolate cake for birthdays and celebrations."
+        },
+        croissant: {
+            name: "Butter Croissant",
+            price: 89,
+            description: "Golden, flaky pastries perfect for your morning coffee."
+        },
+        cupcakes: {
+            name: "Gourmet Cupcakes",
+            price: 79,
+            description: "Soft cupcakes with delicious frosting."
+        },
+        cookies: {
+            name: "Chocolate Cookies",
+            price: 99,
+            description: "Freshly baked cookies filled with chocolate goodness."
+        },
+        brownies: {
+            name: "Fudge Brownies",
+            price: 89,
+            description: "Rich, soft and fudgy chocolate brownies."
+        },
+        bread: {
+            name: "Artisan Bread",
+            price: 69,
+            description: "Golden-crusted bread with a soft centre."
+        }
+    };
 
-            var product = params.get("product");
-            var price = params.get("price");
+    const params = new URLSearchParams(window.location.search);
+    const select = document.getElementById("productSelect");
+    const quantityInput = document.getElementById("quantity");
+    const form = document.getElementById("orderForm");
+    const confirmation = document.getElementById("confirmation");
 
-            var allowedProducts = {
-                "Chocolate Cake": 499,
-                "Butter Croissant": 89,
-                "Gourmet Cupcakes": 79,
-                "Chocolate Cookies": 99,
-                "Fudge Brownies": 89,
-                "Artisan Bread": 69
-            };
+    function money(amount) {
+        return "₹" + amount.toLocaleString("en-IN");
+    }
 
-            var nameElement = document.getElementById("productName");
-            var priceElement = document.getElementById("productPrice");
-            var errorElement = document.getElementById("orderError");
-            var emailButton = document.getElementById("emailOrder");
-            var whatsappButton = document.getElementById("whatsappOrder");
+    function getSelectedProduct() {
+        return products[select.value] || products.cake;
+    }
 
-            if (
-                product &&
-                Object.prototype.hasOwnProperty.call(allowedProducts, product) &&
-                price === String(allowedProducts[product])
-            ) {
-                nameElement.textContent = product;
-                priceElement.textContent = "₹" + allowedProducts[product];
+    function updateOrder() {
+        const product = getSelectedProduct();
+        const quantity = Math.max(1, Math.min(100, Number(quantityInput.value) || 1));
+        const total = product.price * quantity;
 
-                var message =
-                    "Hello Sweet Crumbs Bakery!\n\n" +
-                    "I would like to enquire about:\n" +
-                    "Product: " + product + "\n" +
-                    "Starting Price: ₹" + allowedProducts[product] + "\n\n" +
-                    "Please confirm availability and final price.";
+        document.getElementById("productName").textContent = product.name;
+        document.getElementById("productDescription").textContent = product.description;
+        document.getElementById("unitPrice").textContent = money(product.price);
+        document.getElementById("summaryPrice").textContent = money(product.price);
+        document.getElementById("summaryQuantity").textContent = quantity;
+        document.getElementById("deliveryCharge").textContent = money(0);
+        document.getElementById("totalCost").textContent = money(total);
+    }
 
-                emailButton.href =
-                    "mailto:battinapradeep3@gmail.com?subject=" +
-                    encodeURIComponent("Order Enquiry - " + product) +
-                    "&body=" + encodeURIComponent(message);
+    const requestedProduct = params.get("product");
+    if (requestedProduct && products[requestedProduct]) {
+        select.value = requestedProduct;
+    }
 
-                whatsappButton.href =
-                    "https://wa.me/919346070654?text=" +
-                    encodeURIComponent(message);
-            } else {
-                nameElement.textContent = "Product not selected";
-                priceElement.textContent = "—";
-                errorElement.style.display = "block";
+    select.addEventListener("change", function () {
+        confirmation.style.display = "none";
+        form.style.display = "block";
+        updateOrder();
+    });
 
-                emailButton.style.display = "none";
-                whatsappButton.style.display = "none";
-            }
-        })();
-    </script>
+    quantityInput.addEventListener("input", function () {
+        confirmation.style.display = "none";
+        form.style.display = "block";
+        updateOrder();
+    });
+
+    form.addEventListener("input", function () {
+        confirmation.style.display = "none";
+    });
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!form.reportValidity()) {
+            return;
+        }
+
+        const product = getSelectedProduct();
+        const quantity = Number(quantityInput.value);
+        const total = product.price * quantity;
+        const customerName = document.getElementById("customerName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const notes = document.getElementById("notes").value.trim();
+        const payment = document.getElementById("payment").value;
+
+        if (!customerName || !phone || !address || quantity < 1 || quantity > 100) {
+            alert("Please check your details and quantity.");
+            return;
+        }
+
+        const summary = [
+            "Thank you, " + customerName + "!",
+            "Product: " + product.name,
+            "Price per item: " + money(product.price),
+            "Quantity: " + quantity,
+            "Delivery: " + money(0),
+            "Total: " + money(total),
+            "Phone: " + phone,
+            "Email: " + (email || "Not provided"),
+            "Address: " + address,
+            "Payment: " + payment,
+            "Notes: " + (notes || "None")
+        ].join("\n");
+
+        document.getElementById("confirmationText").style.whiteSpace = "pre-line";
+        document.getElementById("confirmationText").textContent = summary;
+        confirmation.style.display = "block";
+        confirmation.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    updateOrder();
+})();
+</script>
 
 </body>
 </html>
