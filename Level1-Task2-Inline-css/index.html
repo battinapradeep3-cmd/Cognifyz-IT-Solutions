@@ -4,213 +4,415 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Order Details | Sweet Crumbs Bakery</title>
+    <title>Sweet Crumbs Bakery | Freshly Baked With Love</title>
 
-    <meta name="description" content="View your selected bakery product and contact Sweet Crumbs Bakery to enquire about an order.">
+    <meta name="description" content="Discover delicious cakes, croissants, cupcakes, cookies, brownies and artisan bread at Sweet Crumbs Bakery.">
+
 </head>
 
 <body style="margin:0; font-family:Arial,Helvetica,sans-serif; background:#fff8ef; color:#432719;">
 
     <!-- HEADER -->
-    <header style="background:#432719; color:#f5d6a3; padding:24px 15px; text-align:center;">
-        <a href="index.html" style="color:#f5d6a3; text-decoration:none;">
-            <h1 style="font-family:Georgia,serif; margin:0; font-size:30px;">
+    <header style="background:#432719; color:#f5d6a3; padding:22px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+
+        <div>
+            <h1 style="font-family:Georgia,serif; font-size:30px; margin:0;">
                 Sweet Crumbs
             </h1>
-        </a>
-        <p style="font-size:11px; letter-spacing:4px; color:#fff8ef; margin-bottom:0;">
-            BAKERY &amp; DESSERTS
-        </p>
+
+            <p style="font-size:10px; letter-spacing:4px; margin:8px 0 0; color:#fff8ef;">
+                BAKERY &amp; DESSERTS
+            </p>
+        </div>
+
+        <nav style="display:flex; flex-wrap:wrap; gap:18px; align-items:center;">
+            <a href="#home" style="color:#fff8ef; text-decoration:none;">Home</a>
+            <a href="#menu" style="color:#fff8ef; text-decoration:none;">Our Menu</a>
+            <a href="#story" style="color:#fff8ef; text-decoration:none;">Our Story</a>
+            <a href="#offers" style="color:#fff8ef; text-decoration:none;">Offers</a>
+            <a href="#contact" style="color:#fff8ef; text-decoration:none;">Contact</a>
+        </nav>
+
     </header>
 
-    <!-- MAIN ORDER SECTION -->
-    <main style="max-width:600px; margin:40px auto; padding:0 16px 40px;">
+    <!-- HERO SECTION -->
+    <section id="home" style="text-align:center; padding:90px 20px 80px; background:#f4e5d4;">
 
-        <div style="background:#ffffff; padding:30px 22px; border-radius:10px; border:1px solid #eadaca; box-shadow:0 5px 20px rgba(67,39,25,0.08);">
+        <p style="font-size:12px; letter-spacing:4px; color:#a8753e;">
+            FRESH FROM OUR OVEN
+        </p>
 
-            <div style="text-align:center;">
-                <p style="font-size:11px; letter-spacing:3px; color:#a8753e;">
-                    THANK YOU FOR CHOOSING US
-                </p>
+        <h2 style="font-family:Georgia,serif; font-weight:normal; font-size:clamp(38px,6vw,65px); line-height:1.2; margin:20px auto; max-width:900px;">
+            Made Fresh, Just for You
+        </h2>
 
-                <h2 style="font-family:Georgia,serif; font-size:34px; font-weight:normal; margin:12px 0;">
-                    Your Order Details
-                </h2>
+        <p style="font-size:17px; line-height:1.9; color:#806b59; max-width:700px; margin:0 auto 30px;">
+            Planning a celebration or craving something sweet?
+            Explore our menu and discover delicious treats made with love
+            at Sweet Crumbs Bakery.
+        </p>
 
-                <p style="font-size:14px; line-height:1.8; color:#806b59;">
-                    Your selected bakery product details are shown below.
-                </p>
-            </div>
+        <a href="#menu" style="display:inline-block; background:#7b4228; color:#ffffff; padding:17px 30px; text-decoration:none; font-weight:bold; letter-spacing:1px; border-radius:3px;">
+            EXPLORE OUR MENU
+        </a>
 
-            <!-- PRODUCT DETAILS -->
-            <section style="background:#f5e3ce; padding:24px; border-radius:8px; margin-top:25px;">
+        <p style="margin-top:28px; font-size:14px; color:#806b59;">
+            Email:
+            <a href="mailto:battinapradeep3@gmail.com" style="color:#7b4228; text-decoration:none;">
+                battinapradeep3@gmail.com
+            </a>
+        </p>
 
-                <p style="font-size:11px; letter-spacing:2px; color:#806b59;">
-                    SELECTED PRODUCT
-                </p>
+        <p style="font-size:14px; color:#806b59;">
+            Mobile:
+            <a href="tel:9346070654" style="color:#7b4228; text-decoration:none;">
+                9346070654
+            </a>
+        </p>
 
-                <h3 id="productName" style="font-family:Georgia,serif; font-size:27px; margin:10px 0; overflow-wrap:anywhere;">
-                    Loading product...
-                </h3>
+    </section>
 
-                <div style="border-top:1px solid #d8bfa5; margin-top:20px; padding-top:15px;">
-                    <p style="font-size:11px; letter-spacing:2px; color:#806b59;">
-                        STARTING PRICE
+    <!-- MENU SECTION -->
+    <section id="menu" style="padding:70px 5%;">
+
+        <div style="text-align:center; margin-bottom:45px;">
+
+            <p style="font-size:11px; letter-spacing:4px; color:#a8753e;">
+                OUR SIGNATURE COLLECTION
+            </p>
+
+            <h2 style="font-family:Georgia,serif; font-size:42px; font-weight:normal; margin:15px 0;">
+                Fresh From Our Bakery
+            </h2>
+
+            <p style="color:#806b59; line-height:1.8;">
+                Handcrafted treats to make every moment sweeter.
+            </p>
+
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; max-width:1200px; margin:auto;">
+
+            <!-- PRODUCT 1 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
+
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85"
+                     alt="Chocolate cake"
+                     loading="lazy"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
+
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">BAKERY FAVOURITE</p>
+
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Chocolate Cake
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Rich chocolate layers with a smooth, delicious finish.
                     </p>
 
-                    <p id="productPrice" style="font-size:30px; font-weight:bold; color:#7b4228; margin:8px 0;">
-                        Loading price...
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹499 onwards
                     </p>
 
-                    <p style="font-size:12px; line-height:1.7; color:#806b59;">
-                        Final price and availability should be confirmed with the bakery.
-                    </p>
-                </div>
-
-                <p id="orderError" style="display:none; color:#9b2525; font-size:13px; line-height:1.7;">
-                    Product details were not found. Please return to the menu and select a product.
-                </p>
-
-            </section>
-
-            <!-- CONTACT DETAILS -->
-            <section style="margin-top:30px;">
-
-                <h3 style="font-family:Georgia,serif; font-size:24px; font-weight:normal;">
-                    Contact Our Bakery
-                </h3>
-
-                <!-- EMAIL ADDRESS -->
-                <div style="padding:15px 0; border-bottom:1px solid #eadaca;">
-                    <p style="font-size:14px; letter-height:1.8; color:#806b59; margin-bottom:20px;">
-                        EMAIL ADDRESS
-                    </p>
-
-                    <a href="mailto:battinapradeep3@gmail.com"
-                       style="color:#7b4228; text-decoration:none;">
-                        battinapradeep3@gmail.com
+                    <a href="order.html?product=Chocolate%20Cake&price=499"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
                     </a>
                 </div>
+            </article>
 
-                <!-- MOBILE NUMBER -->
-                <div style="padding:15px 0; border-bottom:1px solid #eadaca;">
-                    <p style="font-size:11px; letter-spacing:2px; color:#a8753e; margin-bottom:8px;">
-                        MOBILE NUMBER
+            <!-- PRODUCT 2 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
+
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=85"
+                     alt="Butter croissant"
+                     loading="lazy"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
+
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">FRESHLY BAKED</p>
+
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Butter Croissant
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Golden, flaky pastry with a soft buttery centre.
                     </p>
 
-                    <a href="tel:9346070654"
-                       style="color:#7b4228; text-decoration:none;">
-                        9346070654
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹89 onwards
+                    </p>
+
+                    <a href="order.html?product=Butter%20Croissant&price=89"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
                     </a>
                 </div>
+            </article>
 
-            </section>
+            <!-- PRODUCT 3 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
 
-            <!-- EMAIL ORDER BUTTON -->
-            <a id="emailOrder"
-               href="mailto:battinapradeep3@gmail.com"
-               style="display:block; margin-top:25px; padding:15px 10px; background:#7b4228; color:#ffffff; text-decoration:none; text-align:center; border-radius:4px; font-size:13px; font-weight:bold;">
-                SEND ORDER ENQUIRY BY EMAIL
-            </a>
+                <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=700&q=85"
+                     alt="Gourmet cupcakes"
+                     loading="lazy"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
 
-            <!-- WHATSAPP BUTTON -->
-            <a id="whatsappOrder"
-               href="https://wa.me/919346070654"
-               target="_blank"
-               rel="noopener noreferrer"
-               style="display:block; margin-top:12px; padding:15px 10px; background:#426b45; color:#ffffff; text-decoration:none; text-align:center; border-radius:4px; font-size:13px; font-weight:bold;">
-                CONTACT ON WHATSAPP
-            </a>
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">SWEET LITTLE TREATS</p>
 
-            <!-- BACK TO MENU -->
-            <a href="index.html#menu"
-               style="display:block; margin-top:25px; text-align:center; color:#7b4228; text-decoration:none; font-size:14px;">
-                ← Back to Our Menu
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Gourmet Cupcakes
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Beautifully decorated cupcakes for every celebration.
+                    </p>
+
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹79 onwards
+                    </p>
+
+                    <a href="order.html?product=Gourmet%20Cupcakes&price=79"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
+                    </a>
+                </div>
+            </article>
+
+            <!-- PRODUCT 4 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
+
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=85"
+                     alt="Chocolate cookies"
+                     loading="lazy"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
+
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">COOKIE CORNER</p>
+
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Chocolate Cookies
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Crisp edges, soft centres and delightful chocolate flavour.
+                    </p>
+
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹99 onwards
+                    </p>
+
+                    <a href="order.html?product=Chocolate%20Cookies&price=99"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
+                    </a>
+                </div>
+            </article>
+
+            <!-- PRODUCT 5 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
+
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85"
+                     alt="Chocolate fudge brownies"
+                     loading="lazy"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
+
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">CHOCOLATE INDULGENCE</p>
+
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Fudge Brownies
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Dense, fudgy chocolate brownies for your sweet cravings.
+                    </p>
+
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹89 onwards
+                    </p>
+
+                    <a href="order.html?product=Fudge%20Brownies&price=89"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
+                    </a>
+                </div>
+            </article>
+
+            <!-- PRODUCT 6 -->
+            <article style="background:#ffffff; border:1px solid #eadaca; border-radius:8px; overflow:hidden;">
+
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=85"
+                     alt="Fresh artisan bread"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=700&q=85';"
+                     style="width:100%; height:230px; object-fit:cover; display:block;">
+
+                <div style="padding:23px;">
+                    <p style="font-size:10px; letter-spacing:2px; color:#a8753e;">BAKED DAILY</p>
+
+                    <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                        Artisan Bread
+                    </h3>
+
+                    <p style="font-size:14px; line-height:1.8; color:#806b59;">
+                        Freshly baked bread with a golden crust and soft centre.
+                    </p>
+
+                    <p style="font-size:22px; color:#7b4228; font-weight:bold;">
+                        ₹69 onwards
+                    </p>
+
+                    <a href="order.html?product=Artisan%20Bread&price=69"
+                       style="display:block; text-align:center; padding:13px; background:#7b4228; color:#fff; text-decoration:none; border-radius:3px;">
+                        ORDER NOW
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section id="story" style="background:#f4e5d4; padding:65px 20px; text-align:center;">
+
+        <p style="font-size:11px; letter-spacing:4px; color:#a8753e;">
+            A LITTLE ABOUT US
+        </p>
+
+        <h2 style="font-family:Georgia,serif; font-size:38px; font-weight:normal;">
+            Baked With Love
+        </h2>
+
+        <p style="max-width:750px; margin:0 auto; font-size:15px; line-height:2; color:#806b59;">
+            At Sweet Crumbs Bakery, we believe that every special moment
+            deserves something delicious. Our collection brings together
+            comforting flavours, beautiful treats and the simple joy of
+            freshly baked goodness.
+        </p>
+
+    </section>
+
+    <!-- OFFERS -->
+    <section id="offers" style="padding:65px 20px; text-align:center;">
+
+        <p style="font-size:11px; letter-spacing:4px; color:#a8753e;">
+            SOMETHING SPECIAL FOR YOU
+        </p>
+
+        <h2 style="font-family:Georgia,serif; font-size:38px; font-weight:normal;">
+            Sweet Moments, Sweet Offers
+        </h2>
+
+        <div style="max-width:750px; margin:30px auto; padding:30px 20px; background:#432719; color:#fff8ef; border-radius:8px;">
+
+            <h3 style="font-family:Georgia,serif; font-size:28px; font-weight:normal; color:#f5d6a3;">
+                Make Every Celebration Sweeter
+            </h3>
+
+            <p style="line-height:1.9; font-size:15px;">
+                Looking for treats for birthdays, parties or special occasions?
+                Contact us to enquire about product availability and bulk orders.
+            </p>
+
+            <a href="#contact" style="display:inline-block; margin-top:12px; padding:14px 25px; background:#f5d6a3; color:#432719; text-decoration:none; font-weight:bold;">
+                ENQUIRE NOW
             </a>
 
         </div>
-    </main>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" style="background:#f4e5d4; padding:65px 20px; text-align:center;">
+
+        <p style="font-size:11px; letter-spacing:4px; color:#a8753e;">
+            WE WOULD LOVE TO HEAR FROM YOU
+        </p>
+
+        <h2 style="font-family:Georgia,serif; font-size:40px; font-weight:normal; margin:15px 0;">
+            Get In Touch
+        </h2>
+
+        <p style="font-size:15px; line-height:1.9; color:#806b59;">
+            Have a question about our menu or want to plan an order?
+            Contact Sweet Crumbs Bakery.
+        </p>
+
+        <div style="max-width:550px; margin:30px auto; padding:30px 20px; background:#ffffff; border:1px solid #eadaca; border-radius:8px;">
+
+            <h3 style="font-family:Georgia,serif; font-size:25px; font-weight:normal;">
+                Contact Details
+            </h3>
+
+            <p style="font-size:12px; letter-spacing:2px; color:#a8753e;">
+                EMAIL ADDRESS
+            </p>
+
+            <p style="font-size:16px; overflow-wrap:anywhere;">
+                <a href="mailto:battinapradeep3@gmail.com" style="color:#7b4228; text-decoration:none;">
+                    battinapradeep3@gmail.com
+                </a>
+            </p>
+
+            <p style="font-size:12px; letter-spacing:2px; color:#a8753e; margin-top:25px;">
+                MOBILE NUMBER
+            </p>
+
+            <p style="font-size:20px;">
+                <a href="tel:9346070654" style="color:#7b4228; text-decoration:none;">
+                    9346070654
+                </a>
+            </p>
+
+            <a href="https://wa.me/919346070654"
+               target="_blank"
+               rel="noopener noreferrer"
+               style="display:inline-block; margin-top:15px; padding:14px 25px; background:#426b45; color:#ffffff; text-decoration:none; border-radius:4px;">
+                CONTACT ON WHATSAPP
+            </a>
+
+            <p style="font-size:12px; line-height:1.8; color:#806b59; margin-top:20px;">
+                Tap the email address to send an email, or tap the mobile
+                number to call.
+            </p>
+
+        </div>
+
+    </section>
 
     <!-- FOOTER -->
-    <footer style="background:#432719; color:#fff8ef; text-align:center; padding:22px 12px;">
-        <h3 style="font-family:Georgia,serif; color:#f5d6a3; font-weight:normal;">
+    <footer style="background:#432719; color:#fff8ef; padding:35px 20px; text-align:center;">
+
+        <h2 style="font-family:Georgia,serif; font-size:30px; font-weight:normal; color:#f5d6a3; margin:0;">
             Sweet Crumbs Bakery
-        </h3>
+        </h2>
 
-        <p style="font-size:12px; line-height:1.8; color:#dfc6b4;">
-            Freshly Baked With Love<br>
-            Front-End Development Project
+        <p style="font-size:12px; letter-spacing:3px;">
+            FRESHLY BAKED WITH LOVE
         </p>
 
-        <p style="font-size:11px; color:#dfc6b4;">
-            Email: battinapradeep3@gmail.com<br>
-            Mobile: 9346070654
+        <p style="font-size:13px; line-height:2; color:#dfc6b4;">
+            Email:
+            <a href="mailto:battinapradeep3@gmail.com" style="color:#f5d6a3; text-decoration:none;">
+                battinapradeep3@gmail.com
+            </a>
+            <br>
+
+            Mobile:
+            <a href="tel:9346070654" style="color:#f5d6a3; text-decoration:none;">
+                9346070654
+            </a>
         </p>
 
-        <p style="font-size:11px; color:#dfc6b4;">
-            © 2026 Sweet Crumbs Bakery
+        <p style="font-size:11px; color:#dfc6b4; margin-top:25px;">
+            © 2026 Sweet Crumbs Bakery. All rights reserved.
         </p>
+
     </footer>
-
-    <!-- PRODUCT DETAILS SCRIPT -->
-    <script>
-        (function () {
-            var params = new URLSearchParams(window.location.search);
-
-            var product = params.get("product");
-            var price = params.get("price");
-
-            var allowedProducts = {
-                "Chocolate Cake": 499,
-                "Butter Croissant": 89,
-                "Gourmet Cupcakes": 79,
-                "Chocolate Cookies": 99,
-                "Fudge Brownies": 89,
-                "Artisan Bread": 69
-            };
-
-            var nameElement = document.getElementById("productName");
-            var priceElement = document.getElementById("productPrice");
-            var errorElement = document.getElementById("orderError");
-            var emailButton = document.getElementById("emailOrder");
-            var whatsappButton = document.getElementById("whatsappOrder");
-
-            if (
-                product &&
-                Object.prototype.hasOwnProperty.call(allowedProducts, product) &&
-                price === String(allowedProducts[product])
-            ) {
-                var finalPrice = allowedProducts[product];
-
-                nameElement.textContent = product;
-                priceElement.textContent = "₹" + finalPrice;
-
-                var message =
-                    "Hello Sweet Crumbs Bakery!\n\n" +
-                    "I would like to enquire about:\n" +
-                    "Product: " + product + "\n" +
-                    "Starting Price: ₹" + finalPrice + "\n\n" +
-                    "Please confirm availability and final price.";
-
-                emailButton.href =
-                    "mailto:battinapradeep3@gmail.com?subject=" +
-                    encodeURIComponent("Order Enquiry - " + product) +
-                    "&body=" + encodeURIComponent(message);
-
-                whatsappButton.href =
-                    "https://wa.me/919346070654?text=" +
-                    encodeURIComponent(message);
-
-            } else {
-                nameElement.textContent = "Product not selected";
-                priceElement.textContent = "—";
-                errorElement.style.display = "block";
-
-                emailButton.style.display = "none";
-                whatsappButton.style.display = "none";
-            }
-        })();
-    </script>
 
 </body>
 </html>
