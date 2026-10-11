@@ -892,79 +892,71 @@ header.navbar,
         font-size: 12px;
     }
 }
-
-/* Mobile screen */
-@media screen and (max-width: 600px) {
-    header.navbar,
-    .navbar {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        padding: 20px 12px;
-        min-height: auto;
-    }
-
-    .navbar .logo {
-        font-size: 30px;
-    }
-
-    .navbar nav {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px 18px;
-    }
-
-    .navbar nav a {
-        font-size: 12px;
-    }
-
-    .navbar .nav-button {
-        padding: 10px 18px;
-        font-size: 12px;
-    }
-}
-/* Hero section layout */
+/* BLOOMORA HERO BACKGROUND */
 .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    position: relative;
+    display: flex;
     align-items: center;
-    gap: 40px;
+    min-height: 650px;
+    padding: 70px 5%;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255, 244, 232, 0.98) 0%,
+            rgba(255, 244, 232, 0.90) 38%,
+            rgba(255, 244, 232, 0.25) 68%,
+            rgba(255, 244, 232, 0.05) 100%
+        ),
+        url("images/bloomora-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Hero text */
+/* TEXT ON LEFT */
 .hero-content {
-    text-align: left;
+    position: relative;
+    z-index: 2;
+    width: 58%;
+    max-width: 700px;
 }
 
-/* Hero image */
+/* HIDE SEPARATE IMAGE */
 .hero-visual {
-    width: 100%;
-    height: 520px;
-    overflow: hidden;
+    display: none !important;
 }
 
-.hero-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+/* HEADING */
+.hero h1 {
+    color: #6E1B3B;
+    max-width: 650px;
 }
 
-/* Mobile view */
+/* DESCRIPTION */
+.hero p {
+    color: #57464A;
+    line-height: 1.8;
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
     .hero {
-        grid-template-columns: 1fr;
-        gap: 25px;
+        min-height: 650px;
+        padding: 45px 24px;
+        background-position: 65% center;
     }
 
     .hero-content {
-        text-align: left;
+        width: 100%;
+        max-width: 100%;
     }
 
-    .hero-visual {
-        height: 380px;
+    .hero h1 {
+        font-size: clamp(42px, 11vw, 64px);
+        line-height: 1.08;
+    }
+
+    .hero p {
+        font-size: 16px;
     }
 }
