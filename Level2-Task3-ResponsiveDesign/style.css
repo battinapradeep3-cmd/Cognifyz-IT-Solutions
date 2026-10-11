@@ -4,34 +4,53 @@
   --cream: #F7F1E8;
   --light-pink: #E8C4C4;
 }
+/* Bloomora - Dusty Rose, Burgundy & Cream Theme */
 
+html,
 body {
-  background-color: var(--cream);
-  color: var(--burgundy);
+  background-color: #F7F1E8 !important;
+  color: #3B2028;
 }
 
-header {
-  background-color: var(--cream);
+header,
+nav,
+.hero,
+.hero-content {
+  background-color: #F7F1E8 !important;
+}
+
+.hero h1,
+h1,
+h2,
+h3 {
+  color: #6E1B3B;
+}
+
+.hero em,
+.hero span {
+  color: #C08081;
 }
 
 button,
-.btn {
-  background-color: var(--burgundy);
-  color: var(--cream);
+.btn,
+a.button {
+  background-color: #6E1B3B;
+  color: #F7F1E8;
 }
 
 button:hover,
 .btn:hover {
-  background-color: var(--dusty-rose);
+  background-color: #C08081;
 }
 
-section {
-  background-color: var(--cream);
+.bestsellers,
+.collections {
+  background-color: #F4E4E4 !important;
 }
 
 footer {
-  background-color: var(--burgundy);
-  color: var(--cream);
+  background-color: #6E1B3B !important;
+  color: #F7F1E8;
 }
 * {
     margin: 0;
