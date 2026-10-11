@@ -15,7 +15,7 @@ const products = [
     category: "Fashion",
     price: 1499,
     tag: "POPULAR",
-    description: "Clean, versatile sneakers for your daily adventures.",
+    description: "Clean, versatile sneakers for daily adventures.",
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
   },
   {
@@ -74,79 +74,76 @@ const products = [
   }
 ];
 
-// Website state
 let selectedCategory = "All";
 let cart = [];
 let toastTimer;
 
-// HTML elements
-const productGrid = document.getElementById("productGrid");
-const searchInput = document.getElementById("searchInput");
-const categoryList = document.getElementById("categoryList");
-const resultsCount = document.getElementById("resultsCount");
+const $ = id => document.getElementById(id);
 
-const cartToggle = document.getElementById("cartToggle");
-const cartDrawer = document.getElementById("cartDrawer");
-const closeCart = document.getElementById("closeCart");
-const overlay = document.getElementById("overlay");
-const cartItems = document.getElementById("cartItems");
-const cartCount = document.getElementById("cartCount");
-const drawerCount = document.getElementById("drawerCount");
-const cartSubtotal = document.getElementById("cartSubtotal");
+const productGrid = $("productGrid");
+const searchInput = $("searchInput");
+const categoryList = $("categoryList");
+const resultsCount = $("resultsCount");
 
-const checkoutBtn = document.getElementById("checkoutBtn");
-const continueShopping = document.getElementById("continueShopping");
+const cartToggle = $("cartToggle");
+const cartDrawer = $("cartDrawer");
+const closeCart = $("closeCart");
+const overlay = $("overlay");
+const cartItems = $("cartItems");
+const cartCount = $("cartCount");
+const drawerCount = $("drawerCount");
+const cartSubtotal = $("cartSubtotal");
 
-const productModal = document.getElementById("productModal");
-const modalContent = document.getElementById("modalContent");
-const closeModal = document.getElementById("closeModal");
+const checkoutBtn = $("checkoutBtn");
+const continueShopping = $("continueShopping");
 
-const toast = document.getElementById("toast");
+const productModal = $("productModal");
+const modalContent = $("modalContent");
+const closeModal = $("closeModal");
+const toast = $("toast");
 
-// Format prices in Indian Rupees
 function formatPrice(price) {
   return "₹" + price.toLocaleString("en-IN");
 }
 
-// Display products based on category and search
+// Display and filter products
 function renderProducts() {
   const searchTerm = searchInput.value.trim().toLowerCase();
 
-  const filteredProducts = products.filter(product => {
-    const matchesCategory =
+  const filtered = products.filter(product => {
+    const categoryMatches =
       selectedCategory === "All" ||
       product.category === selectedCategory;
 
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchTerm) ||
-      product.category.toLowerCase().includes(searchTerm) ||
-      product.description.toLowerCase().includes(searchTerm);
+    const searchMatches = [
+      product.name,
+      product.category,
+      product.description
+    ].some(value => value.toLowerCase().includes(searchTerm));
 
-    return matchesCategory && matchesSearch;
+    return categoryMatches && searchMatches;
   });
 
   resultsCount.textContent =
-    `Showing ${filteredProducts.length} of ${products.length} products`;
+    `Showing ${filtered.length} of ${products.length} products`;
 
-  if (filteredProducts.length === 0) {
+  if (filtered.length === 0) {
     productGrid.innerHTML = `
       <div class="empty-results">
         <h3>No products found</h3>
         <p>Try another search or choose a different category.</p>
-      </div>
-    `;
+      </div>`;
     return;
   }
 
-  productGrid.innerHTML = filteredProducts.map(product => `
+  productGrid.innerHTML = filtered.map(product => `
     <article class="product-card">
       <div class="product-image">
         <img
           src="${product.image}"
           alt="${product.name}"
           loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/600x700/f0f0e9/344b34?text=NovaMart';"
-        >
+          onerror="this.onerror=null;this.src='https://placehold.co/600x700/f0f0e9/344b34?text=NovaMart';">
         <span class="product-tag">${product.tag}</span>
       </div>
 
@@ -157,9 +154,7 @@ function renderProducts() {
 
         <div class="product-bottom">
           <span class="product-price">${formatPrice(product.price)}</span>
-          <button class="add-btn" data-add="${product.id}">
-            + Add
-          </button>
+          <button class="add-btn" data-add="${product.id}">+ Add</button>
         </div>
 
         <button class="details-btn" data-details="${product.id}">
@@ -170,63 +165,55 @@ function renderProducts() {
   `).join("");
 }
 
-// Category buttons
+// Category filters
 categoryList.addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
-
   if (!button) return;
 
   selectedCategory = button.dataset.category;
 
-  document.querySelectorAll(".category").forEach(category => {
-    category.classList.toggle("active", category === button);
+  document.querySelectorAll(".category").forEach(item => {
+    item.classList.toggle("active", item === button);
   });
 
   renderProducts();
 });
 
-// Search products
+// Search
 searchInput.addEventListener("input", renderProducts);
 
-// Add to cart and view details
+$("searchToggle").addEventListener("click", () => {
+  $("shop").scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => searchInput.focus(), 400);
+});
+
+// Add product or open details
 productGrid.addEventListener("click", event => {
   const addButton = event.target.closest("[data-add]");
   const detailsButton = event.target.closest("[data-details]");
 
-  if (addButton) {
-    addToCart(Number(addButton.dataset.add));
-  }
-
-  if (detailsButton) {
-    showProductDetails(Number(detailsButton.dataset.details));
-  }
+  if (addButton) addToCart(Number(addButton.dataset.add));
+  if (detailsButton) showProductDetails(Number(detailsButton.dataset.details));
 });
 
-// Add product to cart
 function addToCart(productId) {
   const product = products.find(item => item.id === productId);
-
   if (!product) return;
 
-  const existingItem = cart.find(item => item.id === productId);
+  const existing = cart.find(item => item.id === productId);
 
-  if (existingItem) {
-    existingItem.quantity += 1;
+  if (existing) {
+    existing.quantity++;
   } else {
-    cart.push({
-      id: product.id,
-      quantity: 1
-    });
+    cart.push({ id: productId, quantity: 1 });
   }
 
   renderCart();
   showToast(`${product.name} added to your cart!`);
 }
 
-// Increase or decrease product quantity
 function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
-
   if (!item) return;
 
   item.quantity += change;
@@ -238,14 +225,13 @@ function changeQuantity(productId, change) {
   renderCart();
 }
 
-// Remove a product completely
 function removeFromCart(productId) {
   cart = cart.filter(item => item.id !== productId);
   renderCart();
   showToast("Product removed from cart.");
 }
 
-// Display cart
+// Render cart contents and calculate totals
 function renderCart() {
   const totalQuantity = cart.reduce(
     (sum, item) => sum + item.quantity, 0
@@ -259,7 +245,6 @@ function renderCart() {
   cartCount.textContent = totalQuantity;
   drawerCount.textContent = `(${totalQuantity})`;
   cartSubtotal.textContent = formatPrice(subtotal);
-
   checkoutBtn.disabled = cart.length === 0;
 
   if (cart.length === 0) {
@@ -268,14 +253,12 @@ function renderCart() {
         <div class="empty-icon">🛍️</div>
         <h3>Your cart is empty</h3>
         <p>Discover something you love and add it here.</p>
-      </div>
-    `;
+      </div>`;
     return;
   }
 
   cartItems.innerHTML = cart.map(item => {
     const product = products.find(p => p.id === item.id);
-
     if (!product) return "";
 
     return `
@@ -283,8 +266,7 @@ function renderCart() {
         <img
           src="${product.image}"
           alt="${product.name}"
-          onerror="this.onerror=null;this.src='https://placehold.co/200x200/f0f0e9/344b34?text=Product';"
-        >
+          onerror="this.onerror=null;this.src='https://placehold.co/200x200/f0f0e9/344b34?text=Product';">
 
         <div class="cart-item-info">
           <h3>${product.name}</h3>
@@ -292,19 +274,11 @@ function renderCart() {
 
           <div class="cart-item-actions">
             <div class="quantity-control">
-              <button
-                data-quantity="${product.id}"
-                data-change="-1"
-                aria-label="Decrease quantity"
-              >−</button>
-
+              <button data-quantity="${product.id}" data-change="-1"
+                aria-label="Decrease quantity">−</button>
               <span>${item.quantity}</span>
-
-              <button
-                data-quantity="${product.id}"
-                data-change="1"
-                aria-label="Increase quantity"
-              >+</button>
+              <button data-quantity="${product.id}" data-change="1"
+                aria-label="Increase quantity">+</button>
             </div>
 
             <button class="remove-btn" data-remove="${product.id}">
@@ -312,12 +286,10 @@ function renderCart() {
             </button>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join("");
 }
 
-// Cart quantity and remove controls
 cartItems.addEventListener("click", event => {
   const quantityButton = event.target.closest("[data-quantity]");
   const removeButton = event.target.closest("[data-remove]");
@@ -334,22 +306,19 @@ cartItems.addEventListener("click", event => {
   }
 });
 
-// Open shopping cart
+// Cart drawer
 function openCart() {
   cartDrawer.classList.add("open");
   overlay.classList.add("show");
   cartDrawer.setAttribute("aria-hidden", "false");
   document.body.classList.add("no-scroll");
-  closeCart.focus();
 }
 
-// Close shopping cart
 function hideCart() {
   cartDrawer.classList.remove("open");
   overlay.classList.remove("show");
   cartDrawer.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
-  cartToggle.focus();
 }
 
 cartToggle.addEventListener("click", openCart);
@@ -357,10 +326,9 @@ closeCart.addEventListener("click", hideCart);
 continueShopping.addEventListener("click", hideCart);
 overlay.addEventListener("click", hideCart);
 
-// Show product details
+// Product details modal
 function showProductDetails(productId) {
   const product = products.find(item => item.id === productId);
-
   if (!product) return;
 
   modalContent.innerHTML = `
@@ -368,8 +336,7 @@ function showProductDetails(productId) {
       <img
         src="${product.image}"
         alt="${product.name}"
-        onerror="this.onerror=null;this.src='https://placehold.co/600x700/f0f0e9/344b34?text=NovaMart';"
-      >
+        onerror="this.onerror=null;this.src='https://placehold.co/600x700/f0f0e9/344b34?text=NovaMart';">
 
       <div>
         <p class="product-category">${product.category}</p>
@@ -377,49 +344,36 @@ function showProductDetails(productId) {
         <p>${product.description}</p>
         <p class="modal-price">${formatPrice(product.price)}</p>
         <p>Tag: ${product.tag}</p>
-
         <button class="add-btn" data-modal-add="${product.id}">
           + Add to Cart
         </button>
       </div>
-    </div>
-  `;
+    </div>`;
 
   productModal.classList.add("show");
   productModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("no-scroll");
-  closeModal.focus();
 }
 
-// Add from product details modal
-modalContent.addEventListener("click", event => {
-  const button = event.target.closest("[data-modal-add]");
-
-  if (!button) return;
-
-  const productId = Number(button.dataset.modalAdd);
-  const product = products.find(item => item.id === productId);
-
-  addToCart(productId);
-  hideProductModal();
-
-  // Open the cart to show the added product
-  openCart();
-});
-
-// Close product details modal
 function hideProductModal() {
   productModal.classList.remove("show");
   productModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
 }
 
+modalContent.addEventListener("click", event => {
+  const button = event.target.closest("[data-modal-add]");
+  if (!button) return;
+
+  addToCart(Number(button.dataset.modalAdd));
+  hideProductModal();
+  openCart();
+});
+
 closeModal.addEventListener("click", hideProductModal);
 
 productModal.addEventListener("click", event => {
-  if (event.target === productModal) {
-    hideProductModal();
-  }
+  if (event.target === productModal) hideProductModal();
 });
 
 // Toast notifications
@@ -428,13 +382,12 @@ function showToast(message) {
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
-
   toastTimer = setTimeout(() => {
     toast.classList.remove("show");
   }, 2500);
 }
 
-// Demo checkout
+// Demo checkout: no actual payment is processed
 checkoutBtn.addEventListener("click", () => {
   if (cart.length === 0) return;
 
@@ -444,7 +397,7 @@ checkoutBtn.addEventListener("click", () => {
   }, 0);
 
   const confirmed = window.confirm(
-    `Demo checkout\n\nYour total is ${formatPrice(subtotal)}.\n\nNo real payment will be taken. Continue with this demo?`
+    `Demo checkout\n\nYour total is ${formatPrice(subtotal)}.\n\nNo real payment will be taken. Continue?`
   );
 
   if (confirmed) {
@@ -455,22 +408,19 @@ checkoutBtn.addEventListener("click", () => {
   }
 });
 
-// Escape key closes open panels
+// Close open panels with Escape
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    if (productModal.classList.contains("show")) {
-      hideProductModal();
-    } else if (cartDrawer.classList.contains("open")) {
-      hideCart();
-    }
+  if (event.key !== "Escape") return;
+
+  if (productModal.classList.contains("show")) {
+    hideProductModal();
+  } else if (cartDrawer.classList.contains("open")) {
+    hideCart();
   }
 });
 
-// Footer year
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+// Footer year and initial rendering
+$("year").textContent = new Date().getFullYear();
 
-// Initialize website
 renderProducts();
 renderCart();
-
