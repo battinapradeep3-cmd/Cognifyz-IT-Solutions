@@ -1,3 +1,38 @@
+:root {
+  --dusty-rose: #C08081;
+  --burgundy: #6E1B3B;
+  --cream: #F7F1E8;
+  --light-pink: #E8C4C4;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--burgundy);
+}
+
+header {
+  background-color: var(--cream);
+}
+
+button,
+.btn {
+  background-color: var(--burgundy);
+  color: var(--cream);
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--dusty-rose);
+}
+
+section {
+  background-color: var(--cream);
+}
+
+footer {
+  background-color: var(--burgundy);
+  color: var(--cream);
+}
 * {
     margin: 0;
     padding: 0;
