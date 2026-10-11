@@ -11,13 +11,48 @@ body {
   background-color: #F7F1E8 !important;
   color: #3B2028;
 }
-
 header,
-nav,
-.hero,
-.hero-content {
-  background-color: #F7F1E8 !important;
+nav {
+    background-color: #6E1B3B !important;
 }
+
+.hero {
+    background-color: transparent !important;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(247, 241, 232, 0.94) 0%,
+            rgba(247, 241, 232, 0.78) 40%,
+            rgba(247, 241, 232, 0.15) 75%,
+            rgba(247, 241, 232, 0.02) 100%
+        ),
+        url("./images/hero.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.hero-content {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.hero-visual {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        background-position: 65% center !important;
+        min-height: 680px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+}
+
 
 .hero h1,
 h1,
