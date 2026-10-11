@@ -728,3 +728,50 @@ footer {
         gap: 8px;
     }
 }
+/* HEADER - BURGUNDY */
+header,
+.header,
+.navbar {
+    background-color: #6E1B3B !important;
+    color: #F7F1E8 !important;
+}
+
+/* LOGO */
+header .logo,
+header .logo a,
+header .navbar-brand {
+    color: #F7F1E8 !important;
+}
+
+/* NAVIGATION LINKS */
+header nav a,
+header .nav-links a,
+.navbar a {
+    color: #F7F1E8 !important;
+}
+
+/* HEADER BUTTON */
+header button,
+header .btn {
+    background-color: #C08081 !important;
+    color: #FFFFFF !important;
+    border-color: #C08081 !important;
+}
+
+/* FOOTER - BURGUNDY */
+footer {
+    background-color: #6E1B3B !important;
+    color: #F7F1E8 !important;
+}
+
+footer a,
+footer h2,
+footer h3,
+footer p {
+    color: #F7F1E8 !important;
+}
+
+/* MAIN BACKGROUND - CREAM */
+body {
+    background-color: #F7F1E8 !important;
+}
