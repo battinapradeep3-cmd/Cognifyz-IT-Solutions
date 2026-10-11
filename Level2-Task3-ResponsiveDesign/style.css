@@ -788,3 +788,141 @@ footer p {
 body {
     background-color: #F7F1E8 !important;
 }
+/* ===== BLOOMORA HEADER DESIGN ===== */
+
+header.navbar,
+.navbar {
+    width: 100%;
+    min-height: 85px;
+    padding: 18px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background-color: #6E1B3B !important;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Logo */
+.navbar .logo {
+    color: #FFF4E8 !important;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.navbar .logo span {
+    color: #D8A0AE !important;
+}
+
+/* Navigation background remove */
+.navbar nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0;
+}
+
+/* Navigation links */
+.navbar nav a {
+    color: #FFF4E8 !important;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    background: transparent !important;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.navbar nav a:hover {
+    color: #E6A9B8 !important;
+}
+
+/* Get in Touch button */
+.navbar .nav-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #D8A0AE !important;
+    color: #4B1028 !important;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-button:hover {
+    background-color: #FFF4E8 !important;
+    color: #6E1B3B !important;
+}
+
+/* Tablet screen */
+@media screen and (max-width: 900px) {
+    header.navbar,
+    .navbar {
+        padding: 18px 4%;
+        gap: 18px;
+    }
+
+    .navbar .logo {
+        font-size: 27px;
+    }
+
+    .navbar nav {
+        gap: 16px;
+    }
+
+    .navbar nav a {
+        font-size: 13px;
+    }
+
+    .navbar .nav-button {
+        padding: 10px 13px;
+        font-size: 12px;
+    }
+}
+
+/* Mobile screen */
+@media screen and (max-width: 600px) {
+    header.navbar,
+    .navbar {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 12px;
+        min-height: auto;
+    }
+
+    .navbar .logo {
+        font-size: 30px;
+    }
+
+    .navbar nav {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 18px;
+    }
+
+    .navbar nav a {
+        font-size: 12px;
+    }
+
+    .navbar .nav-button {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+}
