@@ -1,532 +1,474 @@
 
-"use strict";
-
 const products = [
   {
-    id: 1, name: "Sculpted Ceramic Vase", category: "Home",
-    price: 899, oldPrice: 1199, rating: 4.8, reviews: 124,
-    badge: "BESTSELLER",
-    image: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=700&q=80",
-    description: "A timeless ceramic accent for your shelf, side table or dining table."
+    id: 1,
+    name: "Sculpted Ceramic Vase",
+    category: "Home",
+    price: 899,
+    emoji: "🏺",
+    tag: "BESTSELLER",
+    description: "A timeless accent for your favourite space.",
+    image: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 2, name: "Wireless Studio Buds", category: "Electronics",
-    price: 1499, oldPrice: 1999, rating: 4.7, reviews: 89,
-    badge: "POPULAR",
-    image: "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80",
-    description: "A sleek everyday audio accessory for music, calls and your daily commute."
+    id: 2,
+    name: "Wireless Studio Buds",
+    category: "Tech",
+    price: 1499,
+    emoji: "🎧",
+    tag: "POPULAR",
+    description: "Everyday audio with a clean, modern look.",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 3, name: "Everyday Canvas Tote", category: "Fashion",
-    price: 649, oldPrice: 799, rating: 4.6, reviews: 76,
-    badge: "EVERYDAY PICK",
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80",
-    description: "A versatile carry-all for errands, classes and weekends."
+    id: 3,
+    name: "Everyday Canvas Tote",
+    category: "Lifestyle",
+    price: 599,
+    emoji: "👜",
+    tag: "EVERYDAY PICK",
+    description: "A versatile companion for busy days.",
+    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 4, name: "Modern Desk Lamp", category: "Home",
-    price: 1299, oldPrice: 1599, rating: 4.9, reviews: 102,
-    badge: "TOP RATED",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80",
-    description: "A warm, considered touch for your desk, reading corner or bedside table."
+    id: 4,
+    name: "Modern Desk Lamp",
+    category: "Home",
+    price: 1299,
+    emoji: "💡",
+    tag: "NEW ARRIVAL",
+    description: "Bring a warm glow to your workspace.",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 5, name: "Minimal Daily Journal", category: "Accessories",
-    price: 399, oldPrice: 499, rating: 4.5, reviews: 58,
-    badge: "UNDER ₹500",
-    image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=700&q=80",
-    description: "A simple place for daily notes, ideas, plans and reminders."
+    id: 5,
+    name: "Minimal Daily Journal",
+    category: "Lifestyle",
+    price: 349,
+    emoji: "📔",
+    tag: "",
+    description: "A little space for your everyday ideas.",
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 6, name: "Insulated Hydration Bottle", category: "Accessories",
-    price: 749, oldPrice: 999, rating: 4.7, reviews: 94,
-    badge: "DAILY ESSENTIAL",
-    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=700&q=80",
-    description: "A practical everyday bottle for work, travel or the gym."
+    id: 6,
+    name: "Insulated Hydration Bottle",
+    category: "Lifestyle",
+    price: 699,
+    emoji: "🧴",
+    tag: "",
+    description: "A practical essential for life on the go.",
+    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 7, name: "Foldable Phone Stand", category: "Electronics",
-    price: 499, oldPrice: 649, rating: 4.4, reviews: 43,
-    badge: "SMART PICK",
-    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=700&q=80",
-    description: "A handy desk accessory for video calls and hands-free viewing."
+    id: 7,
+    name: "Foldable Phone Stand",
+    category: "Tech",
+    price: 299,
+    emoji: "📱",
+    tag: "SMART PICK",
+    description: "A simple upgrade for your desk setup.",
+    image: "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=700&q=80"
   },
   {
-    id: 8, name: "Botanical Scented Candle", category: "Home",
-    price: 599, oldPrice: 749, rating: 4.8, reviews: 111,
-    badge: "CUSTOMER FAVOURITE",
-    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80",
-    description: "A simple home accent for cosy evenings and thoughtful gifting."
+    id: 8,
+    name: "Botanical Scented Candle",
+    category: "Home",
+    price: 499,
+    emoji: "🕯️",
+    tag: "",
+    description: "Create a calm and inviting atmosphere.",
+    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80"
   }
 ];
-
-const $ = (selector) => document.querySelector(selector);
-
-const productGrid = $("#productGrid");
-const productSearch = $("#productSearch");
-const categoryButtons = $("#categoryButtons");
-const sortSelect = $("#sortSelect");
-const emptyState = $("#emptyState");
-const resultsMessage = $("#resultsMessage");
-const clearSearch = $("#clearSearch");
-
-const cartDrawer = $("#cartDrawer");
-const overlay = $("#overlay");
-const cartItems = $("#cartItems");
-const cartEmpty = $("#cartEmpty");
-const cartBottom = $("#cartBottom");
-const cartSubtotal = $("#cartSubtotal");
-const cartCount = $("#cartCount");
-const drawerCount = $("#drawerCount");
-const wishlistCount = $("#wishlistCount");
-const toast = $("#toast");
-
-let activeCategory = "All";
-let wishlistMode = false;
-let toastTimer;
 
 const cart = new Map();
 const wishlist = new Set();
 
+const productGrid = document.getElementById("productGrid");
+const productSearch = document.getElementById("productSearch");
+const categoryFilter = document.getElementById("categoryFilter");
+const sortFilter = document.getElementById("sortFilter");
+const emptyState = document.getElementById("emptyState");
+const resultsMessage = document.getElementById("resultsMessage");
+
+const cartDrawer = document.getElementById("cartDrawer");
+const overlay = document.getElementById("overlay");
+const cartItems = document.getElementById("cartItems");
+const cartEmpty = document.getElementById("cartEmpty");
+const cartBottom = document.getElementById("cartBottom");
+
+let toastTimer;
+
 function formatPrice(amount) {
-  return "₹" + amount.toLocaleString("en-IN");
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(amount);
 }
 
-function getProduct(id) {
-  return products.find((product) => product.id === Number(id));
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
 }
 
 function showToast(message) {
+  const toast = document.getElementById("toast");
   toast.textContent = message;
   toast.classList.add("show");
-  clearTimeout(toastTimer);
 
+  clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.remove("show");
-  }, 2600);
+  }, 2400);
+}
+
+function getFilteredProducts() {
+  const term = productSearch.value.trim().toLowerCase();
+  const category = categoryFilter.value;
+
+  const filtered = products.filter(product => {
+    const matchesSearch = [
+      product.name,
+      product.description,
+      product.category
+    ].some(value => value.toLowerCase().includes(term));
+
+    const matchesCategory =
+      category === "All" || product.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  switch (sortFilter.value) {
+    case "low":
+      filtered.sort((a, b) => a.price - b.price);
+      break;
+    case "high":
+      filtered.sort((a, b) => b.price - a.price);
+      break;
+    case "name":
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+  }
+
+  return filtered;
 }
 
 function renderProducts() {
-  const query = productSearch.value.trim().toLowerCase();
+  const filtered = getFilteredProducts();
 
-  let visibleProducts = products.filter((product) => {
-    const matchesCategory =
-      activeCategory === "All" || product.category === activeCategory;
-
-    const matchesSearch =
-      product.name.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query) ||
-      product.description.toLowerCase().includes(query);
-
-    const matchesWishlist = !wishlistMode || wishlist.has(product.id);
-
-    return matchesCategory && matchesSearch && matchesWishlist;
-  });
-
-  switch (sortSelect.value) {
-    case "price-low":
-      visibleProducts.sort((a, b) => a.price - b.price);
-      break;
-    case "price-high":
-      visibleProducts.sort((a, b) => b.price - a.price);
-      break;
-    case "rating":
-      visibleProducts.sort((a, b) => b.rating - a.rating);
-      break;
-    case "name":
-      visibleProducts.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-  }
-
-  productGrid.innerHTML = visibleProducts.map((product) => {
-    const isSaved = wishlist.has(product.id);
-
-    return `
-      <article class="product-card">
-        <div class="product-art">
-          <img src="${product.image}" alt="${product.name}" loading="lazy"
-            onerror="this.onerror=null;this.src='https://placehold.co/600x700/f0eee7/153e34?text=NovaMart';">
-          <span class="product-badge">${product.badge}</span>
-          <button class="wishlist-button ${isSaved ? "active" : ""}"
-            data-action="wishlist" data-id="${product.id}"
-            aria-label="${isSaved ? "Remove from" : "Add to"} wishlist"
-            aria-pressed="${isSaved}">${isSaved ? "♥" : "♡"}</button>
+  productGrid.innerHTML = filtered.map(product => `
+    <article class="product-card">
+      <div class="product-visual">
+        <span class="product-emoji">${product.emoji}</span>
+        <img
+          src="${product.image}"
+          alt="${escapeHTML(product.name)}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        ${product.tag
+          ? `<span class="product-tag">${escapeHTML(product.tag)}</span>`
+          : ""}
+        <button
+          class="wishlist-button ${wishlist.has(product.id) ? "active" : ""}"
+          data-wishlist="${product.id}"
+          aria-label="${wishlist.has(product.id) ? "Remove from" : "Add to"} wishlist"
+          aria-pressed="${wishlist.has(product.id)}"
+        >${wishlist.has(product.id) ? "♥" : "♡"}</button>
+      </div>
+      <div class="product-info">
+        <span class="product-category">${escapeHTML(product.category)}</span>
+        <h3>${escapeHTML(product.name)}</h3>
+        <p class="product-description">${escapeHTML(product.description)}</p>
+        <div class="product-bottom">
+          <span class="product-price">${formatPrice(product.price)}</span>
+          <button class="add-button" data-add="${product.id}">+ Add to Cart</button>
         </div>
-        <div class="product-info">
-          <p class="product-category">${product.category === "Home" ? "Home & Living" : product.category}</p>
-          <h3 class="product-name">${product.name}</h3>
-          <div class="product-rating" aria-label="${product.rating} out of 5 stars">
-            ★★★★★ <span>${product.rating} (${product.reviews})</span>
-          </div>
-          <div class="product-price-row">
-            <span class="product-price">${formatPrice(product.price)}</span>
-            <span class="old-price">${formatPrice(product.oldPrice)}</span>
-          </div>
-          <button class="add-button" data-action="add" data-id="${product.id}">Add to bag&nbsp; +</button>
-        </div>
-      </article>
-    `;
-  }).join("");
+      </div>
+    </article>
+  `).join("");
 
-  emptyState.hidden = visibleProducts.length !== 0;
-  productGrid.hidden = visibleProducts.length === 0;
+  productGrid.hidden = filtered.length === 0;
+  emptyState.hidden = filtered.length !== 0;
 
-  resultsMessage.textContent = wishlistMode
-    ? `${visibleProducts.length} wishlist item${visibleProducts.length === 1 ? "" : "s"}`
-    : `${visibleProducts.length} product${visibleProducts.length === 1 ? "" : "s"} to discover`;
-
-  clearSearch.hidden = productSearch.value.length === 0;
-
-  document.querySelectorAll(".category-button").forEach((button) => {
-    button.classList.toggle(
-      "active",
-      !wishlistMode && button.dataset.category === activeCategory
-    );
-  });
-}
-
-function setCategory(category) {
-  activeCategory = category;
-  wishlistMode = false;
-  renderProducts();
-}
-
-function toggleWishlist(id) {
-  const product = getProduct(id);
-  if (!product) return;
-
-  if (wishlist.has(product.id)) {
-    wishlist.delete(product.id);
-    showToast(`${product.name} removed from wishlist`);
-  } else {
-    wishlist.add(product.id);
-    showToast(`${product.name} added to wishlist`);
-  }
-
-  wishlistCount.textContent = wishlist.size;
-  renderProducts();
+  resultsMessage.textContent =
+    `${filtered.length} product${filtered.length === 1 ? "" : "s"} found`;
 }
 
 function addToCart(id) {
-  const product = getProduct(id);
+  const product = products.find(item => item.id === id);
   if (!product) return;
 
-  const item = cart.get(product.id);
-
-  if (item) {
-    item.quantity += 1;
+  if (cart.has(id)) {
+    cart.get(id).quantity += 1;
   } else {
-    cart.set(product.id, { productId: product.id, quantity: 1 });
+    cart.set(id, { ...product, quantity: 1 });
   }
 
   renderCart();
-  showToast(`${product.name} added to your bag`);
+  showToast(`${product.name} added to your cart.`);
 }
 
 function changeQuantity(id, amount) {
-  const item = cart.get(Number(id));
+  const item = cart.get(id);
   if (!item) return;
 
   item.quantity += amount;
-  if (item.quantity <= 0) cart.delete(Number(id));
+
+  if (item.quantity <= 0) {
+    cart.delete(id);
+  }
 
   renderCart();
 }
 
 function removeFromCart(id) {
-  const product = getProduct(id);
-  cart.delete(Number(id));
+  cart.delete(id);
   renderCart();
-
-  if (product) showToast(`${product.name} removed from your bag`);
+  showToast("Product removed from your cart.");
 }
 
 function renderCart() {
-  let totalQuantity = 0;
-  let subtotal = 0;
+  const items = [...cart.values()];
+  const quantity = items.reduce((sum, item) => sum + item.quantity, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  cart.forEach((item) => {
-    const product = getProduct(item.productId);
-    if (!product) return;
+  document.getElementById("cartCount").textContent = quantity;
+  document.getElementById("drawerCount").textContent = `(${quantity})`;
+  document.getElementById("cartSubtotal").textContent = formatPrice(subtotal);
 
-    totalQuantity += item.quantity;
-    subtotal += product.price * item.quantity;
-  });
+  cartEmpty.hidden = items.length !== 0;
+  cartBottom.hidden = items.length === 0;
 
-  cartCount.textContent = totalQuantity;
-  drawerCount.textContent = `(${totalQuantity})`;
-  cartSubtotal.textContent = formatPrice(subtotal);
-
-  const isEmpty = cart.size === 0;
-  cartEmpty.hidden = !isEmpty;
-  cartBottom.hidden = isEmpty;
-  cartItems.hidden = isEmpty;
-
-  if (isEmpty) {
-    cartItems.innerHTML = "";
-    return;
-  }
-
-  cartItems.innerHTML = [...cart.values()].map((item) => {
-    const product = getProduct(item.productId);
-    if (!product) return "";
-
-    return `
-      <div class="cart-line">
-        <img src="${product.image}" alt="${product.name}"
-          onerror="this.onerror=null;this.src='https://placehold.co/160x180/f0eee7/153e34?text=NovaMart';">
-        <div>
-          <h3>${product.name}</h3>
-          <div class="line-price">${formatPrice(product.price * item.quantity)}</div>
-          <div class="quantity-control">
-            <button data-cart-action="decrease" data-id="${product.id}" aria-label="Decrease quantity">−</button>
-            <span>${item.quantity}</span>
-            <button data-cart-action="increase" data-id="${product.id}" aria-label="Increase quantity">+</button>
-          </div>
-        </div>
-        <button class="remove-line" data-cart-action="remove" data-id="${product.id}" aria-label="Remove ${product.name}">×</button>
+  cartItems.innerHTML = items.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-visual">
+        <img
+          src="${item.image}"
+          alt=""
+          onerror="this.style.display='none';this.parentElement.textContent='${item.emoji}'"
+        >
       </div>
-    `;
-  }).join("");
+      <div>
+        <h4>${escapeHTML(item.name)}</h4>
+        <small>${formatPrice(item.price)} each</small>
+        <div class="quantity-controls">
+          <button data-quantity="${item.id}" data-change="-1" aria-label="Decrease quantity">−</button>
+          <span>${item.quantity}</span>
+          <button data-quantity="${item.id}" data-change="1" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <div>
+        <strong>${formatPrice(item.price * item.quantity)}</strong>
+        <button class="remove-item" data-remove="${item.id}">Remove</button>
+      </div>
+    </div>
+  `).join("");
 }
 
 function openCart() {
   cartDrawer.classList.add("open");
-  overlay.classList.add("show");
+  overlay.classList.add("open");
   cartDrawer.setAttribute("aria-hidden", "false");
-  document.body.classList.add("locked");
-  $("#closeCart").focus();
+  document.body.style.overflow = "hidden";
+  document.getElementById("closeCart").focus();
 }
 
 function closeCart() {
   cartDrawer.classList.remove("open");
-  overlay.classList.remove("show");
+  overlay.classList.remove("open");
   cartDrawer.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("locked");
+  document.body.style.overflow = "";
 }
 
-function resetFilters() {
-  productSearch.value = "";
-  sortSelect.value = "featured";
-  activeCategory = "All";
-  wishlistMode = false;
-  renderProducts();
-}
+function toggleWishlist(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
 
-function showWishlist() {
-  wishlistMode = !wishlistMode;
-  activeCategory = "All";
-
-  if (wishlistMode) {
-    productSearch.value = "";
-    sortSelect.value = "featured";
+  if (wishlist.has(id)) {
+    wishlist.delete(id);
+    showToast("Removed from wishlist.");
+  } else {
+    wishlist.add(id);
+    showToast("Added to wishlist.");
   }
 
   renderProducts();
-  $("#shop").scrollIntoView({ behavior: "smooth" });
-
-  showToast(wishlistMode
-    ? (wishlist.size ? "Showing your saved favourites" : "Your wishlist is empty. Tap ♡ to save a product.")
-    : "Showing all products");
 }
 
-/* Product search, categories, sorting and wishlist */
-categoryButtons.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-category]");
-  if (button) setCategory(button.dataset.category);
-});
+// Search and filters
+productSearch.addEventListener("input", renderProducts);
+categoryFilter.addEventListener("change", renderProducts);
+sortFilter.addEventListener("change", renderProducts);
 
-productSearch.addEventListener("input", () => {
-  wishlistMode = false;
-  renderProducts();
-});
-
-sortSelect.addEventListener("change", renderProducts);
-
-clearSearch.addEventListener("click", () => {
+document.getElementById("clearSearch").addEventListener("click", () => {
   productSearch.value = "";
+  categoryFilter.value = "All";
+  sortFilter.value = "featured";
   renderProducts();
-  productSearch.focus();
 });
 
-productGrid.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-action]");
-  if (!button) return;
+// Product buttons
+productGrid.addEventListener("click", event => {
+  const addButton = event.target.closest("[data-add]");
+  const wishButton = event.target.closest("[data-wishlist]");
 
-  if (button.dataset.action === "add") addToCart(button.dataset.id);
-  if (button.dataset.action === "wishlist") toggleWishlist(button.dataset.id);
+  if (addButton) addToCart(Number(addButton.dataset.add));
+  if (wishButton) toggleWishlist(Number(wishButton.dataset.wishlist));
 });
 
-/* Shopping cart controls */
-cartItems.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-cart-action]");
-  if (!button) return;
+// Shopping cart
+cartItems.addEventListener("click", event => {
+  const quantityButton = event.target.closest("[data-quantity]");
+  const removeButton = event.target.closest("[data-remove]");
 
-  const id = Number(button.dataset.id);
+  if (quantityButton) {
+    changeQuantity(
+      Number(quantityButton.dataset.quantity),
+      Number(quantityButton.dataset.change)
+    );
+  }
 
-  if (button.dataset.cartAction === "increase") changeQuantity(id, 1);
-  if (button.dataset.cartAction === "decrease") changeQuantity(id, -1);
-  if (button.dataset.cartAction === "remove") removeFromCart(id);
+  if (removeButton) {
+    removeFromCart(Number(removeButton.dataset.remove));
+  }
 });
 
-$("#openCart").addEventListener("click", openCart);
-$("#closeCart").addEventListener("click", closeCart);
+document.getElementById("cartButton").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
 
-$("#continueShopping").addEventListener("click", () => {
+document.getElementById("continueShopping").addEventListener("click", () => {
   closeCart();
-  $("#shop").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("products").scrollIntoView({ behavior: "smooth" });
 });
 
-$("#continueShoppingBottom").addEventListener("click", closeCart);
-$("#wishlistShortcut").addEventListener("click", showWishlist);
-$("#footerCart").addEventListener("click", openCart);
-
-$("#footerWishlist").addEventListener("click", () => {
-  closeCart();
-  wishlistMode = true;
-  activeCategory = "All";
-  productSearch.value = "";
-  renderProducts();
-  $("#shop").scrollIntoView({ behavior: "smooth" });
+document.getElementById("clearCart").addEventListener("click", () => {
+  cart.clear();
+  renderCart();
+  showToast("Your cart has been cleared.");
 });
 
-$("#resetFilters").addEventListener("click", resetFilters);
-$("#emptyReset").addEventListener("click", resetFilters);
+// Prepare cart details in the visitor's email application
+document.getElementById("checkoutButton").addEventListener("click", () => {
+  if (cart.size === 0) return;
 
-$("#searchFocus").addEventListener("click", () => {
-  $("#shop").scrollIntoView({ behavior: "smooth" });
-  setTimeout(() => productSearch.focus(), 350);
+  const lines = [...cart.values()].map(item =>
+    `${item.name} x ${item.quantity} = ${formatPrice(item.price * item.quantity)}`
+  );
+
+  const subtotal = [...cart.values()].reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  const body = [
+    "Hello NovaMart,",
+    "",
+    "I would like to enquire about the following products:",
+    ...lines,
+    "",
+    `Subtotal: ${formatPrice(subtotal)}`,
+    "",
+    "Please let me know the next steps."
+  ].join("\n");
+
+  const url = `mailto:battinapradeep3@gmail.com?subject=${encodeURIComponent("NovaMart Order Enquiry")}&body=${encodeURIComponent(body)}`;
+  window.location.href = url;
 });
 
-$("#checkoutButton").addEventListener("click", () => {
-  showToast(cart.size
-    ? "Demo checkout only — no payment has been processed."
-    : "Your bag is empty.");
-});
-
-/* Newsletter demo */
-$("#newsletterForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  showToast("Thanks for your interest! Newsletter signup is demo-only.");
-  event.target.reset();
-});
-
-/* Mobile navigation */
-const menuToggle = $("#menuToggle");
-const navigation = $("#navigation");
+// Mobile navigation
+const menuToggle = document.getElementById("menuToggle");
+const navigation = document.getElementById("navigation");
 
 menuToggle.addEventListener("click", () => {
-  const isOpen = navigation.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.textContent = isOpen ? "×" : "☰";
+  const open = navigation.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  menuToggle.textContent = open ? "×" : "☰";
 });
 
-navigation.querySelectorAll("a").forEach((link) => {
+navigation.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     navigation.classList.remove("open");
     menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
     menuToggle.textContent = "☰";
   });
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeCart();
+// Contact form character counter
+const contactMessage = document.getElementById("contactMessage");
+
+contactMessage.addEventListener("input", () => {
+  document.getElementById("messageCount").textContent =
+    contactMessage.value.length;
 });
 
-/* Feedback form: star rating */
-const ratingButtons = document.querySelectorAll(".rating-star");
-const ratingInput = $("#feedbackRating");
-const ratingLabel = $("#ratingLabel");
-
-const ratingDescriptions = {
-  1: "Needs improvement",
-  2: "Could be better",
-  3: "Good",
-  4: "Very good",
-  5: "Excellent!"
-};
-
-ratingButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const rating = Number(button.dataset.rating);
-    ratingInput.value = rating;
-    ratingLabel.textContent = ratingDescriptions[rating];
-
-    ratingButtons.forEach((star) => {
-      const selected = Number(star.dataset.rating) <= rating;
-      star.classList.toggle("selected", selected);
-      star.setAttribute("aria-pressed", String(selected));
-    });
-  });
-});
-
-/* Message character count */
-const messageInput = $("#feedbackMessage");
-const messageCount = $("#messageCount");
-
-messageInput.addEventListener("input", () => {
-  messageCount.textContent = `${messageInput.value.length} / 1500`;
-});
-
-/*
-  Feedback submission uses a mailto draft.
-  It opens the visitor's email application; the visitor must press Send.
-  For automatic online delivery, connect a form service such as Formspree.
-*/
-$("#feedbackForm").addEventListener("submit", (event) => {
+// Contact form validation and email preparation
+document.getElementById("contactForm").addEventListener("submit", event => {
   event.preventDefault();
 
-  const name = $("#feedbackName").value.trim();
-  const email = $("#feedbackEmail").value.trim();
-  const type = $("#feedbackType").value;
-  const message = messageInput.value.trim();
-  const rating = Number(ratingInput.value);
+  const name = document.getElementById("contactName").value.trim();
+  const email = document.getElementById("contactEmail").value.trim();
+  const subject = document.getElementById("contactSubject").value;
+  const message = contactMessage.value.trim();
+  const status = document.getElementById("contactStatus");
 
-  const status = $("#feedbackStatus");
-  const sendButton = $("#sendFeedback");
+  status.className = "form-status";
+  status.textContent = "";
 
-  status.classList.remove("error");
-  status.classList.add("show");
-
-  if (!name || !email || !type || !message) {
-    status.textContent = "Please fill in all required fields.";
+  if (!name || !email || !subject || !message) {
+    status.textContent = "Please complete all required fields.";
     status.classList.add("error");
     return;
   }
 
-  if (rating < 1 || rating > 5) {
-    status.textContent = "Please select a star rating before sending.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    status.textContent = "Please enter a valid email address.";
     status.classList.add("error");
     return;
   }
 
-  const subject = encodeURIComponent(`NovaMart ${type} from ${name}`);
-  const body = encodeURIComponent(
-    `NovaMart Website Message\n\n` +
-    `Name: ${name}\n` +
-    `Email: ${email}\n` +
-    `Message type: ${type}\n` +
-    `Rating: ${rating}/5\n\n` +
-    `Message:\n${message}`
-  );
+  const body = [
+    "Hello NovaMart,",
+    "",
+    `Name: ${name}`,
+    `Reply email: ${email}`,
+    `Enquiry type: ${subject}`,
+    "",
+    "Message:",
+    message
+  ].join("\n");
 
-  const mailtoUrl =
-    `mailto:battinapradeep3@gmail.com?subject=${subject}&body=${body}`;
+  const mailto = `mailto:battinapradeep3@gmail.com?subject=${encodeURIComponent("NovaMart - " + subject)}&body=${encodeURIComponent(body)}`;
 
-  status.textContent =
-    "Your email app should open with your message prepared. Review it and press Send to deliver your feedback.";
+  status.textContent = "Your email app is opening. Please review the message and press Send.";
+  status.classList.add("success");
 
-  sendButton.disabled = true;
-  window.location.href = mailtoUrl;
-
-  setTimeout(() => {
-    sendButton.disabled = false;
-  }, 1200);
+  window.location.href = mailto;
 });
 
-/* Current year and initial render */
-$("#currentYear").textContent = new Date().getFullYear();
+// Close drawer and menu with Escape
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeCart();
+    navigation.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.textContent = "☰";
+  }
+});
+
+// Initial page setup
+document.getElementById("currentYear").textContent = new Date().getFullYear();
 
 renderProducts();
 renderCart();
