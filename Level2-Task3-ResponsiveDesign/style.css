@@ -926,3 +926,45 @@ header.navbar,
         font-size: 12px;
     }
 }
+/* Hero section layout */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Hero text */
+.hero-content {
+    text-align: left;
+}
+
+/* Hero image */
+.hero-visual {
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+}
+
+.hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .hero-content {
+        text-align: left;
+    }
+
+    .hero-visual {
+        height: 380px;
+    }
+}
