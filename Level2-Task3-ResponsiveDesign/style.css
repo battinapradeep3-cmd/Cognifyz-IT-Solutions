@@ -960,3 +960,35 @@ header.navbar,
         font-size: 16px;
     }
 }
+/* Make hero text background transparent */
+.hero-content {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 58%;
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Show more of the flower background */
+.hero {
+    background-position: 65% center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 680px;
+        padding: 35px 24px;
+        background-position: 65% center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+    }
+}
