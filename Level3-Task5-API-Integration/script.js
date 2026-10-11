@@ -108,7 +108,11 @@ function showError(message) {
 }
 
 async function loadCountries() {
-  const myRequest = ++requestNumber;
+  const response = await fetch("API_URL");
+  const data = await response.json();
+
+  // Existing code that displays the data
+}
 
   if (requestController) {
     requestController.abort();
