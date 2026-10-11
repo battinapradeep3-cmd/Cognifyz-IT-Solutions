@@ -907,7 +907,7 @@ header.navbar,
             rgba(255, 244, 232, 0.25) 68%,
             rgba(255, 244, 232, 0.05) 100%
         ),
-        url("images/bloomora-hero.jpg");
+        url("images/hero.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
