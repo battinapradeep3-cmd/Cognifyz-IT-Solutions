@@ -1,222 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NovaMart — thoughtful finds for everyday living.">
-  <meta name="theme-color" content="#173d32">
+  <meta name="description" content="NovaMart - discover fashion, electronics and everyday accessories. Contact us for enquiries.">
   <title>NovaMart | Shop Smarter</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="announcement">Thoughtful finds for everyday living <span>✦</span> Welcome to NovaMart</div>
 
-  <header class="header">
-    <a href="#home" class="brand">
-      <span class="brand-icon">N</span>
-      <span>nova<span class="brand-light">mart</span><small>SHOP SMARTER</small></span>
-    </a>
+  <header class="navbar">
+    <a href="#home" class="logo">Nova<span>Mart.</span></a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-
-    <nav class="navigation" id="navigation">
-      <a class="nav-link active" href="#home">Home</a>
-      <a class="nav-link" href="#shop">Shop</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#contact">Contact</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
 
-    <div class="header-actions">
-      <button class="icon-btn" id="searchFocus" aria-label="Search products" title="Search">⌕</button>
-      <button class="icon-btn wishlist-shortcut" id="wishlistShortcut" aria-label="View wishlist" title="Wishlist">♡ <span id="wishlistCount">0</span></button>
-      <button class="cart-btn" id="openCart" aria-label="Open shopping cart">Bag <span id="cartCount">0</span></button>
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Go to product search">⌕</button>
+      <button class="cart-button" id="cartToggle">
+        🛒 Cart <span id="cartCount">0</span>
+      </button>
     </div>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow"><span></span> THE NOVAMART EDIT</p>
-        <h1>Good finds.<br><em>Better living.</em></h1>
-        <p class="hero-description">Discover thoughtful picks, everyday essentials and little things that make life feel special.</p>
-        <div class="hero-actions">
-          <a href="#shop" class="primary-btn">Explore collection <span>↗</span></a>
-          <a href="#about" class="text-link">Our story <span>→</span></a>
-        </div>
-        <div class="hero-note"><span>★★★★★</span> Carefully selected for everyday living</div>
+      <div class="hero-content">
+        <p class="eyebrow">YOUR EVERYDAY MARKETPLACE</p>
+        <h1>Find your next<br><span>favorite thing.</span></h1>
+        <p class="hero-description">
+          Discover thoughtful picks, everyday essentials and
+          fresh styles — all in one place.
+        </p>
+        <a href="#shop" class="primary-btn">Explore Collection ↗</a>
+        <div class="hero-note">✦ Curated finds. Better everyday.</div>
       </div>
 
-      <div class="hero-visual" aria-label="NovaMart decorative product display">
-        <div class="hero-circle"></div>
-        <div class="decor-card decor-back"><span>THE EVERYDAY<br>COLLECTION</span><div class="decor-object object-small">✿</div></div>
-        <div class="decor-card decor-front">
-          <span class="decor-kicker">NOVA SELECT</span>
-          <div class="decor-object">🏺</div>
-          <div class="decor-caption">Small joys,<br><em>every day.</em></div>
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85"
+          alt="Modern clothing and shopping store">
+        <div class="floating-card">
+          <span>✦</span>
+          <div>
+            <strong>Fresh finds</strong>
+            <small>Picked for you</small>
+          </div>
         </div>
-        <div class="floating-note note-one">Thoughtfully picked ✦</div>
-        <div class="floating-note note-two">♡ Find your favourite</div>
       </div>
-      <div class="hero-footer"><span>01 — CURATED FINDS</span><span>MADE FOR EVERYDAY LIVING</span><span>SCROLL TO DISCOVER ↓</span></div>
     </section>
 
-    <section class="benefits" aria-label="NovaMart highlights">
-      <div><span class="benefit-icon">✳</span><p><b>Thoughtful picks</b><small>Chosen with care</small></p></div>
-      <div><span class="benefit-icon">♡</span><p><b>Everyday favourites</b><small>Little things, big joy</small></p></div>
-      <div><span class="benefit-icon">↗</span><p><b>Easy shopping</b><small>Browse at your pace</small></p></div>
+    <section class="benefits">
+      <div>🚚 <span><strong>Easy shopping</strong><small>Browse in seconds</small></span></div>
+      <div>✨ <span><strong>Curated products</strong><small>Everyday favorites</small></span></div>
+      <div>🛍️ <span><strong>Simple cart</strong><small>Know your total</small></span></div>
     </section>
 
-    <section class="shop section-wrap" id="shop">
+    <section class="shop-section" id="shop">
       <div class="section-heading">
         <div>
           <p class="eyebrow">THE COLLECTION</p>
-          <h2>Find your <em>something.</em></h2>
-          <p class="section-description">Everyday essentials and thoughtful little discoveries.</p>
+          <h2>Shop your favorites.</h2>
+          <p class="muted">Little upgrades for your everyday life.</p>
         </div>
-        <span class="section-number">N° 001 — 008</span>
-      </div>
 
-      <div class="shop-tools">
-        <label class="search-field">
-          <span aria-hidden="true">⌕</span>
-          <input type="search" id="productSearch" placeholder="Search products..." autocomplete="off" aria-label="Search products">
-          <button id="clearSearch" type="button" aria-label="Clear search">×</button>
-        </label>
-
-        <div class="filter-tools">
-          <label>Category
-            <select id="categoryFilter">
-              <option value="all">All products</option>
-              <option value="home">Home & Living</option>
-              <option value="tech">Tech</option>
-              <option value="accessories">Accessories</option>
-              <option value="wellness">Wellness</option>
-            </select>
-          </label>
-          <label>Sort by
-            <select id="sortSelect">
-              <option value="featured">Featured</option>
-              <option value="price-low">Price: low to high</option>
-              <option value="price-high">Price: high to low</option>
-              <option value="name">Name: A–Z</option>
-              <option value="rating">Top rated</option>
-            </select>
-          </label>
-          <button class="reset-btn" id="resetFilters" type="button">Reset ↺</button>
+        <div class="search-box" id="searchBox">
+          <span>⌕</span>
+          <input type="search" id="searchInput" placeholder="Search products..." aria-label="Search products">
         </div>
       </div>
 
-      <div class="category-chips" aria-label="Filter by category">
-        <button class="chip active" data-category="all">Everything</button>
-        <button class="chip" data-category="home">Home & Living</button>
-        <button class="chip" data-category="tech">Tech</button>
-        <button class="chip" data-category="accessories">Accessories</button>
-        <button class="chip" data-category="wellness">Wellness</button>
+      <div class="category-list" id="categoryList">
+        <button class="category active" data-category="All">All Products</button>
+        <button class="category" data-category="Fashion">Fashion</button>
+        <button class="category" data-category="Electronics">Electronics</button>
+        <button class="category" data-category="Accessories">Accessories</button>
       </div>
 
-      <div class="results-row">
-        <p id="resultsMessage" aria-live="polite">Showing all products</p>
-        <button class="wishlist-view" id="wishlistMode" type="button">♡ View wishlist</button>
+      <div class="results-line">
+        <span id="resultsCount">Loading products...</span>
+        <span>Thoughtfully selected ✦</span>
       </div>
 
-      <div class="product-grid" id="productGrid"></div>
-      <div class="empty-state" id="emptyState" hidden>
-        <span>⌕</span>
-        <h3>No finds this time.</h3>
-        <p>Try another search or clear your filters.</p>
-        <button class="primary-btn" id="emptyReset" type="button">Clear filters</button>
+      <div class="product-grid" id="productGrid">
+        <p class="loading-message">Loading our collection...</p>
       </div>
-      <div class="collection-footer"><span>GOOD THINGS, SELECTED FOR YOU</span><span>✦</span><span>MORE TO DISCOVER SOON</span></div>
     </section>
 
-    <section class="about-section" id="about">
-      <div class="about-art">
-        <div class="about-ring"><span>THE ART OF<br><em>everyday</em></span></div>
-        <span class="about-star">✳</span>
-        <span class="about-art-label">NOVA MART · EST. WITH CARE</span>
-      </div>
-      <div class="about-copy">
+    <section class="promo-section" id="about">
+      <div>
         <p class="eyebrow">A LITTLE ABOUT US</p>
-        <h2>Less noise.<br><em>More good things.</em></h2>
-        <p>We believe the best finds don't need to be complicated. NovaMart brings together useful products and thoughtful details to make everyday living a little more enjoyable.</p>
-        <p>Save the things you love, explore at your own pace and discover something that feels just right for you.</p>
-        <a href="#shop" class="text-link">Explore the collection <span>→</span></a>
+        <h2>Good finds.<br>Good feelings.</h2>
       </div>
+      <p>
+        NovaMart is a mini shopping experience built around
+        simple discovery. Browse your favorites, add them to
+        your cart and keep shopping your way.
+      </p>
+      <a href="#shop" class="light-btn">Shop the collection ↗</a>
     </section>
 
-    <section class="newsletter section-wrap">
-      <div><p class="eyebrow">A NOTE FROM NOVAMART</p><h2>Good things, <em>occasionally.</em></h2><p>Join us for new finds and a little everyday inspiration.</p></div>
-      <form id="newsletterForm" class="newsletter-form">
-        <label class="sr-only" for="newsletterEmail">Your email address</label>
-        <input type="email" id="newsletterEmail" placeholder="Your email address" required>
-        <button type="submit">Join us →</button>
-        <small>Demo only: your email is not sent or stored.</small>
-      </form>
+    <!-- Contact section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-heading">
+        <p class="eyebrow">LET'S CONNECT</p>
+        <h2>We'd love to hear from you.</h2>
+        <p>
+          Have a question or feedback about NovaMart?
+          Reach out using the contact details below.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <div class="contact-icon" aria-hidden="true">✉</div>
+          <h3>Email Us</h3>
+          <p>For enquiries and feedback</p>
+          <a href="mailto:battinapradeep3@gmaiil.com">
+            battinapradeep3@gmaiil.com
+          </a>
+        </article>
+
+        <article class="contact-card">
+          <div class="contact-icon" aria-hidden="true">☎</div>
+          <h3>Call Us</h3>
+          <p>Get in touch by phone</p>
+          <a href="tel:+919346070654">+91 93460 70654</a>
+        </article>
+      </div>
+
+      <p class="contact-note">
+        We appreciate your interest in NovaMart. Thank you for visiting!
+      </p>
     </section>
   </main>
 
-  <footer class="footer" id="contact">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="#home" class="brand footer-logo"><span class="brand-icon">N</span><span>nova<span class="brand-light">mart</span><small>SHOP SMARTER</small></span></a>
-        <p>Good finds for everyday living.<br>Curated with care, always.</p>
-      </div>
-      <div class="footer-column">
-        <h3>Explore</h3>
-        <a href="#home">Home</a><a href="#shop">Shop all</a><a href="#about">Our story</a>
-      </div>
-      <div class="footer-column">
-        <h3>Get in touch</h3>
-        <a href="mailto:battinapradeep3@gmaiil.com">battinapradeep3@gmaiil.com</a>
-        <a href="tel:+919346070654">+91 93460 70654</a>
-        <span>Mon–Sat · 9 AM–6 PM</span>
-      </div>
-      <div class="footer-note"><span>✳</span><p>Make room for<br><em>the good stuff.</em></p></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="currentYear"></span> NovaMart. All rights reserved.</span>
-      <span>MADE FOR EVERYDAY LIVING ✦</span>
-      <a href="#home">Back to top ↑</a>
-    </div>
+  <footer class="footer">
+    <a href="#home" class="logo">Nova<span>Mart.</span></a>
+    <p>Made for your everyday ✦</p>
+    <p>© <span id="year"></span> NovaMart. Demo shopping website.</p>
   </footer>
 
+  <!-- Cart overlay -->
   <div class="overlay" id="overlay"></div>
 
+  <!-- Shopping cart drawer -->
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
-    <div class="drawer-heading">
-      <div><p class="eyebrow">YOUR SELECTION</p><h2>Your bag <span id="drawerCount">(0)</span></h2></div>
-      <button class="close-btn" id="closeCart" aria-label="Close cart">×</button>
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">YOUR SELECTION</p>
+        <h2>Your Cart <span id="drawerCount">(0)</span></h2>
+      </div>
+      <button class="close-btn" id="closeCart" aria-label="Close cart">✕</button>
     </div>
+
     <div class="cart-items" id="cartItems"></div>
-    <div class="cart-empty" id="cartEmpty"><span>♡</span><h3>Your bag is taking a breather.</h3><p>Add something you love and it will show up here.</p><button class="primary-btn" id="continueShopping">Continue shopping</button></div>
-    <div class="cart-bottom" id="cartBottom">
-      <div class="subtotal-row"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div>
-      <p>Shipping and taxes are calculated at checkout.</p>
-      <button class="primary-btn checkout-btn" id="checkoutButton">Continue to checkout <span>→</span></button>
-      <small>Demo store: no real payment is processed.</small>
+
+    <div class="cart-footer">
+      <div class="subtotal">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">₹0</strong>
+      </div>
+      <p class="cart-disclaimer">Demo checkout — no real payment will be taken.</p>
+      <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout ↗</button>
+      <button class="continue-btn" id="continueShopping">Continue Shopping</button>
     </div>
   </aside>
 
-  <div class="modal-backdrop" id="modalBackdrop">
-    <section class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="close-btn modal-close" id="closeModal" aria-label="Close product details">×</button>
-      <div class="modal-art" id="modalArt"></div>
-      <div class="modal-copy">
-        <p class="eyebrow" id="modalCategory">NOVA SELECT</p>
-        <h2 id="modalTitle">Product name</h2>
-        <p class="modal-rating" id="modalRating">★ 4.8</p>
-        <p class="modal-description" id="modalDescription"></p>
-        <strong class="modal-price" id="modalPrice"></strong>
-        <div class="modal-actions"><button class="primary-btn" id="modalAdd">Add to bag →</button><button class="modal-heart" id="modalWishlist" aria-label="Toggle wishlist">♡</button></div>
-        <small>Product details are for this demo storefront.</small>
-      </div>
-    </section>
+  <!-- Product details modal -->
+  <div class="modal-backdrop" id="productModal" aria-hidden="true">
+    <div class="product-modal" role="dialog" aria-modal="true" aria-label="Product details">
+      <button class="close-btn modal-close" id="closeModal" aria-label="Close details">✕</button>
+      <div id="modalContent"></div>
+    </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"><span>✦</span><p id="toastMessage">Added to bag</p></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 </body>
 </html>
