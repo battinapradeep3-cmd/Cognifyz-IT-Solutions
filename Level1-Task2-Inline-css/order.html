@@ -3,305 +3,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Order delicious bakery products from Sweet Crumbs Bakery.">
+<meta name="description" content="Order freshly baked treats from Sweet Crumbs Bakery.">
 <title>Place Your Order | Sweet Crumbs Bakery</title>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--brown:#7b4228;--dark:#422719;--cream:#fff8ef;--pink:#f1dfd2}
-body{font-family:Arial,sans-serif;background:var(--cream);color:var(--dark);line-height:1.7}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-.announcement{background:var(--dark);color:white;text-align:center;padding:8px;font-size:12px;letter-spacing:1px}
-header{background:var(--cream);border-bottom:1px solid #ead8c8}
-.navbar{max-width:1150px;margin:auto;padding:16px 25px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.logo{font-family:Georgia,serif;font-size:26px;font-weight:bold;color:var(--brown);line-height:1.2}
-.logo span{display:block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:3px;text-align:center;margin-top:5px}
-.nav-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.nav-links a{font-size:14px;font-weight:bold}
-.nav-links a:hover{color:#bd754a}
-.hero{text-align:center;padding:50px 20px;background:linear-gradient(120deg,#fff1e2,#efd0bc)}
-.eyebrow{color:var(--brown);font-size:12px;font-weight:bold;letter-spacing:3px;text-transform:uppercase}
-h1,h2,h3{font-family:Georgia,serif;line-height:1.3}
-.hero h1{font-size:clamp(35px,5vw,52px);margin:12px 0}
-.hero h1 span{color:var(--brown);font-style:italic}
-.hero p{color:#71594a}
-.page-container{max-width:1150px;margin:auto;padding:50px 25px 70px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);align-items:start;gap:30px}
-.panel{background:white;border:1px solid #eadbce;border-radius:8px;padding:28px;box-shadow:0 8px 25px #42271908}
-.panel h2{font-size:28px;margin-bottom:5px}
-.muted{color:#79695e;font-size:14px;margin-bottom:23px}
-.form-group{margin-bottom:18px}
-label{display:block;font-size:14px;font-weight:bold;margin-bottom:7px}
-input,select,textarea{display:block;width:100%;border:1px solid #d9c6b6;background:#fffdfb;border-radius:4px;padding:12px;color:var(--dark);outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--brown);box-shadow:0 0 0 2px #7b42281c}
-textarea{resize:vertical;min-height:95px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.quantity-row{display:grid;grid-template-columns:1fr 130px;gap:15px;align-items:end}
-.primary-btn{display:block;width:100%;padding:14px 18px;border:none;border-radius:4px;background:var(--brown);color:white;font-weight:bold;cursor:pointer;transition:.2s}
-.primary-btn:hover{background:var(--dark)}
-.summary{position:sticky;top:20px}
-.summary h2{margin-bottom:20px}
-.summary-product{display:flex;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid #eadbce;font-size:14px}
-.summary-product span:last-child{font-weight:bold;text-align:right}
-.summary-total{display:flex;justify-content:space-between;gap:15px;margin:20px 0;font-size:21px;font-weight:bold;color:var(--brown)}
-.summary-note{background:#fff5e8;border-radius:5px;padding:14px;font-size:13px;color:#725947;margin-top:18px}
-.contact-help{margin-top:20px;padding-top:17px;border-top:1px solid #eadbce;font-size:13px}
-.contact-help a{color:var(--brown);font-weight:bold;overflow-wrap:anywhere}
-.confirmation{display:none;margin-top:22px;padding:18px;border:1px solid #9bbd94;border-radius:5px;background:#f0f8ed;color:#285327}
-.confirmation h3{font-size:23px;margin-bottom:8px}
-.confirmation p{font-size:14px;margin-bottom:12px}
-.confirmation pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:13px;padding:12px;background:white;border:1px solid #d8e5d3;border-radius:4px;margin:12px 0}
-.secondary-btn{display:inline-block;padding:10px 14px;background:white;color:var(--dark);border:1px solid #a7bda0;border-radius:4px;cursor:pointer;font-weight:bold;margin:4px 4px 0 0}
-.notice{font-size:12px;color:#79695e;margin-top:12px}
-footer{background:#29180f;color:#f5e7dc;padding:30px 20px;text-align:center}
-.footer-logo{font-family:Georgia,serif;font-size:24px;font-weight:bold}
-footer p{font-size:13px;color:#cdb9aa;margin-top:7px}
-.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:14px 0;font-size:13px}
-@media(max-width:800px){
-.page-container{grid-template-columns:1fr;padding:35px 18px 50px}
-.summary{position:static}
-.navbar{flex-direction:column}
-.nav-links{justify-content:center;gap:12px 18px}
-}
-@media(max-width:480px){
-.panel{padding:19px}
-.form-row{grid-template-columns:1fr;gap:0}
-.quantity-row{grid-template-columns:1fr 100px}
-.nav-links a{font-size:12px}
-}
-</style>
 </head>
 
-<body>
-<div class="announcement">FRESHLY BAKED WITH LOVE · SWEET MOMENTS START HERE</div>
+<body style="margin:0;font-family:Arial,sans-serif;background:#fffaf3;color:#432719;">
 
-<header>
-<nav class="navbar" aria-label="Main navigation">
-<a class="logo" href="index.html">Sweet Crumbs<span>BAKERY &amp; DESSERTS</span></a>
-<div class="nav-links">
-<a href="index.html">Home</a>
-<a href="index.html#menu">Our Menu</a>
-<a href="index.html#story">Our Story</a>
-<a href="index.html#offers">Offers</a>
-<a href="index.html#contact">Contact</a>
-</div>
-</nav>
+<header style="background:#2B1712;padding:22px 15px;text-align:center;color:#F5EBDD;">
+    <h1 style="font-family:Georgia,serif;margin:0;">Sweet Crumbs Bakery</h1>
+    <p style="color:#D5B98C;letter-spacing:3px;font-size:11px;">FRESHLY BAKED WITH LOVE</p>
 </header>
 
-<section class="hero">
-<div class="eyebrow">A Little Taste of Happiness</div>
-<h1>Place Your <span>Order.</span></h1>
-<p>Choose your favourite treats and tell us how to reach you.</p>
-</section>
+<main style="max-width:750px;margin:30px auto;padding:0 15px 35px;">
 
-<main class="page-container">
-<section class="panel">
-<h2>Order Details</h2>
-<p class="muted">Fill in the details below to prepare your order request.</p>
+    <a href="index.html#menu" style="color:#7b4228;text-decoration:none;">← Back to Menu</a>
 
-<form id="orderForm">
-<div class="form-group">
-<label for="customerName">Full Name *</label>
-<input id="customerName" name="customerName" type="text" placeholder="Enter your full name" autocomplete="name" maxlength="100" required>
-</div>
+    <div style="background:white;border:1px solid #eadaca;border-radius:10px;padding:24px;margin-top:20px;box-shadow:0 4px 15px rgba(67,39,25,0.07);">
 
-<div class="form-row">
-<div class="form-group">
-<label for="customerEmail">Email Address *</label>
-<input id="customerEmail" name="customerEmail" type="email" placeholder="you@example.com" autocomplete="email" maxlength="150" required>
-</div>
-<div class="form-group">
-<label for="customerPhone">Mobile Number *</label>
-<input id="customerPhone" name="customerPhone" type="tel" placeholder="Enter mobile number" autocomplete="tel" pattern="[0-9+\-\s()]{10,17}" title="Enter a valid phone number" required>
-</div>
-</div>
+        <h2 style="font:normal 32px Georgia,serif;text-align:center;margin-top:0;">Place Your Order</h2>
 
-<div class="form-group">
-<label for="product">Choose Your Product *</label>
-<select id="product" name="product" required>
-<option value="Chocolate Cake">Chocolate Cake — ₹499</option>
-<option value="Butter Croissant">Butter Croissant — ₹89</option>
-<option value="Gourmet Cupcakes">Gourmet Cupcakes — ₹79</option>
-<option value="Chocolate Cookies">Chocolate Cookies — ₹99</option>
-<option value="Fudge Brownies">Fudge Brownies — ₹89</option>
-<option value="Artisan Bread">Artisan Bread — ₹69</option>
-</select>
-</div>
+        <p style="text-align:center;color:#806b59;line-height:1.7;">
+            Choose your quantity and enter your delivery details below.
+        </p>
 
-<div class="quantity-row">
-<div class="form-group">
-<label for="deliveryDate">Preferred Delivery Date *</label>
-<input id="deliveryDate" name="deliveryDate" type="date" required>
-</div>
-<div class="form-group">
-<label for="quantity">Quantity *</label>
-<input id="quantity" name="quantity" type="number" min="1" max="50" value="1" required>
-</div>
-</div>
+        <div id="productBox" style="background:#f5e3ce;border-radius:8px;padding:18px;margin:22px 0;">
+            <p style="font-size:11px;letter-spacing:3px;color:#9a5b35;">YOUR SELECTED PRODUCT</p>
+            <h3 id="productName" style="font:normal 25px Georgia,serif;margin:8px 0;">Loading product...</h3>
+            <p id="productDescription" style="color:#725848;font-size:14px;"></p>
+            <p style="font-size:18px;font-weight:bold;color:#7b4228;">
+                Unit Price: <span id="unitPrice">₹0</span>
+            </p>
+        </div>
 
-<div class="form-group">
-<label for="address">Delivery Address *</label>
-<textarea id="address" name="address" placeholder="Enter your complete delivery address" autocomplete="street-address" maxlength="500" required></textarea>
-</div>
+        <form id="orderForm">
 
-<div class="form-group">
-<label for="notes">Special Instructions (Optional)</label>
-<textarea id="notes" name="notes" placeholder="Cake message, flavour preferences or other requests" maxlength="500"></textarea>
-</div>
+            <label for="productSelect" style="display:block;font-weight:bold;margin:18px 0 8px;">Select Product</label>
+            <select id="productSelect" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;background:white;font-size:15px;">
+                <option value="cake">Chocolate Cake - ₹499</option>
+                <option value="croissant">Butter Croissant - ₹89</option>
+                <option value="cupcakes">Gourmet Cupcakes - ₹79</option>
+                <option value="cookies">Chocolate Cookies - ₹99</option>
+                <option value="brownies">Fudge Brownies - ₹89</option>
+                <option value="bread">Artisan Bread - ₹69</option>
+            </select>
 
-<button class="primary-btn" type="submit">PREPARE ORDER REQUEST →</button>
-<p class="notice">This is a front-end demo. Submitting prepares your order details but does not automatically store the order on a server.</p>
-</form>
+            <label for="quantity" style="display:block;font-weight:bold;margin:18px 0 8px;">Quantity</label>
+            <input type="number" id="quantity" min="1" max="100" value="1" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
 
-<div class="confirmation" id="confirmation" role="status" aria-live="polite">
-<h3>Order Request Prepared!</h3>
-<p>Your order details are ready. Copy them or open your email app to send the request.</p>
-<pre id="orderText"></pre>
-<button class="secondary-btn" type="button" id="copyOrder">Copy Order Details</button>
-<a class="secondary-btn" id="emailOrder" href="mailto:battinapradeep3@gmail.com">Send via Email</a>
-<p class="notice" id="copyStatus"></p>
-</div>
-</section>
+            <div style="background:#fffaf3;border:1px solid #eadaca;padding:16px;border-radius:6px;margin:20px 0;">
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Price per item</span>
+                    <strong id="summaryPrice">₹499</strong>
+                </div>
 
-<aside class="panel summary">
-<h2>Order Summary</h2>
-<div class="summary-product"><span id="summaryProduct">Chocolate Cake</span><span id="unitPrice">₹499</span></div>
-<div class="summary-product"><span>Quantity</span><span id="summaryQuantity">1</span></div>
-<div class="summary-product"><span>Subtotal</span><span id="subtotal">₹499</span></div>
-<div class="summary-product"><span>Delivery Charges</span><span>To be confirmed</span></div>
-<div class="summary-total"><span>Product Total</span><span id="total">₹499</span></div>
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Quantity</span>
+                    <strong id="summaryQuantity">1</strong>
+                </div>
 
-<p class="summary-note">Prices are demo prices. Delivery fees, availability and final order confirmation must be confirmed with the bakery.</p>
+                <div style="display:flex;justify-content:space-between;gap:10px;margin:8px 0;">
+                    <span>Delivery charge</span>
+                    <strong id="deliveryCharge">₹0</strong>
+                </div>
 
-<div class="contact-help">
-<h3>Need Help?</h3>
-<p>Contact us directly with your questions.</p>
-<p>Email: <a href="mailto:battinapradeep3@gmail.com">battinapradeep3@gmail.com</a></p>
-<p>Phone: <a href="tel:+919346070654">9346070654</a></p>
-</div>
-</aside>
+                <hr style="border:0;border-top:1px solid #eadaca;">
+
+                <div style="display:flex;justify-content:space-between;gap:10px;font-size:21px;color:#7b4228;">
+                    <strong>Total Cost</strong>
+                    <strong id="totalCost" aria-live="polite">₹499</strong>
+                </div>
+
+                <p style="font-size:11px;color:#806b59;">Delivery is shown as ₹0 in this demo. Confirm actual delivery fees before accepting orders.</p>
+            </div>
+
+            <h3 style="font:normal 24px Georgia,serif;">Customer Details</h3>
+
+            <label for="customerName" style="display:block;font-weight:bold;margin:15px 0 8px;">Full Name *</label>
+            <input type="text" id="customerName" name="customerName" autocomplete="name" maxlength="100" required placeholder="Enter your full name"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
+
+            <label for="phone" style="display:block;font-weight:bold;margin:15px 0 8px;">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" pattern="[0-9+() -]{10,20}" maxlength="20" required placeholder="Enter your phone number"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
+
+            <label for="email" style="display:block;font-weight:bold;margin:15px 0 8px;">Email (Optional)</label>
+            <input type="email" id="email" name="email" autocomplete="email" maxlength="150" placeholder="Enter your email"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-size:15px;">
+
+            <label for="address" style="display:block;font-weight:bold;margin:15px 0 8px;">Delivery Address *</label>
+            <textarea id="address" name="address" autocomplete="street-address" maxlength="500" required rows="3" placeholder="House number, street, area, city, PIN code"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-family:Arial,sans-serif;font-size:15px;resize:vertical;"></textarea>
+
+            <label for="notes" style="display:block;font-weight:bold;margin:15px 0 8px;">Order Notes (Optional)</label>
+            <textarea id="notes" name="notes" maxlength="500" rows="2" placeholder="Cake message or special instructions"
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;font-family:Arial,sans-serif;font-size:15px;resize:vertical;"></textarea>
+
+            <label for="payment" style="display:block;font-weight:bold;margin:15px 0 8px;">Payment Method</label>
+            <select id="payment" name="payment" required
+                style="box-sizing:border-box;width:100%;padding:13px;border:1px solid #d8c3ad;border-radius:5px;background:white;font-size:15px;">
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="UPI on Delivery">UPI on Delivery</option>
+            </select>
+
+            <button type="submit"
+                style="width:100%;margin-top:24px;padding:16px;background:#7b4228;color:white;border:0;border-radius:5px;font-size:16px;font-weight:bold;cursor:pointer;">
+                CONFIRM ORDER
+            </button>
+
+        </form>
+
+        <div id="confirmation" role="status" aria-live="polite"
+            style="display:none;margin-top:25px;padding:20px;background:#edf7ed;border:1px solid #b8d9b8;border-radius:7px;overflow-wrap:anywhere;">
+            <h2 style="color:#286638;">Order Summary Created!</h2>
+            <p id="confirmationText" style="line-height:1.8;"></p>
+            <button type="button" onclick="window.print()"
+                style="padding:12px 18px;background:#286638;color:white;border:0;border-radius:5px;cursor:pointer;">
+                Print Order Summary
+            </button>
+            <p style="font-size:12px;color:#536b53;">
+                This is a demo confirmation. Your order has not been sent to the bakery.
+            </p>
+        </div>
+
+    </div>
 </main>
 
-<footer>
-<div class="footer-logo">Sweet Crumbs Bakery</div>
-<p>FRESHLY BAKED WITH LOVE</p>
-<div class="footer-links">
-<a href="index.html">Home</a>
-<a href="index.html#menu">Menu</a>
-<a href="index.html#story">Our Story</a>
-<a href="index.html#contact">Contact</a>
-</div>
-<p><a href="mailto:battinapradeep3@gmail.com">battinapradeep3@gmail.com</a></p>
-<p><a href="tel:+919346070654">9346070654</a></p>
-<p>© 2026 Sweet Crumbs Bakery. All rights reserved.</p>
+<footer style="background:#2B1712;color:#F5EBDD;text-align:center;padding:25px 15px;">
+    <h3 style="font-family:Georgia,serif;color:#D5B98C;">Sweet Crumbs Bakery</h3>
+    <p style="font-size:13px;">Freshly Baked With Love</p>
+    <a href="index.html" style="color:#F5EBDD;">Return to Home</a>
 </footer>
 
 <script>
-const prices={
-  "Chocolate Cake":499,
-  "Butter Croissant":89,
-  "Gourmet Cupcakes":79,
-  "Chocolate Cookies":99,
-  "Fudge Brownies":89,
-  "Artisan Bread":69
-};
+(function () {
+    "use strict";
 
-const form=document.getElementById("orderForm");
-const productSelect=document.getElementById("product");
-const quantityInput=document.getElementById("quantity");
-const deliveryDate=document.getElementById("deliveryDate");
-const confirmation=document.getElementById("confirmation");
-const orderText=document.getElementById("orderText");
-const emailOrder=document.getElementById("emailOrder");
-const copyStatus=document.getElementById("copyStatus");
+    const products = {
+        cake: {
+            name: "Chocolate Cake",
+            price: 499,
+            description: "Rich chocolate cake for birthdays and celebrations."
+        },
+        croissant: {
+            name: "Butter Croissant",
+            price: 89,
+            description: "Golden, flaky pastries perfect for your morning coffee."
+        },
+        cupcakes: {
+            name: "Gourmet Cupcakes",
+            price: 79,
+            description: "Soft cupcakes with delicious frosting."
+        },
+        cookies: {
+            name: "Chocolate Cookies",
+            price: 99,
+            description: "Freshly baked cookies filled with chocolate goodness."
+        },
+        brownies: {
+            name: "Fudge Brownies",
+            price: 89,
+            description: "Rich, soft and fudgy chocolate brownies."
+        },
+        bread: {
+            name: "Artisan Bread",
+            price: 69,
+            description: "Golden-crusted bread with a soft centre."
+        }
+    };
 
-function formatPrice(amount){
-  return "₹"+amount.toLocaleString("en-IN");
-}
+    const params = new URLSearchParams(window.location.search);
+    const select = document.getElementById("productSelect");
+    const quantityInput = document.getElementById("quantity");
+    const form = document.getElementById("orderForm");
+    const confirmation = document.getElementById("confirmation");
 
-function updateSummary(){
-  const product=productSelect.value;
-  const quantity=Math.max(1,Math.min(50,Number(quantityInput.value)||1));
-  const price=prices[product]||0;
-  const subtotal=price*quantity;
+    function money(amount) {
+        return "₹" + amount.toLocaleString("en-IN");
+    }
 
-  document.getElementById("summaryProduct").textContent=product;
-  document.getElementById("unitPrice").textContent=formatPrice(price);
-  document.getElementById("summaryQuantity").textContent=quantity;
-  document.getElementById("subtotal").textContent=formatPrice(subtotal);
-  document.getElementById("total").textContent=formatPrice(subtotal);
-}
+    function getSelectedProduct() {
+        return products[select.value] || products.cake;
+    }
 
-productSelect.addEventListener("change",updateSummary);
-quantityInput.addEventListener("input",updateSummary);
+    function updateOrder() {
+        const product = getSelectedProduct();
+        const quantity = Math.max(1, Math.min(100, Number(quantityInput.value) || 1));
+        const total = product.price * quantity;
 
-const today=new Date();
-const localToday=[
-  today.getFullYear(),
-  String(today.getMonth()+1).padStart(2,"0"),
-  String(today.getDate()).padStart(2,"0")
-].join("-");
+        document.getElementById("productName").textContent = product.name;
+        document.getElementById("productDescription").textContent = product.description;
+        document.getElementById("unitPrice").textContent = money(product.price);
+        document.getElementById("summaryPrice").textContent = money(product.price);
+        document.getElementById("summaryQuantity").textContent = quantity;
+        document.getElementById("deliveryCharge").textContent = money(0);
+        document.getElementById("totalCost").textContent = money(total);
+    }
 
-deliveryDate.min=localToday;
-deliveryDate.value=localToday;
+    const requestedProduct = params.get("product");
+    if (requestedProduct && products[requestedProduct]) {
+        select.value = requestedProduct;
+    }
 
-const params=new URLSearchParams(window.location.search);
-const requestedProduct=params.get("product");
+    select.addEventListener("change", function () {
+        confirmation.style.display = "none";
+        form.style.display = "block";
+        updateOrder();
+    });
 
-if(requestedProduct && Object.prototype.hasOwnProperty.call(prices,requestedProduct)){
-  productSelect.value=requestedProduct;
-}
+    quantityInput.addEventListener("input", function () {
+        confirmation.style.display = "none";
+        form.style.display = "block";
+        updateOrder();
+    });
 
-updateSummary();
+    form.addEventListener("input", function () {
+        confirmation.style.display = "none";
+    });
 
-form.addEventListener("submit",function(event){
-  event.preventDefault();
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-  if(!form.reportValidity()){
-    return;
-  }
+        if (!form.reportValidity()) {
+            return;
+        }
 
-  const product=productSelect.value;
-  const quantity=Number(quantityInput.value);
-  const price=prices[product];
-  const subtotal=price*quantity;
+        const product = getSelectedProduct();
+        const quantity = Number(quantityInput.value);
+        const total = product.price * quantity;
+        const customerName = document.getElementById("customerName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const notes = document.getElementById("notes").value.trim();
+        const payment = document.getElementById("payment").value;
 
-  const details=[
-    "SWEET CRUMBS BAKERY - ORDER REQUEST",
-    "-----------------------------------",
-    "Customer Name: "+document.getElementById("customerName").value.trim(),
-    "Email: "+document.getElementById("customerEmail").value.trim(),
-    "Mobile: "+document.getElementById("customerPhone").value.trim(),
-    "Product: "+product,
-    "Unit Price: "+formatPrice(price),
-    "Quantity: "+quantity,
-    "Product Total: "+formatPrice(subtotal),
-    "Preferred Delivery Date: "+deliveryDate.value,
-    "Delivery Address: "+document.getElementById("address").value.trim(),
-    "Special Instructions: "+(document.getElementById("notes").value.trim()||"None"),
-    "",
-    "Please confirm availability, delivery charges and final order."
-  ].join("\n");
+        if (!customerName || !phone || !address || quantity < 1 || quantity > 100) {
+            alert("Please check your details and quantity.");
+            return;
+        }
 
-  orderText.textContent=details;
+        const summary = [
+            "Thank you, " + customerName + "!",
+            "Product: " + product.name,
+            "Price per item: " + money(product.price),
+            "Quantity: " + quantity,
+            "Delivery: " + money(0),
+            "Total: " + money(total),
+            "Phone: " + phone,
+            "Email: " + (email || "Not provided"),
+            "Address: " + address,
+            "Payment: " + payment,
+            "Notes: " + (notes || "None")
+        ].join("\n");
 
-  emailOrder.href="mailto:battinapradeep3@gmail.com"
-    +"?subject="+encodeURIComponent("Bakery Order Request - "+product)
-    +"&body="+encodeURIComponent(details);
+        document.getElementById("confirmationText").style.whiteSpace = "pre-line";
+        document.getElementById("confirmationText").textContent = summary;
+        confirmation.style.display = "block";
+        confirmation.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 
-  confirmation.style.display="block";
-  copyStatus.textContent="";
-  confirmation.scrollIntoView({behavior:"smooth",block:"nearest"});
-});
-
-document.getElementById("copyOrder").addEventListener("click",async function(){
-  try{
-    await navigator.clipboard.writeText(orderText.textContent);
-    copyStatus.textContent="Order details copied successfully.";
-  }catch(error){
-    copyStatus.textContent="Automatic copy is unavailable. Select and copy the order text above.";
-  }
-});
+    updateOrder();
+})();
 </script>
+
 </body>
 </html>
