@@ -1,1 +1,181 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore country information using a live REST API.">
+  <title>API Nexus | Live Data Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <header class="navbar">
+    <a class="brand" href="#" aria-label="API Nexus home">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span>API<span class="accent">NEXUS</span></span>
+    </a>
+    <nav>
+      <a class="nav-link active" href="#home">Overview</a>
+      <a class="nav-link" href="#explorer">Explorer</a>
+      <a class="nav-link" href="#about">About</a>
+    </nav>
+    <div class="api-status">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="apiStatus">Connecting...</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> LIVE API INTEGRATION PROJECT</div>
+        <h1>Explore the world.<br><span class="gradient-text">Powered by APIs.</span></h1>
+        <p class="hero-description">
+          Discover countries, explore global information, and experience
+          real-time data fetched directly from a public REST API.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#explorer">Explore Countries <span>↗</span></a>
+          <a class="secondary-btn" href="#about">How it works</a>
+        </div>
+        <div class="hero-note">
+          <span class="live-pulse"></span>
+          Connected to a public REST API
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Global data illustration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="globe">🌐</div>
+        <div class="float-card float-card-top">
+          <span class="mini-icon">↗</span>
+          <div><strong>Live data</strong><small>API powered</small></div>
+        </div>
+        <div class="float-card float-card-bottom">
+          <span class="mini-icon purple">✦</span>
+          <div><strong>Global explorer</strong><small>Discover the world</small></div>
+        </div>
+        <div class="visual-caption">DATA WITHOUT BORDERS</div>
+      </div>
+    </section>
+
+    <section class="stats section-wrap" aria-label="Dashboard statistics">
+      <article class="stat-card">
+        <span class="stat-icon">◎</span>
+        <div><p>Countries loaded</p><h2 id="countryCount">—</h2></div>
+        <span class="stat-tag">LIVE DATA</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon purple">⌘</span>
+        <div><p>Data source</p><h2 class="stat-word">REST API</h2></div>
+        <span class="stat-tag">PUBLIC</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon green">↻</span>
+        <div><p>Last updated</p><h2 class="stat-word" id="lastUpdated">Waiting...</h2></div>
+        <span class="stat-tag">FETCH</span>
+      </article>
+    </section>
+
+    <section class="explorer section-wrap" id="explorer">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">DATA EXPLORER</div>
+          <h2>Discover countries<span class="accent">.</span></h2>
+          <p>Search, filter, and explore information from around the globe.</p>
+        </div>
+        <button class="secondary-btn refresh-btn" id="refreshBtn" type="button">
+          <span id="refreshIcon">↻</span> Refresh data
+        </button>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search countries or capitals..." autocomplete="off">
+          <kbd>SEARCH</kbd>
+        </label>
+        <label class="filter-wrap">
+          <span class="sr-only">Filter by region</span>
+          <select id="regionFilter">
+            <option value="All">All regions</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </label>
+        <label class="filter-wrap sort-wrap">
+          <span class="sr-only">Sort countries</span>
+          <select id="sortFilter">
+            <option value="name">Name: A–Z</option>
+            <option value="population">Population: High–Low</option>
+            <option value="region">Region: A–Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="results-line">
+        <span id="resultsLabel">Loading countries...</span>
+        <span class="source-label"><span class="status-dot"></span> SOURCE: REST COUNTRIES</span>
+      </div>
+
+      <div class="country-grid" id="countryGrid" aria-live="polite">
+        <div class="loading-card"><span class="loader"></span><p>Fetching live country data...</p></div>
+      </div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-icon">⌕</div>
+        <h3>No countries found</h3>
+        <p>Try another search term or change the selected region.</p>
+        <button class="secondary-btn" id="clearBtn" type="button">Clear filters</button>
+      </div>
+
+      <div class="pagination">
+        <span id="pageInfo">Showing results</span>
+        <div class="page-actions">
+          <button class="page-btn" id="prevBtn" type="button" disabled aria-label="Previous page">←</button>
+          <span id="pageNumber">1</span>
+          <button class="page-btn" id="nextBtn" type="button" aria-label="Next page">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section-wrap" id="about">
+      <div class="about-copy">
+        <div class="eyebrow">BEHIND THE EXPERIENCE</div>
+        <h2>Simple interface.<br><span class="gradient-text">Powerful integration.</span></h2>
+        <p>This project demonstrates how a frontend application communicates
+          with an external API to retrieve, process, and present structured data.</p>
+      </div>
+      <div class="feature-list">
+        <article class="feature-item"><span>01</span><div><h3>Fetch API</h3><p>Retrieve country information from a public endpoint.</p></div></article>
+        <article class="feature-item"><span>02</span><div><h3>Dynamic rendering</h3><p>Turn JSON responses into interactive country cards.</p></div></article>
+        <article class="feature-item"><span>03</span><div><h3>Responsive design</h3><p>Explore data on desktop, tablet, and mobile devices.</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#"><span class="brand-icon">&lt;/&gt;</span><span>API<span class="accent">NEXUS</span></span></a>
+    <p>Built to explore. Powered by data.</p>
+    <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">REST Countries API ↗</a>
+  </footer>
+
+  <dialog class="country-dialog" id="countryDialog">
+    <button class="dialog-close" id="closeDialog" type="button" aria-label="Close details">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
+
