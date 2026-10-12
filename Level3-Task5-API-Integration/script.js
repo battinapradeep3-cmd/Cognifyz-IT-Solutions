@@ -1,462 +1,422 @@
-const API_URL =
-  "https://restcountries.com/v3.1/all?fields=name,flags,capital,region,population,cca2,currencies,languages,subregion,timezones,area,maps";
 
-const PAGE_SIZE = 9;
+"use strict";
 
-const elements = {
-  grid: document.getElementById("countryGrid"),
-  count: document.getElementById("countryCount"),
-  updated: document.getElementById("lastUpdated"),
-  status: document.getElementById("apiStatus"),
-  statusDot: document.getElementById("statusDot"),
-  search: document.getElementById("searchInput"),
-  region: document.getElementById("regionFilter"),
-  sort: document.getElementById("sortFilter"),
-  results: document.getElementById("resultsLabel"),
-  empty: document.getElementById("emptyState"),
-  pageInfo: document.getElementById("pageInfo"),
-  pageNumber: document.getElementById("pageNumber"),
-  prev: document.getElementById("prevBtn"),
-  next: document.getElementById("nextBtn"),
-  refresh: document.getElementById("refreshBtn"),
-  clear: document.getElementById("clearBtn"),
-  dialog: document.getElementById("countryDialog"),
-  dialogContent: document.getElementById("dialogContent"),
-  closeDialog: document.getElementById("closeDialog"),
-  toast: document.getElementById("toast")
+// ========================================
+// SKYCAST - WEATHER FORECAST APPLICATION
+// API: Open-Meteo (No API key required)
+// ========================================
+
+const API = {
+  geocoding: "https://geocoding-api.open-meteo.com/v1/search",
+  forecast: "https://api.open-meteo.com/v1/forecast"
 };
 
-let countries = [];
-let filteredCountries = [];
-let currentPage = 1;
-let toastTimer;
-let requestController = null;
+const $ = (id) => document.getElementById(id);
+
+const elements = {
+  form: $("searchForm"),
+  input: $("cityInput"),
+  button: $("searchButton"),
+  status: $("statusMessage"),
+  location: $("locationName"),
+  time: $("localTime"),
+  badge: $("conditionBadge"),
+  temperature: $("temperature"),
+  condition: $("conditionText"),
+  feelsLike: $("feelsLike"),
+  high: $("todayHigh"),
+  low: $("todayLow"),
+  art: $("weatherArt"),
+  humidity: $("humidity"),
+  wind: $("windSpeed"),
+  rain: $("rainChance"),
+  pressure: $("pressure"),
+  forecast: $("forecastGrid")
+};
+
 let requestNumber = 0;
 
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
-}
-
-function getName(country) {
-  return country.name?.common || "Unknown country";
-}
-
-function getCapital(country) {
-  return country.capital?.[0] || "No capital listed";
-}
-
-function formatNumber(number) {
-  return new Intl.NumberFormat("en-IN").format(number || 0);
-}
-
-function setStatus(message, state = "online") {
-  elements.status.textContent = message;
-
-  elements.status.parentElement.classList.toggle(
-    "error",
-    state === "error"
-  );
-
-  elements.status.parentElement.classList.toggle(
-    "loading",
-    state === "loading"
-  );
-}
-
-function showToast(message) {
-  clearTimeout(toastTimer);
-
-  elements.toast.textContent = message;
-  elements.toast.classList.add("show");
-
-  toastTimer = setTimeout(() => {
-    elements.toast.classList.remove("show");
-  }, 3000);
-}
-
-function showLoading() {
-  elements.grid.hidden = false;
-
-  elements.grid.innerHTML = `
-    <div class="loading-card">
-      <span class="loader"></span>
-      <p>Fetching live country data...</p>
-    </div>
-  `;
-
-  elements.empty.hidden = true;
-  elements.results.textContent = "Connecting to API...";
-}
-
-function showError(message) {
-  elements.grid.hidden = false;
-
-  elements.grid.innerHTML = `
-    <div class="loading-card">
-      <div style="font-size:30px;color:#ff7889">!</div>
-      <h3>Unable to load data</h3>
-      <p>${escapeHTML(message)}</p>
-      <button class="secondary-btn" id="retryBtn" type="button">
-        Try again
-      </button>
-    </div>
-  `;
-
-  document.getElementById("retryBtn")
-    .addEventListener("click", loadCountries);
-
-  elements.count.textContent = "—";
-  elements.updated.textContent = "Unavailable";
-  elements.results.textContent = "API connection failed";
-  elements.pageInfo.textContent = "No results available";
-  elements.pageNumber.textContent = "—";
-  elements.prev.disabled = true;
-  elements.next.disabled = true;
-  elements.empty.hidden = true;
-
-  setStatus("Connection failed", "error");
-}
-
-async function loadCountries() {
-  // Stop any older request.
-  if (requestController) {
-    requestController.abort();
+// Weather codes follow the WMO interpretation codes.
+function getWeatherInfo(code, isDay = true) {
+  if (code === 0) {
+    return {
+      text: isDay ? "Clear sky" : "Clear night",
+      icon: isDay ? "☀️" : "🌙"
+    };
   }
 
-  const myRequest = ++requestNumber;
-  requestController = new AbortController();
+  if (code === 1) {
+    return { text: "Mainly clear", icon: isDay ? "🌤️" : "🌙" };
+  }
 
-  elements.refresh.disabled = true;
-  elements.refresh.classList.add("refreshing");
+  if (code === 2) {
+    return { text: "Partly cloudy", icon: "⛅" };
+  }
 
-  setStatus("Connecting...", "loading");
-  showLoading();
+  if (code === 3) {
+    return { text: "Overcast", icon: "☁️" };
+  }
+
+  if ([45, 48].includes(code)) {
+    return { text: "Foggy", icon: "🌫️" };
+  }
+
+  if ([51, 53, 55, 56, 57].includes(code)) {
+    return { text: "Drizzle", icon: "🌦️" };
+  }
+
+  if ([61, 63, 65, 66, 67].includes(code)) {
+    return { text: "Rain", icon: "🌧️" };
+  }
+
+  if ([71, 73, 75, 77].includes(code)) {
+    return { text: "Snow", icon: "🌨️" };
+  }
+
+  if ([80, 81, 82].includes(code)) {
+    return { text: "Rain showers", icon: "🌦️" };
+  }
+
+  if ([85, 86].includes(code)) {
+    return { text: "Snow showers", icon: "🌨️" };
+  }
+
+  if (code === 95) {
+    return { text: "Thunderstorm", icon: "⛈️" };
+  }
+
+  if ([96, 99].includes(code)) {
+    return { text: "Thunderstorm with hail", icon: "⛈️" };
+  }
+
+  return { text: "Weather unavailable", icon: "🌡️" };
+}
+
+function showStatus(message, isError = false) {
+  elements.status.textContent = message;
+  elements.status.classList.toggle("error", isError);
+}
+
+function formatTemperature(value) {
+  return Number.isFinite(value) ? `${Math.round(value)}°` : "--°";
+}
+
+function formatNumber(value, digits = 0) {
+  return Number.isFinite(value)
+    ? Number(value).toFixed(digits)
+    : "--";
+}
+
+function formatDay(dateString, index) {
+  if (index === 0) return "Today";
+  if (index === 1) return "Tomorrow";
+
+  const date = new Date(`${dateString}T12:00:00`);
+
+  return new Intl.DateTimeFormat("en", {
+    weekday: "short"
+  }).format(date);
+}
+
+function getLocalTime(timezone) {
+  try {
+    return new Intl.DateTimeFormat("en-IN", {
+      weekday: "long",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: timezone,
+      timeZoneName: "short"
+    }).format(new Date());
+  } catch {
+    return "Local time unavailable";
+  }
+}
+
+// Fetch JSON with a timeout and HTTP error checking.
+async function fetchJSON(url) {
+  const controller = new AbortController();
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 12000);
 
   try {
-    const response = await fetch(API_URL, {
-      signal: requestController.signal
+    const response = await fetch(url, {
+      signal: controller.signal
     });
 
     if (!response.ok) {
-      throw new Error(`API returned HTTP ${response.status}`);
+      throw new Error(`Request failed (${response.status}).`);
     }
 
     const data = await response.json();
 
-    if (!Array.isArray(data)) {
-      throw new Error("Unexpected API response.");
+    if (data.error) {
+      throw new Error(data.reason || "Weather service error.");
     }
 
-    // Ignore results from an older request.
-    if (myRequest !== requestNumber) return;
-
-    countries = data
-      .filter(country => country.name?.common)
-      .sort((a, b) => getName(a).localeCompare(getName(b)));
-
-    elements.count.textContent = formatNumber(countries.length);
-
-    elements.updated.textContent = new Date().toLocaleTimeString(
-      "en-IN",
-      {
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    );
-
-    setStatus("API Connected", "online");
-
-    applyFilters();
-    showToast("Country data loaded successfully!");
-
-  } catch (error) {
-    if (error.name === "AbortError") return;
-    if (myRequest !== requestNumber) return;
-
-    console.error("API error:", error);
-
-    showError(
-      "Unable to connect to the countries API. Check your internet and try again."
-    );
-
+    return data;
   } finally {
-    if (myRequest === requestNumber) {
-      elements.refresh.disabled = false;
-      elements.refresh.classList.remove("refreshing");
-      requestController = null;
-    }
+    clearTimeout(timeout);
   }
 }
 
-function applyFilters() {
-  const query = elements.search.value.trim().toLowerCase();
-  const selectedRegion = elements.region.value;
-  const selectedSort = elements.sort.value;
+// Find city coordinates using the geocoding API.
+async function findCity(city) {
+  const url = new URL(API.geocoding);
 
-  filteredCountries = countries.filter(country => {
-    const name = getName(country).toLowerCase();
-    const capital = getCapital(country).toLowerCase();
-    const region = country.region || "Other";
-
-    const matchesSearch =
-      name.includes(query) || capital.includes(query);
-
-    const matchesRegion =
-      selectedRegion === "All" || region === selectedRegion;
-
-    return matchesSearch && matchesRegion;
+  url.search = new URLSearchParams({
+    name: city,
+    count: "10",
+    language: "en",
+    format: "json"
   });
 
-  if (selectedSort === "population") {
-    filteredCountries.sort(
-      (a, b) => (b.population || 0) - (a.population || 0)
-    );
-  } else if (selectedSort === "region") {
-    filteredCountries.sort((a, b) =>
-      (a.region || "Other").localeCompare(b.region || "Other") ||
-      getName(a).localeCompare(getName(b))
-    );
-  } else {
-    filteredCountries.sort((a, b) =>
-      getName(a).localeCompare(getName(b))
+  const data = await fetchJSON(url);
+
+  if (!data.results || data.results.length === 0) {
+    throw new Error(
+      `No city found for "${city}". Check the spelling and try again.`
     );
   }
 
-  currentPage = 1;
-  renderCountries();
-}
-
-function renderCountries() {
-  const total = filteredCountries.length;
-  const totalPages = Math.ceil(total / PAGE_SIZE);
-  const startIndex = (currentPage - 1) * PAGE_SIZE;
-
-  const pageCountries = filteredCountries.slice(
-    startIndex,
-    startIndex + PAGE_SIZE
+  // Prefer a result in India when multiple cities have the same name.
+  const results = data.results;
+  const indiaResult = results.find(
+    (place) => place.country_code === "IN"
   );
 
-  elements.results.textContent =
-    `${formatNumber(total)} countries found`;
-
-  elements.empty.hidden = total !== 0;
-  elements.grid.hidden = total === 0;
-
-  if (total === 0) {
-    elements.grid.innerHTML = "";
-  } else {
-    elements.grid.innerHTML = pageCountries
-      .map((country, index) => createCountryCard(country, index))
-      .join("");
-
-    elements.grid.querySelectorAll(".details-btn")
-      .forEach(button => {
-        button.addEventListener("click", () => {
-          const country = countries.find(
-            item => item.cca2 === button.dataset.code
-          );
-
-          if (country) openCountryDetails(country);
-        });
-      });
-  }
-
-  elements.pageInfo.textContent = total
-    ? `Showing ${startIndex + 1}–${Math.min(
-        startIndex + PAGE_SIZE,
-        total
-      )} of ${formatNumber(total)}`
-    : "No matching countries";
-
-  elements.pageNumber.textContent =
-    totalPages ? `${currentPage} / ${totalPages}` : "0 / 0";
-
-  elements.prev.disabled = currentPage <= 1;
-  elements.next.disabled =
-    totalPages === 0 || currentPage >= totalPages;
+  return indiaResult || results[0];
 }
 
-function createCountryCard(country, index) {
-  const name = getName(country);
-  const capital = getCapital(country);
-  const region = country.region || "Other";
-  const flag = country.flags?.svg || country.flags?.png || "";
-  const code = country.cca2 || "";
-  const population = formatNumber(country.population);
+// Get current conditions and seven daily forecasts.
+async function getForecast(place) {
+  const url = new URL(API.forecast);
 
-  return `
-    <article class="country-card" style="animation-delay:${index * 35}ms">
-      <div class="flag-wrap">
-        <img
-          src="${escapeHTML(flag)}"
-          alt="${escapeHTML(name)} flag"
-          loading="lazy"
-          referrerpolicy="no-referrer"
-        >
-        <span class="region-chip">${escapeHTML(region)}</span>
-      </div>
+  url.search = new URLSearchParams({
+    latitude: String(place.latitude),
+    longitude: String(place.longitude),
 
-      <div class="country-content">
-        <div class="country-title-row">
-          <h3>${escapeHTML(name)}</h3>
-          <span class="country-code">${escapeHTML(code || "—")}</span>
-        </div>
+    current: [
+      "temperature_2m",
+      "relative_humidity_2m",
+      "apparent_temperature",
+      "is_day",
+      "precipitation",
+      "weather_code",
+      "wind_speed_10m",
+      "pressure_msl"
+    ].join(","),
 
-        <p class="country-capital">⌖ ${escapeHTML(capital)}</p>
+    hourly: [
+      "precipitation_probability"
+    ].join(","),
 
-        <div class="country-divider"></div>
+    daily: [
+      "weather_code",
+      "temperature_2m_max",
+      "temperature_2m_min",
+      "precipitation_probability_max"
+    ].join(","),
 
-        <div class="country-meta">
-          <div>
-            <span class="meta-label">POPULATION</span>
-            <span class="meta-value">${population}</span>
-          </div>
-          <div>
-            <span class="meta-label">REGION</span>
-            <span class="meta-value">${escapeHTML(region)}</span>
-          </div>
-        </div>
+    forecast_days: "7",
+    timezone: "auto"
+  });
 
-        <button
-          class="details-btn"
-          type="button"
-          data-code="${escapeHTML(code)}"
-          aria-label="View details for ${escapeHTML(name)}"
-        >
-          View country details <span>↗</span>
-        </button>
-      </div>
-    </article>
-  `;
+  return fetchJSON(url);
 }
 
-function getCurrencies(country) {
-  const currencies = country.currencies || {};
+function renderCurrentWeather(place, data) {
+  const current = data.current;
+  const daily = data.daily;
 
-  const values = Object.values(currencies).map(currency =>
-    `${currency.name || "Unknown"} (${currency.symbol || "—"})`
+  const info = getWeatherInfo(
+    current.weather_code,
+    current.is_day === 1
   );
 
-  return values.join(", ") || "Not available";
+  elements.location.textContent = [
+    place.name,
+    place.admin1,
+    place.country
+  ].filter(Boolean).join(", ");
+
+  elements.time.textContent = getLocalTime(data.timezone);
+
+  elements.temperature.textContent = Number.isFinite(
+    current.temperature_2m
+  ) ? Math.round(current.temperature_2m) : "--";
+
+  elements.condition.textContent = info.text;
+  elements.art.textContent = info.icon;
+  elements.badge.textContent = info.text.toUpperCase();
+
+  elements.feelsLike.textContent =
+    formatTemperature(current.apparent_temperature);
+
+  elements.humidity.textContent =
+    formatNumber(current.relative_humidity_2m);
+
+  elements.wind.textContent =
+    formatNumber(current.wind_speed_10m);
+
+  elements.pressure.textContent =
+    formatNumber(current.pressure_msl);
+
+  elements.high.textContent =
+    formatTemperature(daily.temperature_2m_max[0]);
+
+  elements.low.textContent =
+    formatTemperature(daily.temperature_2m_min[0]);
+
+  // Find the nearest available hourly precipitation forecast.
+  const hourlyTimes = data.hourly.time;
+  let hourlyIndex = 0;
+  let smallestDifference = Infinity;
+
+  for (let i = 0; i < hourlyTimes.length; i++) {
+    const difference = Math.abs(
+      new Date(hourlyTimes[i]).getTime() -
+      new Date(current.time).getTime()
+    );
+
+    if (difference < smallestDifference) {
+      smallestDifference = difference;
+      hourlyIndex = i;
+    }
+  }
+
+  const probability =
+    data.hourly.precipitation_probability[hourlyIndex];
+
+  elements.rain.textContent = Number.isFinite(probability)
+    ? probability
+    : "--";
 }
 
-function getLanguages(country) {
-  return Object.values(country.languages || {}).join(", ") ||
-    "Not available";
+function renderForecast(daily) {
+  const fragment = document.createDocumentFragment();
+
+  daily.time.forEach((date, index) => {
+    const info = getWeatherInfo(daily.weather_code[index]);
+
+    const card = document.createElement("article");
+    card.className = "forecast-card";
+
+    const day = document.createElement("div");
+    day.className = "forecast-day";
+    day.textContent = formatDay(date, index);
+
+    const icon = document.createElement("div");
+    icon.className = "forecast-icon";
+    icon.textContent = info.icon;
+
+    const condition = document.createElement("div");
+    condition.className = "forecast-condition";
+    condition.textContent = info.text;
+
+    const temperatures = document.createElement("div");
+    temperatures.className = "forecast-temps";
+
+    const high = document.createElement("span");
+    high.textContent = formatTemperature(
+      daily.temperature_2m_max[index]
+    );
+
+    const low = document.createElement("span");
+    low.className = "low";
+    low.textContent = formatTemperature(
+      daily.temperature_2m_min[index]
+    );
+
+    temperatures.append(high, low);
+
+    const rain = document.createElement("div");
+    rain.className = "forecast-rain";
+
+    const chance = daily.precipitation_probability_max[index];
+
+    rain.textContent = Number.isFinite(chance)
+      ? `💧 ${chance}% rain`
+      : "Rain: --";
+
+    card.append(day, icon, condition, temperatures, rain);
+    fragment.appendChild(card);
+  });
+
+  elements.forecast.replaceChildren(fragment);
 }
 
-function openCountryDetails(country) {
-  const name = getName(country);
-  const flag = country.flags?.svg || country.flags?.png || "";
-  const mapsURL = country.maps?.googleMaps;
+async function loadWeather(city) {
+  const query = city.trim();
 
-  const fields = [
-    ["Capital", getCapital(country)],
-    ["Region", country.region || "Not available"],
-    ["Subregion", country.subregion || "Not available"],
-    ["Population", formatNumber(country.population)],
-    ["Area", country.area != null
-      ? `${formatNumber(country.area)} km²`
-      : "Not available"],
-    ["Currency", getCurrencies(country)],
-    ["Languages", getLanguages(country)],
-    ["Time zones", (country.timezones || []).join(", ") || "Not available"]
-  ];
+  if (!query) {
+    showStatus("Please enter a city name.", true);
+    elements.input.focus();
+    return;
+  }
 
-  elements.dialogContent.innerHTML = `
-    <img
-      class="dialog-flag"
-      src="${escapeHTML(flag)}"
-      alt="${escapeHTML(name)} flag"
-    >
+  // Ignore older responses if the user starts another search.
+  const thisRequest = ++requestNumber;
 
-    <h2 class="dialog-title">${escapeHTML(name)}</h2>
+  elements.button.disabled = true;
+  elements.button.textContent = "Loading...";
+  elements.input.disabled = true;
 
-    <p class="dialog-subtitle">
-      Country code: ${escapeHTML(country.cca2 || "—")}
-    </p>
+  showStatus(`Fetching live weather for ${query}...`);
 
-    <div class="dialog-grid">
-      ${fields.map(([label, value]) => `
-        <div class="dialog-field">
-          <small>${escapeHTML(label)}</small>
-          <strong>${escapeHTML(value)}</strong>
-        </div>
-      `).join("")}
-    </div>
+  try {
+    const place = await findCity(query);
 
-    ${mapsURL && /^https:\/\/www\.google\.com\/maps/.test(mapsURL)
-      ? `<p style="margin:20px 0 0">
-          <a class="primary-btn"
-             href="${escapeHTML(mapsURL)}"
-             target="_blank"
-             rel="noopener noreferrer">
-            Open on Google Maps ↗
-          </a>
-        </p>`
-      : ""}
-  `;
+    if (thisRequest !== requestNumber) return;
 
-  if (!elements.dialog.open) {
-    elements.dialog.showModal();
+    const data = await getForecast(place);
+
+    if (thisRequest !== requestNumber) return;
+
+    if (!data.current || !data.daily || !data.hourly) {
+      throw new Error("Weather data is incomplete. Please try again.");
+    }
+
+    renderCurrentWeather(place, data);
+    renderForecast(data.daily);
+
+    elements.input.value = place.name;
+
+    showStatus(
+      `Weather updated for ${place.name}. Forecast timezone: ${data.timezone}.`
+    );
+  } catch (error) {
+    if (thisRequest !== requestNumber) return;
+
+    console.error("SkyCast error:", error);
+
+    const message = error.name === "AbortError"
+      ? "The request timed out. Please check your connection and try again."
+      : error.message || "Unable to load weather. Please try again.";
+
+    showStatus(message, true);
+  } finally {
+    if (thisRequest === requestNumber) {
+      elements.button.disabled = false;
+      elements.button.textContent = "Search ↗";
+      elements.input.disabled = false;
+    }
   }
 }
 
-elements.search.addEventListener("input", applyFilters);
-elements.region.addEventListener("change", applyFilters);
-elements.sort.addEventListener("change", applyFilters);
-
-elements.refresh.addEventListener("click", loadCountries);
-
-elements.prev.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderCountries();
-
-    elements.grid.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
+// Search form.
+elements.form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  loadWeather(elements.input.value);
 });
 
-elements.next.addEventListener("click", () => {
-  const totalPages = Math.ceil(filteredCountries.length / PAGE_SIZE);
-
-  if (currentPage < totalPages) {
-    currentPage++;
-    renderCountries();
-
-    elements.grid.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
+// Popular city shortcuts.
+document.querySelectorAll(".city-chip").forEach((button) => {
+  button.addEventListener("click", () => {
+    loadWeather(button.dataset.city);
+  });
 });
 
-elements.clear.addEventListener("click", () => {
-  elements.search.value = "";
-  elements.region.value = "All";
-  elements.sort.value = "name";
-
-  applyFilters();
-});
-
-elements.closeDialog.addEventListener("click", () => {
-  elements.dialog.close();
-});
-
-elements.dialog.addEventListener("click", event => {
-  if (event.target === elements.dialog) {
-    elements.dialog.close();
-  }
-});
-
-// Start the application.
-loadCountries();
+// Load the default city on the first visit.
+loadWeather("Vijayawada");
