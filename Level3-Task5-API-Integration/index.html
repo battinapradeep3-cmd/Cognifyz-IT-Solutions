@@ -4,161 +4,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B1220">
+  <meta name="description" content="SkyCast Pro provides live weather, hourly insights and a 7-day forecast for cities worldwide.">
 
-  <meta name="description"
-    content="SkyCast - Live weather updates, current conditions and a 7-day forecast for cities worldwide.">
-
-  <title>SkyCast | Weather Forecast</title>
+  <title>SkyCast Pro | Weather Intelligence</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="app-shell">
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
 
+  <div class="app-shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="SkyCast home">
-        <span class="brand-icon">☀</span>
-        <span>SKY<span class="brand-accent">CAST</span></span>
+      <a class="brand" href="#" aria-label="SkyCast Pro home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="25" cy="14" r="7" fill="#63D4FF"/>
+            <path d="M10 28a8 8 0 0 1 1-16 11 11 0 0 1 21 4 7 7 0 0 1-1 14H12" stroke="#F4F7FF" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>skycast<span class="brand-pro"> pro</span></span>
       </a>
 
-      <span class="live-indicator">
-        <span class="live-dot"></span>
-        LIVE WEATHER
-      </span>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#today" class="nav-link active">Today</a>
+        <a href="#hourly" class="nav-link">Hourly</a>
+        <a href="#forecast" class="nav-link">7-Day Forecast</a>
+      </nav>
+
+      <div class="top-actions">
+        <span class="live-label"><span class="live-dot"></span> LIVE DATA</span>
+        <button id="unitToggle" class="unit-toggle" type="button" aria-label="Switch temperature unit">°C <span>/</span> °F</button>
+      </div>
     </header>
 
     <main>
       <section class="hero">
-        <div class="eyebrow">YOUR PERSONAL WEATHER STATION</div>
-        <h1>Understand the sky.<br>
-          <span>Plan your day.</span>
-        </h1>
-        <p class="hero-text">
-          Real-time weather conditions and forecasts for anywhere in the world.
-        </p>
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> WEATHER INTELLIGENCE, REIMAGINED</div>
+          <h1>Every forecast.<br><span>A clearer day.</span></h1>
+          <p class="hero-description">
+            Know the weather before you step outside. Explore live conditions,
+            hourly insights and your week ahead.
+          </p>
+        </div>
 
-        <form id="searchForm" class="search-form">
-          <span class="search-icon" aria-hidden="true">⌕</span>
-          <input
-            id="cityInput"
-            type="search"
-            placeholder="Search city, e.g. Hyderabad"
-            aria-label="Enter city name"
-            autocomplete="off"
-            required
-            maxlength="100">
-          <button id="searchButton" type="submit">Search ↗</button>
-        </form>
+        <div class="search-area">
+          <form id="searchForm" class="search-form">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <input id="cityInput" type="search" maxlength="100"
+              placeholder="Search a city around the world..."
+              aria-label="Search for a city" autocomplete="off" required>
+            <button id="searchButton" type="submit">Explore <span>↗</span></button>
+          </form>
 
-        <div class="quick-cities">
-          <span>Popular:</span>
-          <button type="button" class="city-chip" data-city="Vijayawada">Vijayawada</button>
-          <button type="button" class="city-chip" data-city="Hyderabad">Hyderabad</button>
-          <button type="button" class="city-chip" data-city="Mumbai">Mumbai</button>
-          <button type="button" class="city-chip" data-city="Delhi">Delhi</button>
+          <div class="search-bottom">
+            <div class="popular-cities">
+              <span>EXPLORE</span>
+              <button class="city-chip" data-city="Vijayawada" type="button">Vijayawada</button>
+              <button class="city-chip" data-city="Hyderabad" type="button">Hyderabad</button>
+              <button class="city-chip" data-city="Mumbai" type="button">Mumbai</button>
+            </div>
+            <button id="locationButton" class="location-button" type="button">
+              <span>◎</span> My location
+            </button>
+          </div>
+
+          <div id="suggestions" class="suggestions" hidden></div>
         </div>
       </section>
 
-      <div id="statusMessage" class="status-message" role="status"
-        aria-live="polite">Loading weather data...</div>
+      <div id="statusMessage" class="status-message" role="status" aria-live="polite"></div>
 
-      <section class="weather-panel" aria-label="Current weather">
-        <div class="panel-heading">
+      <section id="today" class="current-section">
+        <div class="section-heading">
           <div>
-            <div class="section-label">CURRENT CONDITIONS</div>
-            <h2 id="locationName">Vijayawada, India</h2>
-            <p id="localTime" class="muted">Fetching local time...</p>
+            <div class="section-kicker">RIGHT HERE, RIGHT NOW</div>
+            <h2>Your weather</h2>
           </div>
-          <div class="weather-badge" id="conditionBadge">WEATHER REPORT</div>
+          <div class="updated-label"><span class="live-dot"></span> Current conditions</div>
         </div>
 
-        <div class="current-weather">
-          <div class="temperature-block">
-            <div class="temperature">
-              <span id="temperature">--</span><span class="degree">°</span>
+        <article class="current-card">
+          <div class="current-main">
+            <div class="current-details">
+              <div class="location-line">
+                <span class="location-pin">⌖</span>
+                <h3 id="locationName">Vijayawada, India</h3>
+              </div>
+              <p id="localTime" class="local-time">Loading local time...</p>
+              <div class="current-temperature">
+                <span id="temperature">--</span><span class="temp-degree">°</span>
+              </div>
+              <h4 id="conditionText" class="condition-text">Loading conditions...</h4>
+              <p class="feels-line">Feels like <strong id="feelsLike">--°</strong></p>
+              <div class="high-low">
+                <span>↑ <b id="todayHigh">--°</b></span>
+                <span>↓ <b id="todayLow">--°</b></span>
+                <span class="high-low-label">Today's range</span>
+              </div>
             </div>
-            <h3 id="conditionText">Loading conditions...</h3>
-            <p class="muted">Feels like <strong id="feelsLike">--°</strong></p>
-            <p class="high-low">
-              H: <span id="todayHigh">--°</span>
-              <span class="separator">/</span>
-              L: <span id="todayLow">--°</span>
-            </p>
+
+            <div class="weather-visual">
+              <div class="visual-orbit orbit-one"></div>
+              <div class="visual-orbit orbit-two"></div>
+              <div id="weatherArt" class="weather-art" aria-hidden="true">🌤️</div>
+              <div class="visual-caption" id="visualCaption">A look at the sky</div>
+            </div>
           </div>
 
-          <div class="weather-art" id="weatherArt" aria-hidden="true">🌤️</div>
-        </div>
+          <div class="current-footer">
+            <span><span class="footer-spark">✦</span> Your day, better informed.</span>
+            <span id="weatherTimezone">Local weather data</span>
+          </div>
+        </article>
 
         <div class="metrics-grid">
           <article class="metric-card">
             <div class="metric-top">
-              <span class="metric-icon">💧</span>
+              <span class="metric-icon cyan">⌁</span>
               <span class="metric-label">HUMIDITY</span>
             </div>
             <div class="metric-value"><span id="humidity">--</span><small>%</small></div>
             <p>Relative humidity</p>
+            <div class="metric-track"><span id="humidityBar" style="width:0%"></span></div>
           </article>
 
           <article class="metric-card">
             <div class="metric-top">
-              <span class="metric-icon">↗</span>
+              <span class="metric-icon violet">↗</span>
               <span class="metric-label">WIND SPEED</span>
             </div>
             <div class="metric-value"><span id="windSpeed">--</span><small>km/h</small></div>
-            <p>Wind at 10 metres</p>
+            <p id="windDirection">Wind at 10 metres</p>
+            <div class="metric-track violet-track"><span id="windBar" style="width:0%"></span></div>
           </article>
 
           <article class="metric-card">
             <div class="metric-top">
-              <span class="metric-icon">🌧️</span>
-              <span class="metric-label">RAINFALL CHANCE</span>
+              <span class="metric-icon cyan">☂</span>
+              <span class="metric-label">RAIN CHANCE</span>
             </div>
             <div class="metric-value"><span id="rainChance">--</span><small>%</small></div>
-            <p>Forecast probability</p>
+            <p>Nearest hourly forecast</p>
+            <div class="metric-track"><span id="rainBar" style="width:0%"></span></div>
           </article>
 
           <article class="metric-card">
             <div class="metric-top">
-              <span class="metric-icon">🌡️</span>
+              <span class="metric-icon violet">◉</span>
+              <span class="metric-label">UV INDEX</span>
+            </div>
+            <div class="metric-value"><span id="uvIndex">--</span><small id="uvLevel">UV</small></div>
+            <p id="uvDescription">Current UV conditions</p>
+            <div class="metric-track violet-track"><span id="uvBar" style="width:0%"></span></div>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon cyan">◌</span>
+              <span class="metric-label">VISIBILITY</span>
+            </div>
+            <div class="metric-value"><span id="visibility">--</span><small>km</small></div>
+            <p>Atmospheric clarity</p>
+            <div class="metric-track"><span id="visibilityBar" style="width:0%"></span></div>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon violet">⌁</span>
               <span class="metric-label">AIR PRESSURE</span>
             </div>
             <div class="metric-value"><span id="pressure">--</span><small>hPa</small></div>
-            <p>Sea-level pressure</p>
+            <p>Mean sea-level pressure</p>
+            <div class="metric-track violet-track"><span id="pressureBar" style="width:50%"></span></div>
           </article>
         </div>
       </section>
 
-      <section class="forecast-section">
+      <section id="hourly" class="hourly-section">
         <div class="section-heading">
           <div>
-            <div class="section-label">PLAN AHEAD</div>
-            <h2>7-Day Forecast</h2>
+            <div class="section-kicker">THE NEXT 24 HOURS</div>
+            <h2>Hourly outlook</h2>
           </div>
-          <span class="forecast-tag">NEXT 7 DAYS</span>
+          <span class="section-note">Temperature & precipitation</span>
         </div>
 
-        <div id="forecastGrid" class="forecast-grid">
-          <div class="forecast-loading">Your forecast will appear here.</div>
+        <div class="content-card hourly-card">
+          <div class="hourly-top">
+            <div>
+              <h3>Temperature trend</h3>
+              <p>See how the day unfolds.</p>
+            </div>
+            <div class="chart-legend">
+              <span class="legend-dot"></span> Temperature
+            </div>
+          </div>
+          <div id="hourlyChart" class="hourly-chart" aria-label="Hourly temperature chart">
+            <p class="empty-state">Hourly forecast will appear here.</p>
+          </div>
+          <div id="hourlyStrip" class="hourly-strip"></div>
         </div>
       </section>
 
-      <footer class="footer">
-        <a class="footer-brand" href="#">SKYCAST</a>
-        <p>Weather data by
-          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">
-            Open-Meteo
-          </a>
-        </p>
-        <p>Built for the Cognifyz API Integration internship task.</p>
-      </footer>
+      <section id="forecast" class="forecast-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">LOOKING AHEAD</div>
+            <h2>Your 7-day forecast</h2>
+          </div>
+          <span class="section-note">A little planning goes a long way.</span>
+        </div>
+
+        <div id="forecastGrid" class="forecast-grid">
+          <div class="empty-state">Your weekly forecast will appear here.</div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="insight-icon">✦</div>
+        <div class="insight-copy">
+          <span class="section-kicker">WEATHER SNAPSHOT</span>
+          <h3 id="insightTitle">Your day at a glance</h3>
+          <p id="weatherInsight">Loading a summary of the weather...</p>
+        </div>
+        <div class="insight-decoration" aria-hidden="true">☁</div>
+      </section>
+
+      <section class="recent-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">YOUR PLACES</div>
+            <h2>Recently explored</h2>
+          </div>
+          <button id="clearRecent" class="text-button" type="button">Clear history</button>
+        </div>
+        <div id="recentCities" class="recent-cities">
+          <span class="section-note">Cities you search will appear here.</span>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <a class="brand footer-brand" href="#">
+        <span class="brand-mark small-mark">☼</span>
+        <span>skycast<span class="brand-pro"> pro</span></span>
+      </a>
+      <p>Weather data powered by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>.</p>
+      <p>Designed with clarity. Built for better days.</p>
+      <span class="footer-bottom">© <span id="footerYear"></span> SkyCast Pro</span>
+    </footer>
   </div>
 </body>
 </html>
