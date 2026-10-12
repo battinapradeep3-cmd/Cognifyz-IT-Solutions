@@ -1,4 +1,3 @@
-
 const API_URL =
   "https://restcountries.com/v3.1/all?fields=name,flags,capital,region,population,cca2,currencies,languages,subregion,timezones,area,maps";
 
@@ -58,12 +57,21 @@ function formatNumber(number) {
 
 function setStatus(message, state = "online") {
   elements.status.textContent = message;
-  elements.status.parentElement.classList.toggle("error", state === "error");
-  elements.status.parentElement.classList.toggle("loading", state === "loading");
+
+  elements.status.parentElement.classList.toggle(
+    "error",
+    state === "error"
+  );
+
+  elements.status.parentElement.classList.toggle(
+    "loading",
+    state === "loading"
+  );
 }
 
 function showToast(message) {
   clearTimeout(toastTimer);
+
   elements.toast.textContent = message;
   elements.toast.classList.add("show");
 
@@ -73,16 +81,22 @@ function showToast(message) {
 }
 
 function showLoading() {
+  elements.grid.hidden = false;
+
   elements.grid.innerHTML = `
     <div class="loading-card">
       <span class="loader"></span>
       <p>Fetching live country data...</p>
-    </div>`;
+    </div>
+  `;
+
   elements.empty.hidden = true;
   elements.results.textContent = "Connecting to API...";
 }
 
 function showError(message) {
+  elements.grid.hidden = false;
+
   elements.grid.innerHTML = `
     <div class="loading-card">
       <div style="font-size:30px;color:#ff7889">!</div>
@@ -91,7 +105,8 @@ function showError(message) {
       <button class="secondary-btn" id="retryBtn" type="button">
         Try again
       </button>
-    </div>`;
+    </div>
+  `;
 
   document.getElementById("retryBtn")
     .addEventListener("click", loadCountries);
@@ -104,24 +119,22 @@ function showError(message) {
   elements.prev.disabled = true;
   elements.next.disabled = true;
   elements.empty.hidden = true;
+
   setStatus("Connection failed", "error");
 }
 
 async function loadCountries() {
-  const response = await fetch("API_URL");
-  const data = await response.json();
-
-  // Existing code that displays the data
-}
-
+  // Stop any older request.
   if (requestController) {
     requestController.abort();
   }
 
+  const myRequest = ++requestNumber;
   requestController = new AbortController();
 
   elements.refresh.disabled = true;
   elements.refresh.classList.add("refreshing");
+
   setStatus("Connecting...", "loading");
   showLoading();
 
@@ -140,32 +153,43 @@ async function loadCountries() {
       throw new Error("Unexpected API response.");
     }
 
+    // Ignore results from an older request.
     if (myRequest !== requestNumber) return;
 
-    countries = data.filter(country => country.name?.common)
+    countries = data
+      .filter(country => country.name?.common)
       .sort((a, b) => getName(a).localeCompare(getName(b)));
 
     elements.count.textContent = formatNumber(countries.length);
+
     elements.updated.textContent = new Date().toLocaleTimeString(
       "en-IN",
-      { hour: "2-digit", minute: "2-digit" }
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
     );
 
     setStatus("API Connected", "online");
+
     applyFilters();
     showToast("Country data loaded successfully!");
+
   } catch (error) {
     if (error.name === "AbortError") return;
     if (myRequest !== requestNumber) return;
 
     console.error("API error:", error);
+
     showError(
-      "Please check your internet connection and try again."
+      "Unable to connect to the countries API. Check your internet and try again."
     );
+
   } finally {
     if (myRequest === requestNumber) {
       elements.refresh.disabled = false;
       elements.refresh.classList.remove("refreshing");
+      requestController = null;
     }
   }
 }
@@ -212,6 +236,7 @@ function renderCountries() {
   const total = filteredCountries.length;
   const totalPages = Math.ceil(total / PAGE_SIZE);
   const startIndex = (currentPage - 1) * PAGE_SIZE;
+
   const pageCountries = filteredCountries.slice(
     startIndex,
     startIndex + PAGE_SIZE
@@ -243,7 +268,10 @@ function renderCountries() {
   }
 
   elements.pageInfo.textContent = total
-    ? `Showing ${startIndex + 1}–${Math.min(startIndex + PAGE_SIZE, total)} of ${formatNumber(total)}`
+    ? `Showing ${startIndex + 1}–${Math.min(
+        startIndex + PAGE_SIZE,
+        total
+      )} of ${formatNumber(total)}`
     : "No matching countries";
 
   elements.pageNumber.textContent =
@@ -310,6 +338,7 @@ function createCountryCard(country, index) {
 
 function getCurrencies(country) {
   const currencies = country.currencies || {};
+
   const values = Object.values(currencies).map(currency =>
     `${currency.name || "Unknown"} (${currency.symbol || "—"})`
   );
@@ -341,11 +370,14 @@ function openCountryDetails(country) {
   ];
 
   elements.dialogContent.innerHTML = `
-    <img class="dialog-flag"
+    <img
+      class="dialog-flag"
       src="${escapeHTML(flag)}"
-      alt="${escapeHTML(name)} flag">
+      alt="${escapeHTML(name)} flag"
+    >
 
     <h2 class="dialog-title">${escapeHTML(name)}</h2>
+
     <p class="dialog-subtitle">
       Country code: ${escapeHTML(country.cca2 || "—")}
     </p>
@@ -361,8 +393,10 @@ function openCountryDetails(country) {
 
     ${mapsURL && /^https:\/\/www\.google\.com\/maps/.test(mapsURL)
       ? `<p style="margin:20px 0 0">
-          <a class="primary-btn" href="${escapeHTML(mapsURL)}"
-            target="_blank" rel="noopener noreferrer">
+          <a class="primary-btn"
+             href="${escapeHTML(mapsURL)}"
+             target="_blank"
+             rel="noopener noreferrer">
             Open on Google Maps ↗
           </a>
         </p>`
@@ -384,7 +418,11 @@ elements.prev.addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
     renderCountries();
-    elements.grid.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    elements.grid.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   }
 });
 
@@ -394,7 +432,11 @@ elements.next.addEventListener("click", () => {
   if (currentPage < totalPages) {
     currentPage++;
     renderCountries();
-    elements.grid.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    elements.grid.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   }
 });
 
@@ -402,6 +444,7 @@ elements.clear.addEventListener("click", () => {
   elements.search.value = "";
   elements.region.value = "All";
   elements.sort.value = "name";
+
   applyFilters();
 });
 
@@ -417,4 +460,3 @@ elements.dialog.addEventListener("click", event => {
 
 // Start the application.
 loadCountries();
-
