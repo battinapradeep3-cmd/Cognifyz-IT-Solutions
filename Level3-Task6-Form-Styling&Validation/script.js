@@ -1,340 +1,342 @@
 
-"use strict";
+/* ==========================================
+   EDUNOVA | FORM VALIDATION & INTERACTIONS
+   ========================================== */
 
-// Get form elements
-const admissionForm = document.getElementById("admissionForm");
-const formMessage = document.getElementById("formMessage");
-const resultSection = document.getElementById("resultSection");
-const studentSummary = document.getElementById("studentSummary");
-const applicationId = document.getElementById("applicationId");
-const successText = document.getElementById("successText");
-const editButton = document.getElementById("editButton");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("admissionForm");
+  const formMessage = document.getElementById("formMessage");
+  const progressBar = document.getElementById("formProgress");
+  const submitButton = document.getElementById("submitButton");
 
-const fields = [
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  const requiredFields = [
     "fullName",
-    "dob",
     "email",
     "phone",
-    "gender",
+    "dob",
     "qualification",
     "course",
-    "studyMode",
     "address"
-];
+  ];
 
-// Set current year in footer
-document.getElementById("year").textContent = new Date().getFullYear();
+  // Footer year
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
 
-// Prevent selecting a future date of birth
-const dobInput = document.getElementById("dob");
-const today = new Date();
-const localToday = [
-    today.getFullYear(),
-    String(today.getMonth() + 1).padStart(2, "0"),
-    String(today.getDate()).padStart(2, "0")
-].join("-");
+  // Do not allow a future date of birth
+  const dobInput = document.getElementById("dob");
+  const today = new Date();
+  const localToday =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
 
-dobInput.max = localToday;
+  dobInput.max = localToday;
 
-// Validation rules
-function validateField(fieldId) {
-    const input = document.getElementById(fieldId);
-    const error = document.getElementById(fieldId + "Error");
-    const value = input.value.trim();
+  // Mobile navigation
+  menuToggle.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("open");
 
-    let errorMessage = "";
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
+  });
 
-    switch (fieldId) {
-        case "fullName": {
-            if (!value) {
-                errorMessage = "Please enter your full name.";
-            } else if (value.length < 3) {
-                errorMessage = "Name must contain at least 3 characters.";
-            } else if (!/^[\p{L}][\p{L}\s.'-]*$/u.test(value)) {
-                errorMessage = "Enter a valid name using letters only.";
-            } else if (value.length > 80) {
-                errorMessage = "Name cannot exceed 80 characters.";
-            }
-            break;
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Validation rules
+  function validateField(field) {
+    const value = field.value.trim();
+    let error = "";
+
+    switch (field.id) {
+      case "fullName":
+        if (!value) {
+          error = "Please enter your full name.";
+        } else if (value.length < 3) {
+          error = "Name must contain at least 3 characters.";
+        } else if (!/^[\p{L}][\p{L}\s.'-]*$/u.test(value)) {
+          error = "Please enter a valid name.";
         }
+        break;
 
-        case "dob": {
-            if (!value) {
-                errorMessage = "Please select your date of birth.";
-            } else {
-                const selectedDate = new Date(value + "T00:00:00");
-                const currentDate = new Date(localToday + "T00:00:00");
-
-                if (Number.isNaN(selectedDate.getTime())) {
-                    errorMessage = "Please enter a valid date.";
-                } else if (selectedDate > currentDate) {
-                    errorMessage = "Date of birth cannot be in the future.";
-                }
-            }
-            break;
+      case "email":
+        if (!value) {
+          error = "Please enter your email address.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+          error = "Please enter a valid email address.";
         }
+        break;
 
-        case "email": {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-            if (!value) {
-                errorMessage = "Please enter your email address.";
-            } else if (value.length > 254 || !emailPattern.test(value)) {
-                errorMessage = "Please enter a valid email address.";
-            }
-            break;
+      case "phone":
+        if (!value) {
+          error = "Please enter your mobile number.";
+        } else if (!/^[6-9]\d{9}$/.test(value)) {
+          error = "Enter a valid 10-digit Indian mobile number.";
         }
+        break;
 
-        case "phone": {
-            if (!value) {
-                errorMessage = "Please enter your mobile number.";
-            } else if (!/^[6-9]\d{9}$/.test(value)) {
-                errorMessage = "Enter a valid 10-digit Indian mobile number.";
-            }
-            break;
+      case "dob":
+        if (!value) {
+          error = "Please select your date of birth.";
+        } else if (value > localToday) {
+          error = "Date of birth cannot be in the future.";
+        } else {
+          const birthDate = new Date(value + "T00:00:00");
+          const currentDate = new Date(localToday + "T00:00:00");
+          let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+          const monthDifference =
+            currentDate.getMonth() - birthDate.getMonth();
+
+          if (
+            monthDifference < 0 ||
+            (monthDifference === 0 &&
+              currentDate.getDate() < birthDate.getDate())
+          ) {
+            age--;
+          }
+
+          if (age < 1) {
+            error = "Please enter a valid date of birth.";
+          }
         }
+        break;
 
-        case "gender": {
-            if (!value) {
-                errorMessage = "Please select your gender.";
-            }
-            break;
+      case "qualification":
+        if (!value) {
+          error = "Please select your qualification.";
         }
+        break;
 
-        case "qualification": {
-            if (!value) {
-                errorMessage = "Please select your qualification.";
-            }
-            break;
+      case "course":
+        if (!value) {
+          error = "Please select an interested course.";
         }
+        break;
 
-        case "course": {
-            if (!value) {
-                errorMessage = "Please select your preferred course.";
-            }
-            break;
+      case "address":
+        if (!value) {
+          error = "Please enter your address.";
+        } else if (value.length < 10) {
+          error = "Please enter a more complete address.";
         }
-
-        case "studyMode": {
-            if (!value) {
-                errorMessage = "Please select your study mode.";
-            }
-            break;
-        }
-
-        case "address": {
-            if (!value) {
-                errorMessage = "Please enter your residential address.";
-            } else if (value.length < 10) {
-                errorMessage = "Address must contain at least 10 characters.";
-            } else if (value.length > 500) {
-                errorMessage = "Address cannot exceed 500 characters.";
-            }
-            break;
-        }
-
-        default:
-            break;
+        break;
     }
 
-    showFieldResult(input, error, errorMessage);
-    return errorMessage === "";
-}
+    const errorElement = document.getElementById(field.id + "Error");
 
-// Display validation result
-function showFieldResult(input, error, message) {
-    error.textContent = message;
+    if (errorElement) {
+      errorElement.textContent = error;
+    }
 
-    input.classList.toggle("invalid", Boolean(message));
-    input.classList.toggle(
-        "valid",
-        !message && input.value.trim() !== ""
+    field.classList.toggle("is-invalid", Boolean(error));
+    field.classList.toggle(
+      "is-valid",
+      !error && value.length > 0
     );
 
-    input.setAttribute("aria-invalid", message ? "true" : "false");
-}
+    field.setAttribute("aria-invalid", String(Boolean(error)));
 
-// Show general form message
-function showFormMessage(message, type) {
-    formMessage.textContent = message;
-    formMessage.className = "form-message show " + type;
-}
+    return error === "";
+  }
 
-// Clear general form message
-function clearFormMessage() {
-    formMessage.textContent = "";
-    formMessage.className = "form-message";
-}
-
-// Real-time validation when users type or change a selection
-fields.forEach(function (fieldId) {
-    const input = document.getElementById(fieldId);
-
-    input.addEventListener("input", function () {
-        if (input.classList.contains("invalid") || admissionForm.dataset.submitted === "true") {
-            validateField(fieldId);
-        }
-
-        clearFormMessage();
-    });
-
-    input.addEventListener("change", function () {
-        if (input.classList.contains("invalid") || admissionForm.dataset.submitted === "true") {
-            validateField(fieldId);
-        }
-
-        clearFormMessage();
-    });
-});
-
-// Allow only digits in the mobile number field
-document.getElementById("phone").addEventListener("input", function () {
-    this.value = this.value.replace(/\D/g, "").slice(0, 10);
-});
-
-// Validate consent checkbox
-function validateConsent() {
+  // Consent checkbox validation
+  function validateConsent() {
     const consent = document.getElementById("consent");
-    const error = document.getElementById("consentError");
+    const consentError = document.getElementById("consentError");
 
     if (!consent.checked) {
-        error.textContent = "Please confirm the information before submitting.";
-        return false;
+      consentError.textContent =
+        "Please confirm the information before submitting.";
+      return false;
     }
 
-    error.textContent = "";
+    consentError.textContent = "";
     return true;
-}
+  }
 
-document.getElementById("consent").addEventListener("change", function () {
-    if (this.checked) {
-        document.getElementById("consentError").textContent = "";
-    }
+  // Update form progress indicator
+  function updateProgress() {
+    const completedFields = requiredFields.filter(function (id) {
+      const field = document.getElementById(id);
 
-    clearFormMessage();
-});
+      if (!field.value.trim()) {
+        return false;
+      }
 
-// Build a safe application summary
-function displayStudentSummary() {
-    const labels = {
-        fullName: "Full Name",
-        dob: "Date of Birth",
-        email: "Email Address",
-        phone: "Mobile Number",
-        gender: "Gender",
-        qualification: "Qualification",
-        course: "Selected Course",
-        studyMode: "Study Mode",
-        address: "Residential Address"
-    };
+      return validateField(field);
+    }).length;
 
-    studentSummary.replaceChildren();
-
-    fields.forEach(function (fieldId) {
-        const input = document.getElementById(fieldId);
-        const item = document.createElement("div");
-        const label = document.createElement("span");
-        const value = document.createElement("strong");
-
-        item.className = "summary-item";
-        label.textContent = labels[fieldId];
-
-        // Use textContent to avoid inserting user input as HTML
-        value.textContent = input.value.trim();
-
-        item.append(label, value);
-        studentSummary.appendChild(item);
-    });
-}
-
-// Generate a demo application reference
-function generateApplicationId() {
-    const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
-    const datePart = localToday.replace(/-/g, "");
-
-    return "EDU-" + datePart + "-" + randomPart;
-}
-
-// Submit the application
-admissionForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    admissionForm.dataset.submitted = "true";
-    clearFormMessage();
-
-    let formIsValid = true;
-    let firstInvalidField = null;
-
-    fields.forEach(function (fieldId) {
-        const isValid = validateField(fieldId);
-
-        if (!isValid) {
-            formIsValid = false;
-
-            if (!firstInvalidField) {
-                firstInvalidField = document.getElementById(fieldId);
-            }
-        }
-    });
-
-    const consentIsValid = validateConsent();
-
-    if (!consentIsValid) {
-        formIsValid = false;
-
-        if (!firstInvalidField) {
-            firstInvalidField = document.getElementById("consent");
-        }
-    }
-
-    if (!formIsValid) {
-        showFormMessage(
-            "Please correct the highlighted errors before submitting your application.",
-            "error-message"
-        );
-
-        if (firstInvalidField) {
-            firstInvalidField.focus();
-            firstInvalidField.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-        }
-
-        return;
-    }
-
-    // This is a front-end demo, not a real college submission.
-    displayStudentSummary();
-
-    applicationId.textContent = generateApplicationId();
-    successText.textContent =
-        "All required fields passed validation. Your demo application is ready.";
-
-    resultSection.hidden = false;
-
-    showFormMessage(
-        "Validation successful! Your demo application summary is displayed below.",
-        "success-message"
+    const consent = document.getElementById("consent");
+    const totalItems = requiredFields.length + 1;
+    const completedItems = completedFields + (consent.checked ? 1 : 0);
+    const percentage = Math.round(
+      (completedItems / totalItems) * 100
     );
 
-    resultSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    progressBar.style.width = percentage + "%";
+  }
+
+  // Real-time validation
+  requiredFields.forEach(function (id) {
+    const field = document.getElementById(id);
+
+    field.addEventListener("blur", function () {
+      validateField(field);
+      updateProgress();
     });
+
+    field.addEventListener("input", function () {
+      if (field.classList.contains("is-invalid")) {
+        validateField(field);
+      }
+
+      formMessage.classList.remove("show", "error");
+      updateProgress();
+    });
+
+    field.addEventListener("change", function () {
+      if (field.classList.contains("is-invalid")) {
+        validateField(field);
+      }
+
+      updateProgress();
+    });
+  });
+
+  // Allow only digits in the mobile number field
+  const phoneInput = document.getElementById("phone");
+
+  phoneInput.addEventListener("input", function () {
+    phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+  });
+
+  document.getElementById("consent").addEventListener("change", function () {
+    validateConsent();
+    updateProgress();
+    formMessage.classList.remove("show", "error");
+  });
+
+  // Form submission
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    formMessage.classList.remove("show", "error");
+    formMessage.textContent = "";
+
+    let formIsValid = true;
+
+    requiredFields.forEach(function (id) {
+      const field = document.getElementById(id);
+      const isValid = validateField(field);
+
+      if (!isValid) {
+        formIsValid = false;
+      }
+    });
+
+    if (!validateConsent()) {
+      formIsValid = false;
+    }
+
+    updateProgress();
+
+    if (!formIsValid) {
+      formMessage.classList.add("show", "error");
+      formMessage.innerHTML =
+        "<strong>Please check your details.</strong>" +
+        "Correct the highlighted fields and try again.";
+
+      const firstInvalidField = form.querySelector(
+        ".is-invalid, #consent:not(:checked)"
+      );
+
+      if (firstInvalidField) {
+        firstInvalidField.focus();
+        firstInvalidField.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+
+      return;
+    }
+
+    // Demo success only: no server request or data storage
+    const studentName = document.getElementById("fullName").value.trim();
+    const selectedCourse = document.getElementById("course").value;
+
+    formMessage.classList.add("show");
+    formMessage.innerHTML =
+      "<strong>✓ Application validated successfully!</strong>" +
+      "Thank you, " + escapeHTML(studentName) + ". " +
+      "Your form passed the browser validation checks. " +
+      "Selected course: " + escapeHTML(selectedCourse) + ". " +
+      "This is a demo confirmation; your application has not been " +
+      "sent to an institution or saved to a database.";
+
+    formMessage.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  });
+
+  // Safely display user-entered text in the confirmation
+  function escapeHTML(value) {
+    return value.replace(/[&<>"']/g, function (character) {
+      const replacements = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      };
+
+      return replacements[character];
+    });
+  }
+
+  // Active navigation link while scrolling
+  const sections = document.querySelectorAll(
+    "#home, #benefits, #admission, #footer"
+  );
+
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const activeId = entry.target.id;
+
+            navLinks.querySelectorAll(".nav-link").forEach(function (link) {
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") === "#" + activeId
+              );
+            });
+          }
+        });
+      },
+      {
+        rootMargin: "-25% 0px -60% 0px"
+      }
+    );
+
+    sections.forEach(function (section) {
+      sectionObserver.observe(section);
+    });
+  }
+
+  updateProgress();
 });
-
-// Return to the form for editing
-editButton.addEventListener("click", function () {
-    resultSection.hidden = true;
-
-    document.getElementById("admission").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-    document.getElementById("fullName").focus({
-        preventScroll: true
-    });
-});
-
